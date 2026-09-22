@@ -1,0 +1,12 @@
+{
+  "name": "legal-agent-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AI Legal Agent 2.0 frontend demo (static only, no backend)",
+  "scripts": {
+    "dev": "npx --yes serve -p 5173 .",
+    "start": "npx --yes serve -p 5173 .",
+    "build": "node scripts/build-github-pages.js",
+    "preview:pages": "npx --yes serve -p 4173 github-pages-build"
+  }
+}

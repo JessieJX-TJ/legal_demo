@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulation Knowledge Base - AI Regulation Agent 2.0</title>
+  <link rel="stylesheet" href="./regulation-knowledge.css">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+  <style>
+    .document-search { display: flex; align-items: center; gap: 7px; margin: 10px 0 7px; }
+    .document-search input {
+      width: min(420px, 70vw);
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid #d9deea;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .check-link { padding: 3px 5px; color: #3568cf; border: 0; background: transparent; font-size: 11px; cursor: pointer; }
+    .check-link:hover { background: #edf3ff; }
+    .parse-state { padding: 2px 5px; border-radius: 4px; font-size: 9px; }
+    .parse-state.ingested { color: #6a7282; background: #f0f2f6; }
+    .parse-state.ready { color: #397553; background: #eaf7ee; }
+    .parse-state.failed { color: #b34848; background: #fff0f0; }
+    .parse-state.checking { color: #8c6d28; background: #fff7dc; }
+    .table-controls { display: flex; align-items: center; gap: 7px; margin: 10px 0; flex-wrap: wrap; }
+    .table-controls input {
+      width: min(320px, 50vw);
+      height: 32px;
+      padding: 0 9px;
+      border: 1px solid #d9deea;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .table-controls span { margin-left: auto; color: #778196; font-size: 11px; }
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 10px;
+      color: #68748a;
+      font-size: 11px;
+    }
+    .table-scroll-top {
+      display: none;
+    }
+    .table-wrap {
+      width: 100%;
+      max-height: none;
+      overflow: visible;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: #fff;
+    }
+    .managed-table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+      table-layout: auto;
+      font-size: 14px;
+      color: #283044;
+    }
+    .managed-table th,
+    .managed-table td {
+      padding: 11px 13px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      max-width: none;
+      vertical-align: top;
+      line-height: 1.55;
+      font-size: 14px;
+      color: #283044;
+    }
+    .managed-table th:last-child,
+    .managed-table td:last-child {
+      border-right: 0;
+    }
+    .managed-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .managed-table thead th {
+      position: static;
+      z-index: auto;
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 600;
+      background: #f8fafc;
+      box-shadow: none;
+      white-space: nowrap;
+    }
+    .managed-table th.select-column,
+    .managed-table td.select-column {
+      position: static;
+      left: auto;
+      z-index: auto;
+      width: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      padding-inline: 12px;
+      background: #fff;
+      vertical-align: middle;
+    }
+    .managed-table thead th.select-column {
+      background: #f8fafc;
+    }
+    .managed-table th:nth-child(2),
+    .managed-table td:nth-child(2),
+    .managed-table th:nth-child(3),
+    .managed-table td:nth-child(3),
+    .managed-table th:last-child,
+    .managed-table td:last-child {
+      position: static;
+      left: auto;
+      right: auto;
+      z-index: auto;
+      min-width: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .managed-table thead th:nth-child(2),
+    .managed-table thead th:nth-child(3),
+    .managed-table thead th:last-child {
+      background: #f8fafc;
+    }
+    .managed-table tbody tr:hover td { background: #f8faff; }
+    .selection-box { width: 18px; height: 18px; flex: none; accent-color: #3568cf; }
+    .batch-danger { color: #b44545; border-color: #e8bcbc; }
+    .batch-danger:disabled { color: #8b94a6; border-color: #d9deea; }
+    .folder-item { cursor: pointer; }
+    .folder-item:focus-visible { outline: 2px solid #3568cf; outline-offset: 2px; }
+    .kb-page .item.folder-item .item-icon {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      flex: none;
+      align-self: center;
+      color: #c4a04a;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cpath fill='%23ffe49a' d='M4 10.5c0-1.4 1.1-2.5 2.5-2.5h7.2l2.1 2.1H29.5c1.4 0 2.5 1.1 2.5 2.5V27c0 1.4-1.1 2.5-2.5 2.5h-23C5.1 29.5 4 28.4 4 27V10.5z'/%3E%3Cpath fill='%23ffd66e' d='M4 14h28v13c0 1.4-1.1 2.5-2.5 2.5h-23C5.1 29.5 4 28.4 4 27V14z'/%3E%3C/svg%3E")
+        center / 42px 42px no-repeat;
+      border-radius: 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+    .import-note { display: block; margin-top: 7px; color: #8a94a7; font-size: 11px; }
+    .excel-format-help {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid #e3e7ef;
+      border-radius: 6px;
+      background: #f8faff;
+      color: #66748b;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .excel-format-help strong { color: #34445c; }
+    .excel-format-help ul { margin: 4px 0 0 18px; padding: 0; }
+    .toolbar-actions { flex-wrap: wrap; }
+    .excel-project-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #68748a;
+      font-size: 11px;
+    }
+    .excel-project-field input {
+      height: 32px;
+      width: 170px;
+      padding: 0 9px;
+      border: 1px solid #d9deea;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    [v-cloak] { display: none; }
+    @media (max-width: 700px) {
+      .document-search { align-items: stretch; flex-wrap: wrap; }
+      .document-search input { width: 100%; }
+      .table-controls { align-items: stretch; flex-wrap: wrap; }
+      .table-controls input { width: 100%; }
+      .table-controls span { margin-left: 0; }
+      .table-wrap { max-height: none; overflow: visible; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .section-head .toolbar-actions { justify-content: flex-start; }
+      .excel-project-field input { width: min(240px, 70vw); }
+    }
+
+    /* kb-page: project purple theme, typography, report-matched buttons */
+    .kb-page .eyebrow {
+      color: #a99be8;
+      font-size: 12px;
+      letter-spacing: 1.2px;
+    }
+    .kb-page .kb-heading p,
+    .kb-page .section-desc,
+    .kb-page .directory-meta,
+    .kb-page .item-main strong,
+    .kb-page .item-main a,
+    .kb-page .form-grid label,
+    .kb-page .excel-project-field,
+    .kb-page .document-search input,
+    .kb-page .table-controls input,
+    .kb-page .excel-project-field input {
+      font-size: 14px;
+    }
+    .kb-page .item-main small,
+    .kb-page .import-note,
+    .kb-page .excel-format-help,
+    .kb-page .parse-state {
+      font-size: 12px;
+    }
+    .kb-page .tabs button.active {
+      color: #7564d8;
+    }
+    .kb-page .tabs button:hover {
+      color: #6757c8;
+    }
+    .kb-page .check-link {
+      color: #7564d8;
+      font-size: 14px;
+    }
+    .kb-page .check-link:hover {
+      background: #f4f1ff;
+    }
+    .kb-page .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 42px;
+      margin-bottom: 10px;
+    }
+    .kb-page .section-head h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #283044;
+      line-height: 1.4;
+    }
+    .kb-page .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .kb-page .section-head .toolbar-actions {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+      width: auto;
+      margin-top: 0;
+    }
+    /* Arco-like Popover, placement: right */
+    .kb-page .kb-help-popover {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex: none;
+    }
+    .kb-page .kb-help-trigger {
+      width: 18px !important;
+      height: 18px !important;
+      min-height: 18px !important;
+      min-width: 18px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      border: 1px solid #c9cdd4 !important;
+      background: #fff !important;
+      color: #86909c !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      line-height: 1 !important;
+      box-shadow: none !important;
+      cursor: help;
+      transform: none !important;
+    }
+    .kb-page .kb-help-trigger:hover,
+    .kb-page .kb-help-popover:hover .kb-help-trigger {
+      color: #7564d8 !important;
+      border-color: #7564d8 !important;
+      background: #f4f1ff !important;
+      transform: none !important;
+    }
+    .kb-page .kb-help-popup {
+      position: absolute;
+      left: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      width: max-content;
+      max-width: 320px;
+      padding: 12px 16px;
+      color: #7b8496;
+      background: #fff;
+      border: 1px solid #e5e6eb;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      white-space: normal;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease, visibility 160ms ease;
+    }
+    .kb-page .kb-help-popup::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-left: 1px solid #e5e6eb;
+      border-bottom: 1px solid #e5e6eb;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .kb-page .kb-help-popover:hover .kb-help-popup {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .kb-page .section-desc {
+      margin: 0 0 12px;
+      color: #7b8496;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .kb-page .excel-format-help {
+      width: 100%;
+      max-width: none;
+      margin: 0 0 14px;
+      box-sizing: border-box;
+    }
+    .kb-page .crumb span.crumb-root,
+    .kb-page .crumb .crumb-root {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      font-size: 18px;
+      font-weight: 700;
+      color: #283044 !important;
+      line-height: 1.4;
+      cursor: default;
+      pointer-events: none;
+      opacity: 1;
+    }
+    .kb-page .crumb button.crumb-root.crumb-root-link {
+      pointer-events: auto;
+      cursor: pointer;
+      color: #283044 !important;
+      font-size: 18px !important;
+      font-weight: 700;
+      line-height: 1.4;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    .kb-page .crumb button.crumb-root.crumb-root-link:hover {
+      color: #7564d8 !important;
+      background: transparent !important;
+      transform: none !important;
+    }
+    .kb-page .crumb button {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: #283044 !important;
+      font-size: 18px !important;
+      font-weight: 700;
+      line-height: 1.4;
+      transform: none !important;
+    }
+    .kb-page .crumb button:hover {
+      color: #7564d8 !important;
+      background: transparent !important;
+      transform: none !important;
+    }
+    .kb-page .crumb > span:not(.crumb-root) {
+      font-size: 18px;
+      font-weight: 700;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+    .kb-page .crumb .crumb-current {
+      color: #283044 !important;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+      cursor: default;
+      pointer-events: none;
+    }
+    .kb-page .directory-meta {
+      padding: 10px 12px;
+    }
+    .kb-page {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      padding: 28px 184px 48px;
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .kb-page .item-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+    @media (max-width: 1200px) {
+      .kb-page .item-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 900px) {
+      .kb-page .item-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      .kb-page .item-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .kb-page .item.folder-item .item-actions {
+      display: flex;
+      align-items: center;
+      flex: none;
+      align-self: center;
+    }
+    .kb-page .item.folder-item .danger-link,
+    .kb-page .item:not(.folder-item) .danger-link {
+      height: auto;
+      min-height: 0;
+      padding: 4px 6px;
+      border: 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
+      display: inline;
+      box-sizing: border-box;
+      cursor: pointer;
+      background: transparent;
+      white-space: nowrap;
+      color: #c55555;
+    }
+    .kb-page .item.folder-item .danger-link:hover,
+    .kb-page .item:not(.folder-item) .danger-link:hover {
+      background: #fff0f0;
+      color: #b52d2d;
+    }
+    /* File cards only — match live 8095 layout; leave .folder-item untouched */
+    .kb-page .item:not(.folder-item) {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 10px;
+    }
+    .kb-page .item:not(.folder-item) .selection-box {
+      align-self: center;
+      flex: none;
+    }
+    .kb-page .item:not(.folder-item) .item-icon {
+      width: 36px;
+      height: 36px;
+      font-size: 9px;
+      align-self: center;
+      flex: none;
+    }
+    .kb-page .item:not(.folder-item) .item-main {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      align-self: center;
+    }
+    .kb-page .item:not(.folder-item) .item-main a,
+    .kb-page .item:not(.folder-item) .item-main strong {
+      display: block;
+      overflow: hidden;
+      color: #35415b;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .kb-page .item:not(.folder-item) .item-main small {
+      display: block;
+      margin-top: 3px;
+      color: #8b95a7;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .kb-page .item:not(.folder-item) .item-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+      min-width: 0;
+    }
+    .kb-page .item:not(.folder-item) .parse-state {
+      display: inline-block;
+      margin-top: 0;
+      width: fit-content;
+      max-width: 100%;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.3;
+      box-sizing: border-box;
+      flex: none;
+    }
+    .kb-page .item:not(.folder-item) .parse-state.ready {
+      color: #397553;
+      background: #eaf7ee;
+    }
+    .kb-page .item:not(.folder-item) .parse-state.failed {
+      color: #b34848;
+      background: #fff0f0;
+    }
+    .kb-page .item:not(.folder-item) .parse-state.checking {
+      color: #8c6d28;
+      background: #fff7dc;
+    }
+    .kb-page .item:not(.folder-item) .item-status-row .item-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0;
+      margin: 0;
+      margin-left: auto;
+      flex: none;
+      align-self: center;
+    }
+    .kb-page .item:not(.folder-item) > .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 0;
+      flex: none;
+      align-self: center;
+    }
+    .kb-page .item:not(.folder-item) .check-link {
+      height: auto;
+      min-height: 0;
+      padding: 3px 5px;
+      border: 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      display: inline;
+      box-sizing: border-box;
+      cursor: pointer;
+      background: transparent;
+      white-space: nowrap;
+      color: #7564d8;
+    }
+    .kb-page .item:not(.folder-item) .check-link:hover {
+      background: #f4f1ff;
+    }
+    .kb-page .panel {
+      padding: 20px 22px;
+    }
+    .kb-page button:not(.check-link):not(.danger-link) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      min-height: 42px;
+      padding: 0 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      box-sizing: border-box;
+      transition: all 0.22s ease;
+    }
+    .kb-page .tabs button {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 9px 14px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      font-weight: 400;
+      transform: none !important;
+    }
+    .kb-page .tabs button.active {
+      color: #7564d8 !important;
+      font-weight: 700;
+      border: none !important;
+      border-bottom: 2px solid #7564d8 !important;
+      margin-bottom: -1px;
+    }
+    .kb-page .tabs button:hover:not(.active) {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+    .kb-page button.icon-button {
+      width: 42px;
+      min-width: 42px;
+      padding: 0;
+      font-size: 18px;
+      color: #7564d8;
+      background: #f4f1ff;
+      border: 1px solid #e3dcfa;
+    }
+    .kb-page button.icon-button:hover:not(:disabled) {
+      background: #eae4fc;
+      border-color: #d6ccf5;
+    }
+    .kb-page button.primary {
+      color: #fff;
+      background: linear-gradient(90deg, #6d70ff 0%, #6757c8 100%);
+      border: none;
+      box-shadow: 0 4px 15px rgba(109, 112, 255, 0.3);
+    }
+    .kb-page button.primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(109, 112, 255, 0.4);
+    }
+    .modal h2 {
+      margin: 0 0 8px;
+      color: #1e293b;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .modal p {
+      margin: 0 0 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #64748b;
+    }
+    .modal .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .modal .form-grid label,
+    .modal .field label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .modal .field-label-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #94a3b8;
+    }
+    .modal .req-star,
+    .kb-page .req-star {
+      color: #ef4444;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .kb-page .excel-project-field .field-label-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .modal .field input,
+    .modal .form-grid input,
+    .modal .form-grid textarea {
+      width: 100%;
+      min-height: 36px;
+      padding: 8px 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #fff;
+      color: #1e293b;
+      font-size: 13px;
+      line-height: 1.4;
+      font-family: inherit;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+    .modal .field input,
+    .modal .form-grid input {
+      height: 36px;
+      padding: 0 10px;
+    }
+    .modal .form-grid textarea {
+      min-height: 72px;
+    }
+    .modal .field input::placeholder,
+    .modal .form-grid input::placeholder,
+    .modal .form-grid textarea::placeholder {
+      color: #94a3b8;
+    }
+    .modal-actions button:not(.primary) {
+      color: #7564d8;
+      background: #f4f1ff;
+      border: 1px solid #e3dcfa;
+      border-radius: 8px;
+    }
+    .modal-actions button:not(.primary):hover:not(:disabled) {
+      background: #eae4fc;
+      border-color: #d6ccf5;
+      color: #6757c8;
+    }
+    .modal-actions button.primary {
+      color: #fff;
+      background: linear-gradient(90deg, #6d70ff 0%, #6757c8 100%);
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(109, 112, 255, 0.3);
+    }
+    .modal-actions button.primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(109, 112, 255, 0.4);
+    }
+    .kb-page .toolbar-actions button:not(.primary):not(.batch-danger),
+    .kb-page .document-search button:not(.batch-danger),
+    .kb-page .table-controls button:not(.batch-danger),
+    .kb-page .pagination button,
+    .kb-page .item-grid button:not(.danger-link):not(.check-link) {
+      color: #7564d8;
+      background: #f4f1ff;
+      border: 1px solid #e3dcfa;
+    }
+    .kb-page .toolbar-actions button:not(.primary):not(.batch-danger):hover:not(:disabled),
+    .kb-page .document-search button:not(.batch-danger):hover:not(:disabled),
+    .kb-page .table-controls button:not(.batch-danger):hover:not(:disabled),
+    .kb-page .pagination button:hover:not(:disabled),
+    .kb-page .item-grid button:not(.danger-link):not(.check-link):hover:not(:disabled) {
+      background: #eae4fc;
+      border-color: #d6ccf5;
+    }
+    .kb-page .batch-danger {
+      color: #b44545;
+      background: #fff;
+      border: 1px solid #e8bcbc;
+    }
+    .kb-page .batch-danger:hover:not(:disabled) {
+      background: #fff5f5;
+      border-color: #e8bcbc;
+    }
+    .kb-page .refresh-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: auto;
+      height: 42px;
+      min-height: 42px;
+      padding: 0 16px;
+      color: #7564d8;
+      background: #f4f1ff;
+      border: 1px solid #e3dcfa;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .kb-page .refresh-button__icon {
+      font-size: 19px;
+      line-height: 1;
+    }
+    .kb-page .refresh-button:hover {
+      color: #6757c8;
+      background: #eae4fc;
+      border-color: #d6ccf5;
+    }
+    .kb-page .recycle-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 420px;
+      padding: 64px 16px 80px;
+      color: #8a94a5;
+      text-align: center;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .kb-page .recycle-empty-icon {
+      display: grid;
+      place-items: center;
+      width: auto;
+      height: auto;
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+    .kb-page .recycle-empty-icon img {
+      display: block;
+      width: 140px;
+      height: auto;
+    }
+    .kb-page .document-search input,
+    .kb-page .table-controls input,
+    .kb-page .excel-project-field input {
+      height: 42px;
+      border-color: #e3dcfa;
+    }
+    .kb-page .document-search input:focus,
+    .kb-page .table-controls input:focus,
+    .kb-page .excel-project-field input:focus,
+    .kb-page .field input:focus,
+    .kb-page .form-grid input:focus,
+    .kb-page .form-grid textarea:focus,
+    .modal .field input:focus,
+    .modal .form-grid input:focus,
+    .modal .form-grid textarea:focus {
+      border-color: #6d70ff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(109, 112, 255, 0.15);
+    }
+    .kb-page .managed-table {
+      width: 100%;
+      min-width: 0;
+      font-size: 14px;
+      color: #283044;
+    }
+    .kb-page .panel .table-wrap {
+      width: 100%;
+      max-height: none;
+      overflow: visible;
+    }
+    .kb-page .panel .table-scroll-top {
+      display: none;
+    }
+    .kb-page .managed-table th,
+    .kb-page .managed-table td {
+      max-width: none;
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
+      border-color: #e2e8f0;
+      font-size: 14px;
+      color: #283044;
+    }
+    .kb-page .managed-table thead th {
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      background: #f8fafc;
+    }
+    .kb-page .managed-table td .check-link {
+      height: auto;
+      min-height: 0;
+      padding: 3px 5px;
+      border: 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      display: inline;
+      background: transparent;
+      white-space: nowrap;
+      color: #7564d8;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .kb-page .managed-table td .check-link:hover {
+      background: #f4f1ff;
+    }
+    .kb-page .managed-table td .check-link.publish-link {
+      color: #3568cf;
+    }
+    .kb-page .managed-table td .check-link.publish-link:hover {
+      background: #edf3ff;
+    }
+    .kb-page .status {
+      color: #7564d8;
+      background: #f4f1ff;
+    }
+    .kb-page .selection-box {
+      accent-color: #7564d8;
+    }
+
+    /* Topbar layout — match workbench .topbar / .topbar-inner */
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      scrollbar-gutter: auto;
+    }
+    #knowledge-app {
+      height: 100%;
+      min-height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .kb-topbar {
+      position: relative;
+      top: auto;
+      z-index: 30;
+      flex: none;
+      width: 100%;
+      height: 68px;
+      min-height: 68px;
+      display: block;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 0;
+    }
+    .kb-topbar .topbar-inner {
+      width: 100%;
+      max-width: none;
+      height: 68px;
+      min-height: 68px;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .kb-topbar .topbar-brand-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .kb-topbar .brand {
+      display: flex;
+      align-items: baseline;
+      color: #1f2937;
+      text-decoration: none;
+    }
+    .kb-topbar .brand strong {
+      font-size: 19px;
+      font-weight: 600;
+    }
+    .kb-topbar .brand em {
+      color: #6d70ff;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+    }
+    .kb-topbar .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex: none;
+    }
+    .kb-topbar .account-wrap {
+      position: relative;
+    }
+    .kb-topbar .header-actions .account {
+      display: grid;
+      grid-template-columns: 40px 14px;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      color: #374151;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 200ms ease;
+    }
+    .kb-topbar .header-actions .account:hover,
+    .kb-topbar .header-actions .account[aria-expanded="true"] {
+      background: rgba(109, 112, 255, 0.08);
+    }
+    .kb-topbar .header-actions .account > b {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: #6757c8;
+      background: #f0edff;
+      border: 1px solid #e2dcfb;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(109, 112, 255, 0.08);
+    }
+    .kb-topbar .header-actions .account .chevron {
+      width: 14px;
+      height: 14px;
+      color: #374151;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    html.kb-embed,
+    html.kb-embed body {
+      height: 100%;
+      overflow: hidden;
+      background: #f6f8fb;
+    }
+    html.kb-embed #knowledge-app {
+      height: 100%;
+      min-height: 100%;
+      overflow: auto;
+    }
+    .kb-topbar[hidden] {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    html.kb-embed .kb-topbar,
+    html.kb-embed header.kb-topbar {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    html.kb-embed .kb-page {
+      padding: 20px 28px 36px !important;
+      max-width: none !important;
+    }
+    html.kb-embed .kb-heading h1 {
+      font-size: 22px;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var embed =
+          window.self !== window.top ||
+          new URLSearchParams(window.location.search).get('embed') === '1';
+        if (embed) document.documentElement.classList.add('kb-embed');
+      } catch (e) {
+        document.documentElement.classList.add('kb-embed');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <header id="kbStaticTopbar" class="kb-topbar" hidden>
+    <div class="topbar-inner">
+      <div class="topbar-brand-area">
+        <a class="brand" href="./index.html" title="Back to workspace">
+          <strong>AI Regulation Agent <em>2.0</em></strong>
+        </a>
+      </div>
+      <div class="header-actions">
+        <div class="account-wrap">
+          <button id="kbAccountBtn" class="account" type="button" aria-expanded="false" aria-label="Account menu">
+            <b id="kbAccountInitials">U</b>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="kbAccountMenu" class="account-menu" hidden>
+            <button class="account-menu-link" type="button" id="kbOpenQaBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 9h8M8 13h5"/></svg>
+              <span>Regulation Q&A Assistant</span>
+              <svg class="menu-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button class="logout-button" type="button" id="kbLogoutBtn">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <script>
+    (function () {
+      var bar = document.getElementById('kbStaticTopbar');
+      if (!bar) return;
+      if (document.documentElement.classList.contains('kb-embed')) {
+        bar.remove();
+      } else {
+        bar.removeAttribute('hidden');
+      }
+    })();
+  </script>
+
+  <div id="knowledge-app" v-cloak>
+    <main class="kb-page">
+      <input ref="excelInput" type="file" accept=".xlsx,.xlsm" multiple hidden @change="uploadExcelSelected">
+
+      <div class="kb-heading">
+        <div>
+          <h1>Regulation Knowledge Base</h1>
+          <p>Centrally manage regulation texts, the controlled master list, and project assessment records.</p>
+        </div>
+        <button class="refresh-button" type="button" title="Refresh current tab" aria-label="Refresh current tab" @click="refreshAll">
+          <span class="refresh-button__icon" aria-hidden="true">↻</span>
+          <span>Refresh</span>
+        </button>
+      </div>
+
+      <nav class="tabs">
+        <button :class="{ active: tab === 'documents' }" @click="selectTab('documents')">Regulation texts</button>
+        <button :class="{ active: tab === 'master' }" @click="selectTab('master')">Master list</button>
+        <button :class="{ active: tab === 'assessments' }" @click="selectTab('assessments')">Project assessments</button>
+        <button :class="{ active: tab === 'recycle' }" @click="selectTab('recycle')">Recycle bin</button>
+      </nav>
+
+      <section v-if="tab === 'documents'" class="panel">
+        <div class="toolbar">
+          <div class="crumb">
+            <span v-if="!path" class="crumb-root">Knowledge base root</span>
+            <button
+              v-else
+              type="button"
+              class="crumb-root crumb-root-link"
+              @click="openPath('')"
+            >Knowledge base root</button>
+            <span v-for="(part, index) in pathParts" :key="part">
+              /
+              <button
+                v-if="index < pathParts.length - 1"
+                type="button"
+                @click="openPath(pathParts.slice(0, index + 1).join('/'))"
+              >{{ part }}</button>
+              <span v-else class="crumb-current">{{ part }}</span>
+            </span>
+          </div>
+          <div class="toolbar-actions">
+            <button :disabled="documentSearchActive" @click="showFolder = true">New folder</button>
+            <button class="primary" :disabled="documentSearchActive" @click="pickFiles">Upload to current folder</button>
+            <input ref="fileInput" type="file" multiple hidden @change="uploadSelected">
+          </div>
+        </div>
+
+        <div class="document-search">
+          <input v-model="documentSearch" placeholder="Search by file name or folder path" @keyup.enter="searchDocuments">
+          <button @click="searchDocuments">Search</button>
+          <button class="batch-danger" :disabled="!selectedFileIds.length" @click="confirmBatchDelete('files')">
+            Bulk delete{{ selectedFileIds.length ? ` (${selectedFileIds.length})` : '' }}
+          </button>
+          <button v-if="documentSearchActive" @click="clearDocumentSearch">Clear</button>
+        </div>
+
+        <div class="directory-meta">
+          <span>{{ documentSearchActive ? `Library-wide search: ${activeDocumentSearch}` : `Current folder: regulation_texts_cleaned${path ? `/${path}` : ''}` }}</span>
+          <span>{{ documentSearchActive ? `${documentTotal} files total` : `${folders.length}  folders · ${files.length}  files` }}</span>
+        </div>
+
+        <div v-if="error" class="error">{{ error }}</div>
+        <div v-if="loading" class="empty">Loading knowledge base…</div>
+
+        <label v-if="files.length" class="import-note">
+          <input class="selection-box" type="checkbox" :checked="allFilesSelected" @change="togglePageSelection('files', $event.target.checked)">
+          Select all files on this page
+        </label>
+        <div v-else-if="!loading && !folders.length" class="empty">This folder is empty</div>
+
+        <div v-if="!loading" class="item-grid">
+          <article
+            v-for="folder in folders"
+            :key="folder.folder_id"
+            class="item folder-item"
+            role="button"
+            tabindex="0"
+            title="Open folder"
+            @click="openPath(folder.relative_path)"
+            @keyup.enter="openPath(folder.relative_path)"
+          >
+            <div class="item-icon">DIR</div>
+            <div class="item-main">
+              <strong>{{ folder.name }}</strong>
+            </div>
+            <div class="item-actions">
+              <button class="danger-link" title="Delete folder" @click.stop="confirmDelete('folder', folder)">Delete</button>
+            </div>
+          </article>
+
+          <article v-for="file in files" :key="file.file_id" class="item" :title="file.display_name">
+            <input v-model="selectedFileIds" class="selection-box" type="checkbox" :value="file.file_id">
+            <div class="item-icon file">{{ (file.extension || '').replace('.', '').toUpperCase() || 'FILE' }}</div>
+            <div class="item-main">
+              <a href="javascript:void(0)" :title="file.display_name" @click.prevent="previewFile(file)">{{ file.display_name }}</a>
+              <small>
+                <template v-if="documentSearchActive">{{ file.relative_path }} · </template>
+                {{ formatSize(file.size) }}
+                <template v-if="file.clause_count"> · {{ file.clause_count }} clauses</template>
+                <template v-if="file.parse_error"> · {{ file.parse_error }}</template>
+              </small>
+              <div class="item-status-row">
+                <span :class="`parse-state ${file.parse_status || 'ingested'}`">{{ parseStatusLabel(file.parse_status) }}</span>
+                <div class="item-actions">
+                  <button v-if="documentSearchActive" class="check-link" @click="openFileFolder(file)">Open location</button>
+                  <button class="check-link" title="Check parse status" @click="checkParse(file)">Check</button>
+                  <button class="danger-link" title="Delete file" @click="confirmDelete('file', file)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div v-if="documentSearchActive" class="pagination">
+          <button :disabled="documentPage <= 1" @click="changeDocumentPage(documentPage - 1)">Previous</button>
+          <span>Page {{ documentPage }} / {{ documentPages }}</span>
+          <button :disabled="documentPage >= documentPages" @click="changeDocumentPage(documentPage + 1)">Next</button>
+        </div>
+      </section>
+
+      <section v-if="tab === 'master'" class="panel">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Master list</h2>
+            <span class="kb-help-popover">
+              <button type="button" class="kb-help-trigger" aria-label="Help">?</button>
+              <span class="kb-help-popup" role="tooltip">
+                Regulation Q&A first filters by regulation code, market, category, applicable object, and vehicle type, then links the full text by file name. Uploaded records are published by default and immediately available for Q&A.
+              </span>
+            </span>
+          </div>
+          <div class="toolbar-actions">
+            <button @click="pickExcel('master')">Upload Excel and import</button>
+            <button class="primary" @click="editMaster({})">Add record</button>
+          </div>
+        </div>
+        <div class="excel-format-help">
+          <strong>Bulk import format</strong>
+          <ul>
+            <li>Only <code>.xlsx</code> or <code>.xlsm</code>; the first sheet’s first row is the header; each row is one regulation.</li>
+            <li>Required columns: standard code, Chinese name, market, category (tag).</li>
+            <li>Optional columns: market aliases, certification object, applicable vehicle types, file names.</li>
+          </ul>
+        </div>
+        <div class="table-controls">
+          <input v-model="masterSearch" placeholder="Search by code, name, market, market alias, or category" @keyup.enter="searchMaster">
+          <button @click="searchMaster">Search</button>
+          <button class="batch-danger" :disabled="!selectedMasterIds.length" @click="confirmBatchDelete('master')">
+            Bulk delete{{ selectedMasterIds.length ? ` (${selectedMasterIds.length})` : '' }}
+          </button>
+          <span>{{ masterTotal }} records</span>
+        </div>
+        <div class="table-scroll-top" ref="masterTopScroll" @scroll="syncTableScroll('master', 'top')">
+          <div :style="{ width: masterScrollWidth + 'px' }"></div>
+        </div>
+        <div class="table-wrap" ref="masterTableScroll" @scroll="syncTableScroll('master', 'table')">
+          <table class="managed-table">
+            <thead>
+              <tr>
+                <th class="select-column">
+                  <input class="selection-box" type="checkbox" :checked="allMasterSelected" @change="togglePageSelection('master', $event.target.checked)">
+                </th>
+                <th>Regulation code</th>
+                <th>Regulation name</th>
+                <th>Market</th>
+                <th>Market aliases</th>
+                <th>Category</th>
+                <th>Certification object</th>
+                <th>Applicable vehicle types</th>
+                <th>File names</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in masterRecords" :key="item.record_id">
+                <td class="select-column">
+                  <input v-model="selectedMasterIds" class="selection-box" type="checkbox" :value="item.record_id">
+                </td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.market }}</td>
+                <td>{{ item.market_aliases || 'Not provided' }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.applicable_object || '—' }}</td>
+                <td>{{ item.vehicle_types || '—' }}</td>
+                <td>{{ item.file_names || 'Not linked' }}</td>
+                <td><span class="status">{{ item.status === 'published' ? 'published' : 'draft' }}</span></td>
+                <td>
+                  <button class="check-link" @click="editMaster(item)">Edit</button>
+                  <button v-if="item.status !== 'published'" class="check-link publish-link" @click="publishMaster(item)">Publish</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button :disabled="masterPage <= 1" @click="changeMasterPage(masterPage - 1)">Previous</button>
+          <span>Page {{ masterPage }} / {{ masterPages }}</span>
+          <button :disabled="masterPage >= masterPages" @click="changeMasterPage(masterPage + 1)">Next</button>
+        </div>
+      </section>
+
+      <section v-if="tab === 'assessments'" class="panel">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Project assessments</h2>
+            <span class="kb-help-popover">
+              <button type="button" class="kb-help-trigger" aria-label="Help">?</button>
+              <span class="kb-help-popup" role="tooltip">
+                Regulation Q&A matches project name and regulation code exactly, then uses market, assessment result, and risk detail to select the project conclusion.
+              </span>
+            </span>
+          </div>
+          <div class="toolbar-actions">
+            <label class="excel-project-field">
+              <span class="field-label-text"><span class="req-star" aria-hidden="true">*</span>Project name</span>
+              <input v-model="excelProjectName" type="text" maxlength="120" placeholder="e.g. S61D-02">
+            </label>
+            <button @click="pickExcel('assessment')">Upload Excel and import</button>
+            <button class="primary" @click="editAssessment({})">Add record</button>
+          </div>
+        </div>
+        <div class="excel-format-help">
+          <strong>Bulk import format</strong>
+          <ul>
+            <li>Only <code>.xlsx</code> or <code>.xlsm</code>; the first sheet’s first row is the header; each row is one project assessment.</li>
+            <li>Required columns: standard code, assessment result, market; project name is required.</li>
+          </ul>
+        </div>
+        <div class="table-controls">
+          <input v-model="assessmentSearch" placeholder="Search by project, code, name, market alias, or risk" @keyup.enter="searchAssessments">
+          <input v-model="assessmentProject" placeholder="Filter by project (any project name)" @keyup.enter="searchAssessments">
+          <button @click="searchAssessments">Search</button>
+          <button class="batch-danger" :disabled="!selectedAssessmentIds.length" @click="confirmBatchDelete('assessments')">
+            Bulk delete{{ selectedAssessmentIds.length ? ` (${selectedAssessmentIds.length})` : '' }}
+          </button>
+          <span>{{ assessmentTotal }} records</span>
+        </div>
+        <div class="table-scroll-top" ref="assessmentTopScroll" @scroll="syncTableScroll('assessment', 'top')">
+          <div :style="{ width: assessmentScrollWidth + 'px' }"></div>
+        </div>
+        <div class="table-wrap" ref="assessmentTableScroll" @scroll="syncTableScroll('assessment', 'table')">
+          <table class="managed-table">
+            <thead>
+              <tr>
+                <th class="select-column">
+                  <input class="selection-box" type="checkbox" :checked="allAssessmentsSelected" @change="togglePageSelection('assessments', $event.target.checked)">
+                </th>
+                <th>Project</th>
+                <th>Regulation code</th>
+                <th>Regulation name</th>
+                <th>Market</th>
+                <th>Market aliases</th>
+                <th>Category</th>
+                <th>Assessment result</th>
+                <th>Risk</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in assessments" :key="item.assessment_id">
+                <td class="select-column">
+                  <input v-model="selectedAssessmentIds" class="selection-box" type="checkbox" :value="item.assessment_id">
+                </td>
+                <td>{{ item.project_name }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name || '—' }}</td>
+                <td>{{ item.market }}</td>
+                <td>{{ item.market_aliases || 'Not provided' }}</td>
+                <td>{{ item.category || '—' }}</td>
+                <td>{{ item.result || 'Not provided' }}</td>
+                <td>{{ item.risk_detail || 'Not provided' }}</td>
+                <td><span class="status">{{ item.status === 'published' ? 'published' : 'draft' }}</span></td>
+                <td>
+                  <button class="check-link" @click="editAssessment(item)">Edit</button>
+                  <button v-if="item.status !== 'published'" class="check-link publish-link" @click="publishAssessment(item)">Publish</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button :disabled="assessmentPage <= 1" @click="changeAssessmentPage(assessmentPage - 1)">Previous</button>
+          <span>Page {{ assessmentPage }} / {{ assessmentPages }}</span>
+          <button :disabled="assessmentPage >= assessmentPages" @click="changeAssessmentPage(assessmentPage + 1)">Next</button>
+        </div>
+      </section>
+
+      <section v-if="tab === 'recycle'" class="panel">
+        <div class="section-head">
+          <h2>Recycle bin</h2>
+        </div>
+        <p class="section-desc">Deleted files and folders are kept here temporarily.</p>
+        <div class="item-grid">
+          <article v-for="item in recycle.folders" :key="item.folder_id" class="item">
+            <div class="item-icon">DIR</div>
+            <div class="item-main">
+              <strong>{{ item.name }}</strong>
+              <small>Folder · {{ item.relative_path }}</small>
+            </div>
+            <div class="item-actions">
+              <button class="check-link" @click="restore('folder', item.folder_id)">Restore</button>
+              <button class="danger-link" @click="purge('folder', item.folder_id)">Delete permanently</button>
+            </div>
+          </article>
+          <article v-for="item in recycle.files" :key="item.file_id" class="item">
+            <div class="item-icon file">FILE</div>
+            <div class="item-main">
+              <strong>{{ item.display_name }}</strong>
+              <small>File · {{ item.relative_path }}</small>
+            </div>
+            <div class="item-actions">
+              <button class="check-link" @click="restore('file', item.file_id)">Restore</button>
+              <button class="danger-link" @click="purge('file', item.file_id)">Delete permanently</button>
+            </div>
+          </article>
+          <div v-if="!recycle.files.length && !recycle.folders.length" class="empty recycle-empty">
+            <div class="recycle-empty-icon" aria-hidden="true">
+              <img src="./assets/trash.svg" alt="" width="140" height="135">
+            </div>
+            <div>Recycle bin is empty</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div v-if="dialog" class="modal-backdrop" @click.self="dialog = null">
+      <section class="modal">
+        <h2>{{ dialog.title }}</h2>
+        <p>{{ dialog.message }}</p>
+        <div v-if="dialog.type === 'folder'" class="field">
+          <label>Folder name</label>
+          <input v-model="dialog.name" autofocus>
+        </div>
+        <div v-if="dialog.type === 'master' || dialog.type === 'assessment'" class="form-grid">
+          <label v-for="field in dialog.fields" :key="field.key">
+            <span class="field-label-text"><span v-if="field.required" class="req-star" aria-hidden="true">*</span>{{ field.label }}</span>
+            <textarea v-if="field.multiline" v-model="dialog.record[field.key]" rows="3"></textarea>
+            <input v-else v-model="dialog.record[field.key]">
+          </label>
+        </div>
+        <div v-else-if="dialog.fields" class="form-grid">
+          <label v-for="field in dialog.fields" :key="field.key">
+            <span class="field-label-text"><span v-if="field.required" class="req-star" aria-hidden="true">*</span>{{ field.label }}</span>
+            <textarea v-if="field.multiline" v-model="dialog.record[field.key]" rows="3"></textarea>
+            <input v-else v-model="dialog.record[field.key]">
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" @click="dialog = null">Cancel</button>
+          <button type="button" class="primary" @click="dialog.submit">Confirm</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="./vendor/vue.global.prod.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./js/kb-directory-data.js"></script>
+  <script src="./js/mock-data.js"></script>
+  <script src="./regulation-knowledge.js?v=20260831b"></script>
+  <script>
+    (function () {
+      var bar = document.getElementById('kbStaticTopbar');
+      if (!bar) return;
+      var user = (window.LegalDemo && LegalDemo.readUser && LegalDemo.readUser()) || { displayName: 'User' };
+      var initialsEl = document.getElementById('kbAccountInitials');
+      if (initialsEl && window.LegalDemo && LegalDemo.initials) {
+        initialsEl.textContent = LegalDemo.initials(user.displayName);
+      }
+      var btn = document.getElementById('kbAccountBtn');
+      var menu = document.getElementById('kbAccountMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = menu.hasAttribute('hidden');
+          if (open) menu.removeAttribute('hidden');
+          else menu.setAttribute('hidden', '');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        document.addEventListener('click', function () {
+          menu.setAttribute('hidden', '');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      }
+      var qa = document.getElementById('kbOpenQaBtn');
+      if (qa) qa.addEventListener('click', function () { location.href = './regulation-qa.html'; });
+      var logoutBtn = document.getElementById('kbLogoutBtn');
+      if (logoutBtn) logoutBtn.addEventListener('click', function () {
+        if (window.LegalDemo && LegalDemo.logout) LegalDemo.logout();
+      });
+    })();
+  </script>
+</body>
+</html>

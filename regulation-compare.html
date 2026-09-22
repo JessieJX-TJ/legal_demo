@@ -1,0 +1,1749 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulation Breakdown & Version Compare - AI Regulation Agent</title>
+  <link rel="stylesheet" href="./css/report-8091.css?v=40">
+  <link rel="stylesheet" href="./css/report-extra.css?v=51">
+  <link rel="stylesheet" href="./css/compare-breakdown.css?v=5">
+  <link rel="stylesheet" href="./css/compliance-conversation.css?v=11">
+  <link rel="stylesheet" href="./css/compare-conversation.css?v=20">
+  <link rel="stylesheet" href="./css/onboarding-tour.css?v=4">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+  <style id="report-critical">
+    html, body, #app {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    .header.legacy-topbar {
+      left: 304px !important;
+      right: 0 !important;
+      width: auto !important;
+    }
+    .header.legacy-topbar .header-inner {
+      position: relative !important;
+      height: 68px !important;
+      padding: 0 32px !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      justify-content: flex-start !important;
+      gap: 20px !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-sizing: border-box !important;
+    }
+    .legacy-nav-heading {
+      position: relative !important;
+      z-index: 2 !important;
+      left: auto !important;
+      transform: none !important;
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex: none !important;
+    }
+    .legacy-topbar .mode-tabs-row {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      z-index: 2 !important;
+      flex: none !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      margin: 0 0 0 auto !important;
+      min-width: 0 !important;
+    }
+    .header-actions {
+      display: none !important;
+    }
+    .legacy-brand {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      color: #1f2937 !important;
+      white-space: nowrap !important;
+    }
+    .legacy-topbar .legacy-account-copy,
+    .legacy-topbar .legacy-account-copy strong,
+    .legacy-topbar .legacy-account-copy small {
+      display: none !important;
+    }
+    .sidebar-brand-bar {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      flex: none !important;
+      width: 100% !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      margin: 0 !important;
+      padding: 0 12px !important;
+      box-sizing: border-box !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      background: #fff !important;
+    }
+    .sidebar-brand {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: auto !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      box-sizing: border-box !important;
+      border: 0 !important;
+      border-bottom: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      color: inherit !important;
+      text-decoration: none !important;
+      cursor: pointer !important;
+      transition: background-color 160ms ease !important;
+    }
+    .sidebar-brand:hover {
+      background: transparent !important;
+      color: inherit !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn {
+      width: 36px !important;
+      height: 36px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: none !important;
+      margin-left: auto !important;
+      padding: 0 !important;
+      color: #6b7280 !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      transition: color 200ms ease, background-color 200ms ease !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn:hover {
+      color: #6757c8 !important;
+      background: rgba(109, 112, 255, 0.08) !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn svg {
+      width: 20px !important;
+      height: 20px !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-brand-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      height: 40px !important;
+      flex: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+    }
+    .sidebar-brand-icon svg {
+      display: block !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+    .sidebar-greeting {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+    }
+    .sidebar-version {
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      color: #94a3b8 !important;
+      margin-top: 2px !important;
+      white-space: nowrap !important;
+    }
+    .legacy-topbar + .app-layout {
+      display: block !important;
+      margin-top: 68px !important;
+      margin-left: 304px !important;
+      width: calc(100% - 304px) !important;
+      max-width: calc(100% - 304px) !important;
+      min-height: calc(100vh / var(--ui-scale) - 68px) !important;
+      background: #F8FAFC !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      box-sizing: border-box !important;
+    }
+    .legacy-topbar + .app-layout .sidebar,
+    aside.sidebar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 304px !important;
+      min-width: 304px !important;
+      max-width: 304px !important;
+      height: calc(100vh / var(--ui-scale)) !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      z-index: 120 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      overflow-x: hidden !important;
+      overflow-y: hidden !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+      background: #fff !important;
+    }
+    .legacy-topbar + .app-layout .sidebar::-webkit-scrollbar,
+    aside.sidebar::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .sidebar-brand-bar {
+      flex: none !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      margin: 0 !important;
+      position: relative !important;
+      z-index: 2 !important;
+      background: #fff !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-brand {
+      flex: none !important;
+      width: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      position: relative !important;
+      z-index: 2 !important;
+      background: transparent !important;
+      border-bottom: none !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      padding: 8px 20px 12px !important;
+      box-sizing: border-box !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+      background: #fff !important;
+    }
+    .sidebar-body::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .sidebar-actions {
+      flex: none !important;
+      display: grid !important;
+      gap: 5px !important;
+      padding: 12px 12px 4px !important;
+      box-sizing: border-box !important;
+    }
+    nav.sidebar-actions {
+      flex: none !important;
+      display: grid !important;
+      gap: 5px !important;
+      padding: 12px 12px 4px !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-kb-btn.header-action-btn.header-kb-btn,
+    .sidebar .sidebar-kb-btn,
+    nav.sidebar-actions .sidebar-kb-btn {
+      width: 100% !important;
+      min-height: 40px !important;
+      height: auto !important;
+      padding: 0 12px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 9px !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      border-radius: 10px !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      text-align: left !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+    }
+    .sidebar-kb-btn.header-action-btn.header-kb-btn:hover,
+    .sidebar .sidebar-kb-btn:hover,
+    .sidebar-kb-btn.is-active,
+    .sidebar-kb-btn[aria-expanded="true"] {
+      color: #6757c8 !important;
+      background: rgba(124, 106, 245, 0.08) !important;
+      border-color: transparent !important;
+    }
+    .sidebar-kb-btn svg {
+      width: 17px !important;
+      height: 17px !important;
+      flex: none !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-kb-btn span {
+      flex: 1 !important;
+    }
+    .kb-modal-overlay {
+      z-index: 1200 !important;
+    }
+    .kb-modal {
+      width: min(1280px, calc(100vw - 48px)) !important;
+      max-width: none !important;
+      height: min(900px, calc(100vh - 48px)) !important;
+      max-height: none !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      border-radius: 16px !important;
+      background: #fff !important;
+      box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22) !important;
+    }
+    .kb-modal-header {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #e8ebf2;
+      background: #fff;
+    }
+    .kb-modal-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #1e293b;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .kb-modal-title svg {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      color: #6757c8;
+    }
+    .kb-modal-body {
+      flex: 1;
+      min-height: 0;
+      background: #f6f8fb;
+      overflow: hidden;
+    }
+    .kb-modal-frame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #f6f8fb;
+    }
+    .sidebar-user {
+      flex: none !important;
+      margin-top: auto !important;
+      padding: 11px 12px 12px !important;
+      border-top: 1px solid rgba(134, 144, 156, 0.18) !important;
+      box-sizing: border-box !important;
+      background: #fff !important;
+    }
+    .sidebar-user .legacy-account-wrap {
+      width: 100% !important;
+      position: relative !important;
+    }
+    .sidebar-user .legacy-account {
+      width: 100% !important;
+      min-height: 58px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 9px !important;
+      padding: 11px 8px 2px !important;
+      box-sizing: border-box !important;
+      grid-template-columns: none !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      line-height: inherit !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    .sidebar-user .legacy-account:hover,
+    .sidebar-user .legacy-account[aria-expanded="true"] {
+      background: rgba(124, 106, 245, 0.06) !important;
+    }
+    .sidebar-user .legacy-account > b,
+    .sidebar-user .legacy-account-avatar {
+      width: 32px !important;
+      height: 32px !important;
+      flex: none !important;
+      display: grid !important;
+      place-items: center !important;
+      color: #6757c8 !important;
+      background: #f0edff !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      box-shadow: none !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    .sidebar-user .legacy-account-avatar svg {
+      width: 17px !important;
+      height: 17px !important;
+      display: block !important;
+    }
+    .sidebar-user .legacy-account-copy {
+      display: grid !important;
+      gap: 2px !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      text-align: left !important;
+    }
+    .sidebar-user .legacy-account-copy strong,
+    .sidebar-user .legacy-account-copy small {
+      display: block !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-user .legacy-account-copy strong {
+      color: #1e293b !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-copy small {
+      color: #94a3b8 !important;
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-chevron,
+    .sidebar-user .legacy-account-settings {
+      width: 16px !important;
+      height: 16px !important;
+      flex: none !important;
+      color: #94a3b8 !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-user .legacy-account-menu {
+      position: absolute !important;
+      top: auto !important;
+      bottom: calc(100% + 6px) !important;
+      right: 0 !important;
+      left: 0 !important;
+      z-index: 140 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 7px !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      border: 1px solid #e2e6ed !important;
+      border-radius: 9px !important;
+      box-shadow: 0 16px 36px rgba(29, 43, 77, 0.14) !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-user .legacy-account-menu button,
+    .sidebar-user .legacy-account-menu .legacy-logout {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      color: #536075 !important;
+      text-align: left !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 6px !important;
+      border-top: 0 !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      cursor: pointer !important;
+    }
+    .sidebar-user .legacy-account-menu button:hover,
+    .sidebar-user .legacy-account-menu .legacy-logout:hover {
+      color: #526fca !important;
+      background: #f2f5fc !important;
+    }
+    .sidebar-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0 0 12px;
+      flex: none;
+    }
+    .sidebar-heading > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .sidebar-heading strong {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .sidebar-heading small {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .sidebar-history-list {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .sidebar-history-list::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    .history-entry {
+      display: flex;
+      min-width: 0;
+      border-radius: 7px;
+      transition: background-color 160ms ease;
+    }
+    .history-entry:hover {
+      background: #f4f1ff;
+    }
+    .history-entry.active {
+      background: #f8fafc;
+    }
+    .history-entry > button:first-child,
+    .history-entry > .history-entry-main {
+      min-width: 0;
+      min-height: 52px;
+      display: grid;
+      grid-template-columns: 16px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      padding: 8px 7px;
+      color: #5b677a;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      border-radius: 7px 0 0 7px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-family: inherit;
+    }
+    .history-entry > button:first-child {
+      cursor: pointer;
+    }
+    .history-entry > .history-entry-main {
+      cursor: default;
+      pointer-events: none;
+    }
+    .history-entry:hover > button:first-child,
+    .history-entry:hover > .history-entry-main {
+      color: #7564d8;
+    }
+    .history-entry.active > button:first-child,
+    .history-entry.active > .history-entry-main {
+      color: #334155;
+    }
+    .history-entry-text {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .history-entry-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .history-entry > button:first-child svg,
+    .history-entry > .history-entry-main svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+      color: #94a3b8;
+    }
+    .history-entry:hover > button:first-child svg,
+    .history-entry:hover > .history-entry-main svg {
+      color: #7564d8;
+    }
+    .history-entry.active > button:first-child svg,
+    .history-entry.active > .history-entry-main svg {
+      color: #334155;
+    }
+    .history-entry time {
+      color: #a1a9b6;
+      font-size: 12px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .history-entry:hover time {
+      color: #a99be8;
+    }
+    .history-entry.active time {
+      color: #94a3b8;
+    }
+    .history-entry .download-entry,
+    .history-entry .delete-entry {
+      width: 28px;
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      color: #aab1bc;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      flex: none;
+    }
+    .history-entry:hover .download-entry,
+    .history-entry:hover .delete-entry {
+      color: #7564d8;
+    }
+    .history-entry .download-entry:hover {
+      color: #2f9b6a !important;
+    }
+    .history-entry .delete-entry {
+      border-radius: 0 7px 7px 0;
+    }
+    .history-entry .delete-entry:hover {
+      color: #ae626d !important;
+    }
+    .history-entry .download-entry svg,
+    .history-entry .delete-entry svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .history-entry .delete-entry:hover {
+      color: #ae626d !important;
+    }
+    .history-entry .download-entry svg,
+    .history-entry .delete-entry svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .sidebar-history-empty {
+      margin: 0;
+      padding: 24px 8px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .sidebar-card {
+      background: #f8fafc !important;
+      border-radius: 12px !important;
+      padding: 16px !important;
+      margin-bottom: 16px !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      flex: none !important;
+    }
+    .sidebar-card.sidebar-actions {
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin-bottom: 16px !important;
+    }
+    .sidebar-actions .btn.btn-primary {
+      width: 100% !important;
+      height: 44px !important;
+      padding: 0 16px !important;
+      color: #7564d8 !important;
+      background: #f4f1ff !important;
+      border: 1px solid #e3dcfa !important;
+      border-radius: 10px !important;
+      box-shadow: none !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      transition: all 220ms ease !important;
+    }
+    .sidebar-actions .btn.btn-primary:hover:not(:disabled) {
+      color: #7564d8 !important;
+      background: #eae4fc !important;
+      border-color: #d6ccf5 !important;
+      transform: none !important;
+      box-shadow: 0 4px 12px rgba(47, 43, 72, 0.06) !important;
+    }
+    .sidebar-card-title {
+      font-size: 12px !important;
+      color: #94a3b8 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      margin-bottom: 14px !important;
+      font-weight: 600 !important;
+    }
+    .sidebar-source-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 8px 0 !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+    .sidebar-source-item .src-name {
+      flex: 1 !important;
+      font-size: 13px !important;
+      color: #334155 !important;
+      line-height: 1.4 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-source-item .src-count {
+      font-size: 12px !important;
+      color: #64748b !important;
+      min-width: 36px !important;
+      text-align: right !important;
+      flex: none !important;
+    }
+    .sidebar-sources-scroll {
+      flex: none !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .sidebar-sources-scroll::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .sidebar-card.sidebar-sources-card {
+      flex: none !important;
+      min-height: 0 !important;
+      display: block !important;
+      overflow: visible !important;
+      margin-bottom: 0 !important;
+    }
+    .sidebar-stat-num {
+      font-size: 22px !important;
+      font-weight: 700 !important;
+      color: #6d70ff !important;
+    }
+    .sidebar-stats-row {
+      display: flex !important;
+      align-items: baseline !important;
+      gap: 16px !important;
+    }
+    .sidebar-stat-item {
+      display: flex !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      margin-bottom: 0 !important;
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+    .sidebar-stat-label {
+      font-size: 12px !important;
+      color: #64748b !important;
+    }
+    .mode-tabs-row {
+      display: flex !important;
+      justify-content: center !important;
+      margin-bottom: 0 !important;
+    }
+    .mode-tabs {
+      display: inline-flex !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      background: #f1f5f9 !important;
+      border: none !important;
+      border-radius: 12px !important;
+      padding: 4px !important;
+      gap: 2px !important;
+      box-shadow: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+    button.mode-tab,
+    .mode-tab {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 9px 16px !important;
+      margin: 0 !important;
+      border: none !important;
+      background: transparent !important;
+      border-radius: 9px !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      line-height: 1.2 !important;
+      color: #64748b !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      flex: 0 0 auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+      box-sizing: border-box !important;
+      font-family: inherit !important;
+    }
+    button.mode-tab.active,
+    .mode-tab.active {
+      background: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+      color: #6d70ff !important;
+    }
+    .mode-tab.tab-breakdown.active,
+    .mode-tab.tab-compare.active { color: #6d70ff !important; }
+    .mode-tab-icon { font-size: 14px !important; line-height: 1 !important; }
+    .mode-tab-sub {
+      font-size: 10px !important;
+      color: #94a3b8 !important;
+      margin-left: 2px !important;
+      font-weight: 400 !important;
+    }
+    .main-content {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 28px 28px 40px !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      background: #F8FAFC !important;
+      box-sizing: border-box !important;
+    }
+    .content-card {
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      min-height: auto !important;
+    }
+    .page-desc {
+      text-align: center !important;
+      color: #64748b !important;
+      font-size: 14px !important;
+      margin-bottom: 24px !important;
+    }
+    .page-header-row h2 {
+      font-size: 20px !important;
+      color: #1e293b !important;
+      font-weight: 600 !important;
+    }
+    .form-hint {
+      margin: 8px 0 0;
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    /* Arco Design-like Slider: https://arco.design/react/components/slider */
+    .arco-like-slider {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 88px;
+      gap: 16px;
+      align-items: center;
+    }
+    .arco-like-slider-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 12px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+    }
+    .arco-like-slider-range::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(
+        to right,
+        #165dff 0%,
+        #165dff calc(var(--arco-slider-pct, 55%)),
+        #e5e6eb calc(var(--arco-slider-pct, 55%)),
+        #e5e6eb 100%
+      );
+    }
+    .arco-like-slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      margin-top: -4px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #165dff;
+      box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.15);
+      transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+    }
+    .arco-like-slider-range:hover::-webkit-slider-thumb {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 4px rgba(22, 93, 255, 0.18);
+    }
+    .arco-like-slider-range:active::-webkit-slider-thumb,
+    .arco-like-slider-range:focus-visible::-webkit-slider-thumb {
+      border-color: #0e42d2;
+      box-shadow: 0 0 0 4px rgba(22, 93, 255, 0.24);
+    }
+    .arco-like-slider-range::-moz-range-track {
+      height: 4px;
+      border-radius: 2px;
+      background: #e5e6eb;
+      border: none;
+    }
+    .arco-like-slider-range::-moz-range-progress {
+      height: 4px;
+      border-radius: 2px;
+      background: #165dff;
+    }
+    .arco-like-slider-range::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #165dff;
+      box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.15);
+      transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+    }
+    .arco-like-slider-range:hover::-moz-range-thumb {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 4px rgba(22, 93, 255, 0.18);
+    }
+    .arco-like-slider-input {
+      width: 88px;
+      height: 32px;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0 8px;
+      color: #1d2129;
+      font-size: 14px;
+      line-height: 30px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #e5e6eb;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+      font-family: inherit;
+      -moz-appearance: textfield;
+    }
+    .arco-like-slider-input::-webkit-outer-spin-button,
+    .arco-like-slider-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .arco-like-slider-input:hover {
+      border-color: #6d70ff;
+    }
+    .arco-like-slider-input:focus {
+      border-color: #6d70ff;
+      box-shadow: 0 0 0 3px rgba(109, 112, 255, 0.15);
+    }
+    @media (max-width: 768px) {
+      .header.legacy-topbar {
+        left: 0 !important;
+      }
+      .legacy-topbar + .app-layout {
+        margin-left: 0 !important;
+      }
+      aside.sidebar,
+      .legacy-topbar + .app-layout .sidebar {
+        position: relative !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 1 !important;
+      }
+      .mode-tabs { flex-wrap: wrap !important; max-width: 100% !important; }
+      .main-content { padding: 16px !important; background: #F8FAFC !important; }
+      .content-card { padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak @click="showAccountMenu = false">
+    <header class="header legacy-topbar">
+      <div class="header-inner">
+        <div class="legacy-nav-heading">
+          <span class="module-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M8 8h8M8 12h8M8 16h8"/></svg></span>
+          <strong class="legacy-brand">Regulation Reports & Advisory Analysis</strong>
+        </div>
+        <div class="mode-tabs-row">
+          <div class="mode-tabs" data-ob="mode-tabs">
+            <button class="mode-tab tab-breakdown" type="button" :class="{active: currentPage === 'breakdown'}" @click="switchToPage('breakdown')" title="Regulation breakdown">
+              <span>Regulation breakdown</span>
+            </button>
+            <button class="mode-tab tab-compare" type="button" :class="{active: currentPage === 'compare'}" @click="switchToPage('compare')" title="Old vs new regulation compare">
+              <span>Old vs new</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand-bar">
+          <a class="sidebar-brand" href="./index.html" title="Back to workspace" aria-label="Back to workspace">
+            <div class="sidebar-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Workspace four modules: purple / yellow / green / blue -->
+                <rect x="4" y="4" width="13" height="13" rx="3.5" fill="#6d70ff"/>
+                <rect x="19" y="4" width="13" height="13" rx="3.5" fill="#e6c84a"/>
+                <rect x="4" y="19" width="13" height="13" rx="3.5" fill="#67af86"/>
+                <rect x="19" y="19" width="13" height="13" rx="3.5" fill="#6a8ef5"/>
+                <!-- Regulation documents -->
+                <path d="M7.5 8.5h6M7.5 11.5h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                <!-- Office compare -->
+                <rect x="21.8" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.95"/>
+                <rect x="26" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.7"/>
+                <!-- Compliance checklist -->
+                <path d="M7.6 25.4l2.4 2.3 4.6-4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- AI sparkle -->
+                <path d="M25.5 22.2l1.15 2.55 2.55 1.15-2.55 1.15L25.5 29.6l-1.15-2.55-2.55-1.15 2.55-1.15L25.5 22.2z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="sidebar-brand-text">
+              <div class="sidebar-greeting">AI Regulation Agent</div>
+              <div class="sidebar-version">Back to workspace</div>
+            </div>
+          </a>
+          <button class="topbar-help-btn" type="button" @click="showHelpModal = true" title="View user guide" aria-label="User guide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"></path><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+        </div>
+
+        <nav class="sidebar-actions" aria-label="Workspace navigation">
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn sidebar-new-task-btn" type="button" data-ob="new-task" @click="startNewTask" title="New task" aria-label="New task">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            <span>New task</span>
+          </button>
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn" type="button" @click="openKnowledgeBase" title="Regulation Knowledge Base" aria-label="Regulation Knowledge Base">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Regulation Knowledge Base</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-body">
+            <div class="sidebar-heading">
+              <div>
+                <strong>History</strong>
+              </div>
+            </div>
+            <div class="sidebar-history-list">
+              <div v-if="!sidebarHistory.length" class="sidebar-history-empty">
+                <div>No history reports yet</div>
+              </div>
+              <div
+                v-for="item in sidebarHistory"
+                :key="item.id"
+                class="history-entry"
+                :class="{ active: activeHistoryId === item.id }"
+              >
+                <button type="button" :title="item.title" @click="openHistoryItem(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>
+                  <span class="history-entry-text">
+                    <span class="history-entry-name">{{ item.fileName || item.title }}</span>
+                    <time>{{ formatHistoryDate(item.date) }}</time>
+                  </span>
+                </button>
+                <button class="download-entry" type="button" title="Download file" aria-label="Download file" @click.stop="downloadHistoryItem(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                </button>
+                <button class="delete-entry" type="button" title="Delete record" aria-label="Delete record" @click.stop="deleteHistoryItem(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
+              </div>
+            </div>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="legacy-account-wrap">
+            <button class="legacy-account" type="button" :aria-expanded="showAccountMenu" aria-label="Account menu" @click.stop="showAccountMenu = !showAccountMenu">
+              <span class="legacy-account-avatar" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <span class="legacy-account-copy">
+                <strong>{{ currentUser.displayName || currentUser.username || 'Jessie' }}</strong>
+                <small>{{ currentUser.role || 'Administrator' }}</small>
+              </span>
+              <svg class="legacy-account-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </button>
+            <div v-if="showAccountMenu" class="legacy-account-menu" @click.stop>
+              <button class="legacy-logout" type="button" @click="logout">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-content">
+        <div class="content-card is-conversation" :class="'mode-' + currentPage">
+
+          <!-- Regulation breakdown · conversation -->
+          <div v-if="currentPage === 'breakdown'" class="cc-conversation rc-conversation">
+            <input ref="breakdownInput" type="file" accept="application/pdf,.pdf" hidden @change="onBreakdownPick">
+
+            <section
+              class="cc-message-stream"
+              aria-live="polite"
+              :class="{ dragover: breakdownDragOver }"
+              @dragover.prevent="breakdownDragOver = true"
+              @dragenter.prevent="breakdownDragOver = true"
+              @dragleave.prevent="breakdownDragOver = false"
+              @drop.prevent="onBreakdownDrop"
+            >
+              <div class="cc-stream-inner">
+                <div class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Ready</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble" data-ob="breakdown-welcome">
+                      <span>
+                        <strong>Start regulation breakdown</strong>
+                        <p>Select a regulation PDF below, click Confirm upload, then set the breakdown title and detail level.</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="breakdownUploadConfirmed && breakdownFile" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span class="cc-user-file-icon" aria-hidden="true">📄</span>
+                    <span>
+                      <strong>{{ breakdownFile.name }}</strong>
+                      <small>{{ formatFileSize(breakdownFile.size) }} · Ready for breakdown</small>
+                    </span>
+                  </div>
+                </div>
+                <div v-if="breakdownUploadConfirmed && breakdownFile" class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Parameter setup</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span>
+                        <strong>Set breakdown parameters</strong>
+                        <p>Enter a task title, choose the detail level, then click Start breakdown below.</p>
+                      </span>
+                      <div class="rc-composer-settings rc-bubble-settings">
+                        <div class="rc-composer-settings-row">
+                          <div class="rc-field">
+                            <label>Breakdown task title</label>
+                            <input type="text" v-model="breakdownTitle" placeholder="Regulation breakdown">
+                          </div>
+                          <div class="rc-field">
+                            <label>Breakdown detail level</label>
+                            <select v-model.number="breakdownDepth">
+                              <option v-for="option in breakdownDepthOptions" :key="option.value" :value="option.value">{{ option.label }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div v-if="breakdownLoading" class="cc-assistant-row" aria-live="polite">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                    <div class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span>
+                        <strong>{{ breakdownStatus || 'Breaking down regulation PDF' }}</strong>
+                        <p>TextIn parsing, LLM technical filtering, and Excel generation run in sequence</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-else-if="breakdownError" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Action needed</span></div>
+                    <div class="cc-assistant-bubble">
+                      <span>
+                        <strong>Breakdown incomplete</strong>
+                        <p>{{ breakdownError }}</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="breakdownPreviewLoading || breakdownPreview || breakdownPreviewError" class="cc-assistant-row cc-result-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content wide">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Breakdown result</span></div>
+
+                    <div v-if="breakdownPreviewLoading" class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span><strong>Loading Excel preview</strong><p>Please wait…</p></span>
+                    </div>
+
+                    <div v-else-if="breakdownPreviewError" class="cc-assistant-bubble">
+                      <span><strong>Preview failed to load</strong><p>{{ breakdownPreviewError }}</p></span>
+                    </div>
+
+                    <div v-else-if="breakdownPreview" class="cc-result-surface" :class="{ 'is-fullscreen': isBreakdownPreviewFullscreen }">
+                      <div class="cc-result-head">
+                        <div>
+                          <h3>Excel preview ready</h3>
+                          <p>
+                            {{ breakdownPreview.row_count || (breakdownPreview.rows && breakdownPreview.rows.length) || 0 }} rows ·
+                            {{ breakdownPreview.breakdown_depth || breakdownDepth }} heading level(s) ·
+                            Tables {{ breakdownPreview.table_count || 0 }} ·
+                            Images {{ breakdownPreview.image_count || 0 }}
+                          </p>
+                        </div>
+                        <div class="cc-result-actions">
+                          <button class="btn btn-primary" type="button" @click="downloadBreakdownExcel" :disabled="!breakdownTaskId">Export Excel</button>
+                          <button
+                            class="cc-icon-btn"
+                            type="button"
+                            :title="isBreakdownPreviewFullscreen ? 'Exit fullscreen' : 'Fullscreen'"
+                            :aria-label="isBreakdownPreviewFullscreen ? 'Exit fullscreen' : 'Fullscreen'"
+                            @click="toggleBreakdownPreviewFullscreen"
+                          >
+                            <svg v-if="!isBreakdownPreviewFullscreen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="table-wrap">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Clause No.</th>
+                              <th>Regulatory requirement</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="row in (breakdownPreview.rows || [])" :key="(row.excel_row || row.clause_no) + '-' + (row.asset_name || row.type)">
+                              <td>{{ row.clause_no }}</td>
+                              <td>
+                                <a v-if="row.type === 'source' && row.is_link" :href="row.text" target="_blank" rel="noopener">{{ row.text }}</a>
+                                <span v-else-if="row.type === 'source'">{{ row.text }}</span>
+                                <img v-else-if="row.type === 'image'" :src="row.asset_url" :alt="row.alt || 'Image'" style="max-width:220px;border-radius:8px">
+                                <div v-else>{{ row.text }}</div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <footer class="cc-composer-area">
+              <div class="cc-composer-inner">
+
+                <div v-if="breakdownFile" class="cc-attachment-strip">
+                  <div class="cc-attachment-list">
+                    <div class="pdf-list-item">
+                      <span class="pdf-list-item-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>
+                      </span>
+                      <span class="pdf-list-item-meta">
+                        <span class="pdf-list-item-name">{{ breakdownFile.name }}</span>
+                        <span class="pdf-list-item-size">{{ formatFileSize(breakdownFile.size) }}</span>
+                      </span>
+                      <button class="pdf-list-item-remove" type="button" @click="removeBreakdownFile" title="Remove" aria-label="Remove">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cc-composer" data-ob="breakdown-composer" :class="{ ready: breakdownComposerReady, busy: breakdownLoading || breakdownPreviewLoading }">
+                  <div class="cc-composer-copy">
+                    <strong>{{ breakdownComposerTitle }}</strong>
+                    <span>{{ breakdownComposerDesc }}</span>
+                  </div>
+                  <div class="cc-composer-actions">
+                    <button type="button" class="cc-icon-action" title="Select PDF" aria-label="Select PDF" :disabled="breakdownLoading || breakdownPreviewLoading || !!breakdownPreview" @click="$refs.breakdownInput.click()">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                    </button>
+                    <button class="cc-generate-btn" type="button" :disabled="!breakdownComposerReady" @click="onBreakdownPrimaryAction">
+                      {{ breakdownPrimaryLabel }}
+                    </button>
+                  </div>
+                </div>
+                <p class="cc-composer-hint">{{ breakdownPreview ? 'Breakdown complete · export results or start a new task to break down again' : (breakdownUploadConfirmed ? 'Confirm parameters in the conversation, then start breakdown' : (breakdownFile ? 'File selected — click Confirm upload to set parameters' : 'Select a regulation PDF · or drag into the conversation · max 100MB per file')) }}</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- Old vs new compare · conversation -->
+          <div v-else-if="currentPage === 'compare'" class="cc-conversation rc-conversation">
+            <input ref="compareLeftInput" type="file" accept="application/pdf,.pdf" hidden @change="onCompareLeftPick">
+            <input ref="compareRightInput" type="file" accept="application/pdf,.pdf" hidden @change="onCompareRightPick">
+
+            <section class="cc-message-stream" aria-live="polite">
+              <div class="cc-stream-inner">
+                <div class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Ready</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble" data-ob="compare-welcome">
+                      <span>
+                        <strong>Start old vs new compare</strong>
+                        <p>Select the old and new regulation PDFs below, click Confirm upload, then set the report title and compare options.</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="compareUploadConfirmed && compareLeftFile && compareRightFile" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span class="cc-user-file-icon" aria-hidden="true">📄</span>
+                    <span>
+                      <strong>Compare files selected</strong>
+                      <small>
+                        Old: {{ compareLeftFile ? compareLeftFile.name : 'Not selected' }} ·
+                        New: {{ compareRightFile ? compareRightFile.name : 'Not selected' }}
+                      </small>
+                    </span>
+                  </div>
+                </div>
+                <div v-if="compareUploadConfirmed && compareLeftFile && compareRightFile" class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Parameter setup</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span>
+                        <strong>Set compare parameters</strong>
+                        <p>Enter a report title, choose compare mode and similarity threshold, then click Start compare below.</p>
+                      </span>
+                      <div class="rc-composer-settings rc-bubble-settings">
+                        <div class="rc-field">
+                          <label>Compare report title</label>
+                          <input type="text" v-model="compareReportTitle" placeholder="Old vs New Regulation Comparison Report">
+                        </div>
+                        <div class="rc-composer-settings-row">
+                          <div class="rc-field">
+                            <label>Compare mode</label>
+                            <select :value="compareMode" @change="setCompareMode($event.target.value)" :disabled="compareLoading">
+                              <option value="same_depth">Same level</option>
+                              <option value="cross_level">Cross-level match</option>
+                            </select>
+                          </div>
+                          <div class="rc-field" v-if="compareMode === 'same_depth'">
+                            <label>Compare detail level</label>
+                            <select v-model.number="compareDepth" :disabled="compareLoading">
+                              <option v-for="option in compareDepthOptions" :key="option.value" :value="option.value">{{ option.label }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="rc-field rc-slider-field">
+                          <label>Similarity threshold</label>
+                          <div class="rc-slider" :style="{ '--rc-slider-pct': Math.round(compareSimilarityThreshold * 100) + '%' }">
+                            <div class="rc-slider-input-wrap">
+                              <input
+                                class="rc-slider-number"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="5"
+                                :value="Math.round(compareSimilarityThreshold * 100)"
+                                :disabled="compareLoading"
+                                @change="setCompareSimilarityPercent($event.target.value)"
+                              >
+                              <span class="rc-slider-unit">%</span>
+                            </div>
+                            <div class="rc-slider-track-wrap">
+                              <input
+                                class="rc-slider-range"
+                                type="range"
+                                min="0"
+                                max="100"
+                                step="5"
+                                :value="Math.round(compareSimilarityThreshold * 100)"
+                                :disabled="compareLoading"
+                                @input="setCompareSimilarityPercent($event.target.value)"
+                                @change="normalizeCompareSimilarityThreshold"
+                              >
+                              <div class="rc-slider-marks" aria-hidden="true">
+                                <span
+                                  v-for="mark in compareSimilarityMarks"
+                                  :key="mark"
+                                  class="rc-slider-mark"
+                                  :class="{ active: Math.round(compareSimilarityThreshold * 100) >= mark }"
+                                  :style="{ left: mark + '%' }"
+                                >
+                                  <i></i>
+                                  <em>{{ mark }}</em>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div v-if="compareLoading" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                    <div class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span>
+                        <strong>{{ (compareProgress && compareProgress.message) || 'Comparing the two regulations' }}</strong>
+                        <p>The backend is breaking down, aligning, and comparing regulation clauses</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-else-if="compareError" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Action needed</span></div>
+                    <div class="cc-assistant-bubble">
+                      <span>
+                        <strong>Compare incomplete</strong>
+                        <p>{{ compareError }}</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="compareResult" class="cc-assistant-row cc-result-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content wide">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Compare result</span></div>
+                    <div class="cc-result-surface" :class="{ 'is-fullscreen': isCompareFullscreen }">
+                      <div class="cc-result-head">
+                        <div>
+                          <h3>Difference analysis</h3>
+                          <p>{{ compareModeSummary }} · {{ compareRows.length }} / {{ compareTotalRows }} </p>
+                        </div>
+                        <div class="cc-result-actions">
+                          <input v-model.trim="compareSearchQuery" type="search" placeholder="Search clauses or content" class="cc-result-search">
+                          <button class="btn btn-primary" type="button" @click="exportCompareToExcel" :disabled="!compareRows.length">Export Excel</button>
+                          <button
+                            class="cc-icon-btn"
+                            type="button"
+                            :title="isCompareFullscreen ? 'Exit fullscreen' : 'Fullscreen'"
+                            :aria-label="isCompareFullscreen ? 'Exit fullscreen' : 'Fullscreen'"
+                            @click="toggleCompareFullscreen"
+                          >
+                            <svg v-if="!isCompareFullscreen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="table-wrap">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Compare topic</th>
+                              <th>Related clauses</th>
+                              <th>Old version</th>
+                              <th>New version</th>
+                              <th>Content difference</th>
+                              <th>Difference notes</th>
+                              <th>Vehicle impact</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="(row, idx) in compareRows" :key="idx">
+                              <td>{{ row.topic }}</td>
+                              <td>{{ row.clauses || '—' }}</td>
+                              <td><span v-html="highlightDiff(row.old)"></span></td>
+                              <td><span v-html="highlightDiff(row.new)"></span></td>
+                              <td><div v-html="renderDiffCell(row.old, row.new, row.change_type)"></div></td>
+                              <td><div v-html="renderDiffExplanation(row)"></div></td>
+                              <td>{{ row.impact || 'N/A' }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <footer class="cc-composer-area">
+              <div class="cc-composer-inner">
+                <div class="rc-dual-upload rc-composer-upload">
+                  <div
+                    class="rc-upload-chip"
+                    :class="{ dragover: isCompareLeftDragOver }"
+                    @click="$refs.compareLeftInput.click()"
+                    @dragover.prevent="isCompareLeftDragOver = true"
+                    @dragenter.prevent="isCompareLeftDragOver = true"
+                    @dragleave.prevent="isCompareLeftDragOver = false"
+                    @drop.prevent="onCompareLeftDrop"
+                  >
+                    <strong>Old regulation</strong>
+                    <small>{{ compareLeftFile ? compareLeftFile.name : 'Click or drag to upload PDF' }}</small>
+                    <button v-if="compareLeftFile" class="rc-chip-remove" type="button" title="Remove" @click.stop="removeCompareFile('left')">✕</button>
+                  </div>
+                  <div class="rc-upload-vs">VS</div>
+                  <div
+                    class="rc-upload-chip"
+                    :class="{ dragover: isCompareRightDragOver }"
+                    @click="$refs.compareRightInput.click()"
+                    @dragover.prevent="isCompareRightDragOver = true"
+                    @dragenter.prevent="isCompareRightDragOver = true"
+                    @dragleave.prevent="isCompareRightDragOver = false"
+                    @drop.prevent="onCompareRightDrop"
+                  >
+                    <strong>New regulation</strong>
+                    <small>{{ compareRightFile ? compareRightFile.name : 'Click or drag to upload PDF' }}</small>
+                    <button v-if="compareRightFile" class="rc-chip-remove" type="button" title="Remove" @click.stop="removeCompareFile('right')">✕</button>
+                  </div>
+                </div>
+
+                <div class="cc-composer" data-ob="compare-composer" :class="{ ready: compareComposerReady, busy: compareLoading }">
+                  <div class="cc-composer-copy">
+                    <strong>{{ compareComposerTitle }}</strong>
+                    <span>{{ compareComposerDesc }}</span>
+                  </div>
+                  <div class="cc-composer-actions">
+                    <button class="cc-generate-btn" type="button" :disabled="!compareComposerReady" @click="onComparePrimaryAction">
+                      {{ comparePrimaryLabel }}
+                    </button>
+                  </div>
+                </div>
+                <p class="cc-composer-hint">{{ compareResult ? 'Compare complete · export results or start a new task to compare again' : (compareUploadConfirmed ? 'Confirm parameters in the conversation, then start compare' : (compareLeftFile && compareRightFile ? 'File selected — click Confirm upload to set parameters' : 'Please select old and new PDFs separately · max 100MB each')) }}</p>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Regulation Knowledge Base modal -->
+    <div v-if="showKnowledgeModal" class="async-modal-overlay kb-modal-overlay" @click.self="closeKnowledgeModal">
+      <div class="async-modal kb-modal" role="dialog" aria-modal="true" aria-labelledby="kbModalTitle">
+        <div class="kb-modal-header">
+          <div class="kb-modal-title" id="kbModalTitle">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Regulation Knowledge Base</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="closeKnowledgeModal" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="kb-modal-body">
+          <iframe
+            class="kb-modal-frame"
+            src="./regulation-knowledge.html?embed=1&v=20260830d"
+            title="Regulation Knowledge Base"
+            @load="onKnowledgeFrameLoad"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- User guide (same modal as workspace / report pages) -->
+    <div v-if="showHelpModal" class="async-modal-overlay" @click.self="showHelpModal = false">
+      <div class="async-modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-modal-header">
+          <div class="help-modal-title" id="helpTitle">
+            <span class="help-modal-title-icon">📖</span>
+            <span>User guide</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="showHelpModal = false" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="help-modal-body">
+
+          <!-- Section 1: Feature overview (aligned with 10.182.37.12:8091) -->
+          <div class="help-section">
+            <div class="help-section-title">Feature overview</div>
+            <p>AI Regulation Agent is built for automotive regulatory intelligence and offers 3 work modes:</p>
+            <p style="margin-top:10px">
+              <button type="button" class="btn btn-outline" @click="startOnboardingTour(true)">Restart onboarding tour</button>
+              <span style="margin-left:8px;color:#94a3b8;font-size:12px">Guides the current mode (Regulation breakdown / Old vs new)</span>
+            </p>
+
+            <div class="help-feature-grid">
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">📌 Regulation report generation</div>
+                <div class="help-feature-card-desc">Automatically crawls the latest regulations/standards from CATARC, MIIT, SAMR, and other sources, then aggregates structured analysis reports (key regulations / meetings / standard notices / drafting updates).</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🌐 Overseas intelligence parsing</div>
+                <div class="help-feature-card-desc">Upload overseas regulation/policy PDFs; AI identifies each discrete regulation/standard/consultation and generates the same 4-section analysis structure as Chinese reports.</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🧠 Skill configuration</div>
+                <div class="help-feature-card-desc">Tune M1 passenger-car pre-filter keywords, add few-shot positive/negative examples, and configure LLM prompt rules; support "dry-run on historical data" for effect checks. All changes are written to an auditable log.</div>
+              </div>
+            </div>
+
+            <ol>
+              <li>The left "Data source status" shows crawled regulation sources. Click an item to crawl it alone, or click "<strong>Crawl all</strong>" to pull everything.</li>
+              <li>Choose a time range (custom / last 15 days / 1 month / 3 months) → click <strong>Generate report</strong> → async generation → auto-jump to preview</li>
+              <li>Overseas intelligence: drag a PDF into the dashed box or click "Select PDF" → click <strong>Generate report</strong> → backend parsing + LLM itemization</li>
+              <li>Each regulation in the report can expand to: <strong>Key points / Policy interpretation / Enterprise actions / Peer references</strong></li>
+              <li>Skill configuration: after changing keywords/rules, click <strong>Save</strong>; use the "Dry run" button in PATCH 04 to validate on historical data</li>
+            </ol>
+          </div>
+
+          <!-- Section 2: Video tutorial -->
+          <div class="help-section">
+            <div class="help-section-title">Video tutorial</div>
+            <div class="help-video-frame">
+              <video controls preload="metadata" :src="helpVideoUrl || ''"></video>
+            </div>
+            <p style="margin-top:10px;color:#94a3b8;font-size:12px">If playback fails, place the video at <code>./static/tutorials/demo.mp4</code> and refresh.</p>
+          </div>
+
+          <!-- Section 3: Skill configuration details -->
+          <div class="help-section">
+            <div class="help-section-title">Skill configuration details</div>
+            <p>Skill configuration tells the AI what counts as an "M1 passenger car"—every newly crawled regulation passes this gate before entering a report. If this gate is wrong, later accuracy does not help.</p>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">The UI has 4 PATCH panels</h4>
+            <ul>
+              <li><strong>PATCH 01 · Filter keywords</strong> — two tag groups: M1 feature terms (hit = keep) and exclusion terms (hit = drop). Type a term and press Enter to add; click ✕ to remove. Click Save at the bottom; changes apply on the next filter run.</li>
+              <li><strong>PATCH 02 · Few-shot samples</strong> — left/right columns for positives (should be M1) and negatives (should not). Samples are appended to the LLM prompt and directly affect is_m1. Prefer 5–10 typical examples per class with clear rationales.</li>
+              <li><strong>PATCH 03 · LLM prompt rules</strong> — extra rules in the textarea (e.g. "prioritize safety + intelligent driving") append to the system prompt; the peer blacklist hides in-house brands (SAIC family: IM / Rising / MG / Roewe, etc.) from Peer references.</li>
+              <li><strong>PATCH 04 · Preview & history</strong> — non-persistent dry-run area. "Dry run" executes the current skill on the last N days of MongoDB data, showing pass/block counts and diffs vs default (X newly kept / Y newly dropped). Below is change history: who, when, and what.</li>
+            </ul>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">Suggested tuning workflow</h4>
+            <ol>
+              <li>In PATCH 04, click "Dry run" to see the default filter baseline</li>
+              <li>In PATCH 01, change keywords (e.g. add "intelligent driving" to M1, or "commercial vehicle" to exclusions), <strong>do not Save yet</strong></li>
+              <li>Run "Dry run" again in PATCH 04 and compare the Diff numbers</li>
+              <li>If the Diff looks right → click Save at the bottom of PATCH 01 → takes effect immediately</li>
+              <li>To undo → click Restore defaults (top-right) to factory settings (note: few-shot samples are kept)</li>
+            </ol>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Operator field</strong> · The Operator box (top-right) is written into every audit log. Set your name (e.g. zhangsan) so history shows who changed what. Default is im, stored in localStorage across reloads.
+            </div>
+          </div>
+
+          <!-- Section 4: Input/output examples -->
+          <div class="help-section">
+            <div class="help-section-title">Input/output examples</div>
+
+            <div class="help-example-grid">
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 1 · Overseas intelligence</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Upload <code>SAIC Group Policy & Standards Weekly (Issue 53, 2026.05.29).pdf</code> (one PDF with 12+ regulations)
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Automatically splits into 12 discrete regulations, each with 4-section analysis (key points / policy interpretation / enterprise actions / peer references), ordered by index
+                </div>
+              </div>
+
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 2 · Regulation aggregation</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Time range = <code>Last 15 days</code><br>
+                  Report title = <code>Regulation information summary report</code>
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Crawl all regulations from 4 sources (CATARC / MIIT / SAMR) for the last 15 days into an ordered "<strong>Key regulation news/policy</strong>" tab
+                </div>
+              </div>
+            </div>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Tip</strong> · Closing the modal while an async job runs does not stop it; scanned/encrypted PDFs that cannot yield text show a friendly message.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./vendor/vue.global.prod.js"></script>
+  <script src="./js/shared.js?v=3"></script>
+  <script src="./js/confirm-dialog.js?v=1"></script>
+  <script src="./js/mock-data.js"></script>
+  <script src="./js/onboarding-tour.js?v=2"></script>
+  <script src="./regulation-compare.js?v=12"></script>
+</body>
+</html>

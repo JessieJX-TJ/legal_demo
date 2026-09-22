@@ -1,0 +1,1306 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>Regulation Q&A Assistant - AI Regulation Agent 2.0</title>
+  <link rel="stylesheet" href="./styles/qa-original.css?v=9">
+  <link rel="stylesheet" href="./css/report-extra.css?v=41">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+  <style>
+    /* Shell matches report page 1:1. Workspace keeps slight enlarge. */
+    html, body, #qa-app {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .header.legacy-topbar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 304px !important;
+      right: 0 !important;
+      width: auto !important;
+      height: 68px !important;
+      z-index: 30 !important;
+      color: #1f2937 !important;
+      background: rgba(255, 255, 255, 0.78) !important;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }
+    .header.legacy-topbar .header-inner {
+      position: relative !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: 68px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 20px !important;
+      margin: 0 !important;
+      padding: 0 32px !important;
+      box-sizing: border-box !important;
+    }
+    .legacy-nav-heading {
+      position: static !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-right: auto !important;
+      white-space: nowrap !important;
+    }
+    .legacy-brand {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      color: #1f2937 !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+    }
+    .header-actions {
+      margin-left: auto !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .qa-history-toggle { display: none !important; }
+
+    .history-sidebar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      bottom: 0 !important;
+      z-index: 120 !important;
+      width: 304px !important;
+      min-width: 304px !important;
+      max-width: 304px !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: #ffffff !important;
+      border-right: 1px solid #e2e8f0 !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-brand-bar {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      flex: none !important;
+      width: 100% !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      margin: 0 !important;
+      padding: 0 12px !important;
+      box-sizing: border-box !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      background: #fff !important;
+    }
+    a.sidebar-brand,
+    .sidebar-brand {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: auto !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      box-sizing: border-box !important;
+      border: 0 !important;
+      border-bottom: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      color: inherit !important;
+      text-decoration: none !important;
+      cursor: pointer !important;
+      transition: background-color 160ms ease !important;
+    }
+    .sidebar-brand:hover {
+      background: transparent !important;
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn {
+      width: 36px !important;
+      height: 36px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: none !important;
+      margin-left: auto !important;
+      padding: 0 !important;
+      color: #6b7280 !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      transition: color 200ms ease, background-color 200ms ease !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn:hover {
+      color: #6757c8 !important;
+      background: rgba(109, 112, 255, 0.08) !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn svg {
+      width: 20px !important;
+      height: 20px !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-brand-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      height: 40px !important;
+      flex: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+    }
+    .sidebar-brand-icon svg {
+      display: block !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+    .sidebar-greeting {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-version {
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      color: #94a3b8 !important;
+      margin-top: 2px !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 16px 20px 24px !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      background: #fff !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Match report sidebar actions + account */
+    nav.sidebar-actions {
+      flex: none !important;
+      display: grid !important;
+      gap: 5px !important;
+      padding: 12px 12px 4px !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-kb-btn {
+      width: 100% !important;
+      min-height: 40px !important;
+      height: auto !important;
+      padding: 0 12px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 9px !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      border-radius: 10px !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      text-align: left !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      font-family: inherit !important;
+    }
+    .sidebar-kb-btn:hover {
+      color: #6757c8 !important;
+      background: rgba(124, 106, 245, 0.08) !important;
+      border-color: transparent !important;
+    }
+    .sidebar-kb-btn svg {
+      width: 17px !important;
+      height: 17px !important;
+      flex: none !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-user {
+      flex: none !important;
+      margin-top: auto !important;
+      padding: 11px 12px 12px !important;
+      border-top: 1px solid rgba(134, 144, 156, 0.18) !important;
+      box-sizing: border-box !important;
+      background: #fff !important;
+    }
+    .sidebar-user .legacy-account-wrap {
+      width: 100% !important;
+      position: relative !important;
+    }
+    .sidebar-user .legacy-account {
+      width: 100% !important;
+      min-height: 58px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 9px !important;
+      padding: 11px 8px 2px !important;
+      box-sizing: border-box !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      line-height: inherit !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    .sidebar-user .legacy-account:hover,
+    .sidebar-user .legacy-account[aria-expanded="true"] {
+      background: rgba(124, 106, 245, 0.06) !important;
+    }
+    .sidebar-user .legacy-account-avatar {
+      width: 32px !important;
+      height: 32px !important;
+      flex: none !important;
+      display: grid !important;
+      place-items: center !important;
+      color: #6757c8 !important;
+      background: #f0edff !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      box-shadow: none !important;
+    }
+    .sidebar-user .legacy-account-avatar svg {
+      width: 17px !important;
+      height: 17px !important;
+      display: block !important;
+    }
+    .sidebar-user .legacy-account-copy {
+      display: grid !important;
+      gap: 2px !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      text-align: left !important;
+    }
+    .sidebar-user .legacy-account-copy strong,
+    .sidebar-user .legacy-account-copy small {
+      display: block !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-user .legacy-account-copy strong {
+      color: #1e293b !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-copy small {
+      color: #94a3b8 !important;
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-settings {
+      width: 16px !important;
+      height: 16px !important;
+      flex: none !important;
+      color: #94a3b8 !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-user .legacy-account-menu {
+      position: absolute !important;
+      top: auto !important;
+      bottom: calc(100% + 6px) !important;
+      right: 0 !important;
+      left: 0 !important;
+      z-index: 140 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 7px !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      border: 1px solid #e2e6ed !important;
+      border-radius: 9px !important;
+      box-shadow: 0 16px 36px rgba(29, 43, 77, 0.14) !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-user .legacy-account-menu .legacy-logout {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      color: #536075 !important;
+      text-align: left !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 6px !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      cursor: pointer !important;
+    }
+    .sidebar-user .legacy-account-menu .legacy-logout:hover {
+      color: #526fca !important;
+      background: #f2f5fc !important;
+    }
+    .sidebar-body .sidebar-heading {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      padding: 0 0 12px !important;
+      flex: none !important;
+    }
+    .sidebar-body .sidebar-heading > div {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+      min-width: 0 !important;
+    }
+    .sidebar-body .sidebar-heading strong {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      color: #94a3b8 !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-body .history-list {
+      flex: 1 !important;
+      min-height: 0 !important;
+    }
+    .sidebar-body .history-entry > button:first-child {
+      font-size: 13px !important;
+    }
+    .sidebar-body .history-entry time {
+      font-size: 11px !important;
+    }
+
+    .qa-layout {
+      margin-top: 68px !important;
+      margin-left: 304px !important;
+      padding: 0 !important;
+      width: calc(100% - 304px) !important;
+      height: calc(100vh - 68px) !important;
+      height: calc(100dvh - 68px) !important;
+      box-sizing: border-box !important;
+    }
+
+    [v-cloak] { display: none !important; }
+    .history-entry {
+      display: flex !important;
+      min-width: 0 !important;
+      border-radius: 7px !important;
+      transition: background-color 160ms ease !important;
+    }
+    .history-entry:hover {
+      background: #f4f1ff !important;
+    }
+    .history-list .history-entry.active,
+    .sidebar-body .history-list .history-entry.active {
+      background: #f8fafc !important;
+    }
+    .history-list .history-entry.active:hover,
+    .sidebar-body .history-list .history-entry.active:hover {
+      background: #f8fafc !important;
+    }
+    .history-entry > button:first-child {
+      min-width: 0 !important;
+      min-height: 52px !important;
+      display: grid !important;
+      grid-template-columns: 16px minmax(0, 1fr) !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex: 1 !important;
+      padding: 8px 7px !important;
+      color: #5b677a !important;
+      text-align: left !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 7px 0 0 7px !important;
+      font-size: 13px !important;
+      line-height: 1.35 !important;
+      cursor: pointer !important;
+      font-family: inherit !important;
+    }
+    .history-entry:hover > button:first-child {
+      color: #7564d8 !important;
+      background: transparent !important;
+    }
+    .history-list .history-entry.active > button:first-child,
+    .sidebar-body .history-list .history-entry.active > button:first-child {
+      color: #334155 !important;
+      background: transparent !important;
+    }
+    .history-list .history-entry.active > button:first-child:hover,
+    .sidebar-body .history-list .history-entry.active > button:first-child:hover {
+      color: #334155 !important;
+      background: transparent !important;
+    }
+    .history-entry-text {
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 2px !important;
+    }
+    .history-entry-name {
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      line-height: 1.35 !important;
+    }
+    .history-entry > button:first-child svg {
+      width: 15px !important;
+      height: 15px !important;
+      flex: none !important;
+      color: #94a3b8 !important;
+    }
+    .history-entry:hover > button:first-child svg {
+      color: #7564d8 !important;
+    }
+    .history-list .history-entry.active > button:first-child svg,
+    .sidebar-body .history-list .history-entry.active > button:first-child svg,
+    .history-list .history-entry.active > button:first-child:hover svg,
+    .sidebar-body .history-list .history-entry.active > button:first-child:hover svg {
+      color: #334155 !important;
+    }
+    .history-entry time {
+      color: #a1a9b6 !important;
+      font-size: 11px !important;
+      line-height: 1.3 !important;
+      white-space: nowrap !important;
+    }
+    .history-entry:hover time {
+      color: #a99be8 !important;
+    }
+    .history-list .history-entry.active time,
+    .sidebar-body .history-list .history-entry.active time {
+      color: #94a3b8 !important;
+    }
+    .history-entry .delete-entry {
+      width: 28px !important;
+      min-height: 52px !important;
+      display: grid !important;
+      place-items: center !important;
+      padding: 0 !important;
+      color: #aab1bc !important;
+      background: transparent !important;
+      border: 0 !important;
+      cursor: pointer !important;
+      flex: none !important;
+      border-radius: 0 7px 7px 0 !important;
+    }
+    .history-entry:hover .delete-entry {
+      color: #7564d8 !important;
+      background: transparent !important;
+    }
+    .history-entry .delete-entry:hover {
+      color: #ae626d !important;
+      background: transparent !important;
+    }
+    .history-entry .delete-entry svg {
+      width: 14px !important;
+      height: 14px !important;
+      display: block !important;
+    }
+    .empty-orb svg { width: 32px; height: 32px; }
+    .suggestion-grid button svg { width: 16px; height: 16px; }
+
+    /* Replace blue accents with new-conversation purple/purple-gray */
+    .empty-orb {
+      width: auto !important;
+      height: auto !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      color: inherit !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      font-size: 56px !important;
+      line-height: 1 !important;
+      display: grid !important;
+      place-items: center !important;
+    }
+    /* user bubble styled under #qa-app */
+    .suggestion-grid button {
+      color: #5b5670 !important;
+      background: #fbfaff !important;
+      border: 1px solid #e3dcfa !important;
+    }
+    .suggestion-grid button:hover {
+      color: #7564d8 !important;
+      background: #f4f1ff !important;
+      border-color: #d6ccf5 !important;
+    }
+    .suggestion-grid button svg {
+      color: #a99be8 !important;
+    }
+
+    /* History list hover: match regulation-compare sidebar */
+    .qa-answer-label span {
+      /* unified under #qa-app */
+    }
+    .qa-summary-section {
+      /* unified under #qa-app */
+    }
+    .summary-mark {
+      color: #7564d8 !important;
+      background: #f0edff !important;
+    }
+    .regulation-card-head strong,
+    .qa-regulation-code,
+    .qa-source-open,
+    .clause-card-head strong {
+      color: #7564d8 !important;
+    }
+    .clause-translation {
+      background: #f4f1ff !important;
+      border-left-color: #a99be8 !important;
+    }
+    .clause-translation > span {
+      color: #7564d8 !important;
+    }
+    .next-list b {
+      color: #7564d8 !important;
+      background: #f4f1ff !important;
+    }
+    .loading-orbit i {
+      background: #7564d8 !important;
+    }
+    .action-row {
+      background: #f4f1ff !important;
+      border-left-color: #a99be8 !important;
+    }
+    .qa-follow-up button {
+      color: #7564d8 !important;
+      background: #f4f1ff !important;
+      border: 1px solid #e3dcfa !important;
+    }
+    .qa-follow-up button:hover {
+      color: #6757c8 !important;
+      background: #eae4fc !important;
+      border-color: #d6ccf5 !important;
+    }
+    .qa-citation-chip,
+    .qa-citation-chip strong {
+      color: #7564d8 !important;
+      border-left-color: #e3dcfa !important;
+    }
+    .qa-citation-chip:hover,
+    .qa-citation-chip:hover strong {
+      color: #6757c8 !important;
+    }
+    .qa-requirement-sources summary,
+    .qa-requirement-sources[open] > summary {
+      color: #7564d8 !important;
+    }
+    .qa-requirement-heading strong {
+      color: #7564d8 !important;
+    }
+    .qa-regulation-requirements h3 {
+      color: #6757c8 !important;
+    }
+    .qa-regulation-requirements li::marker {
+      color: #a99be8 !important;
+    }
+    .change-card {
+      border-left-color: #a99be8 !important;
+    }
+    .change-card.is-conditional_change {
+      border-left-color: #7564d8 !important;
+    }
+    .send-button svg { width: 18px; height: 18px; }
+    .send-button {
+      color: #fff !important;
+      background: linear-gradient(90deg, #6d70ff 0%, #6757c8 100%) !important;
+      border: 0 !important;
+      box-shadow: 0 4px 15px rgba(109, 112, 255, 0.3) !important;
+    }
+    .send-button:hover:not(:disabled) {
+      background: linear-gradient(90deg, #6d70ff 0%, #6757c8 100%) !important;
+      box-shadow: 0 6px 20px rgba(109, 112, 255, 0.4) !important;
+      transform: translateY(-1px);
+    }
+    .send-button:disabled {
+      color: #a4afc2 !important;
+      background: #f1f3f7 !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Empty state: shift down for visual balance; composer: 24px from bottom */
+    .qa-workspace {
+      justify-content: flex-start !important;
+      background: #fbfcfe !important;
+    }
+    .empty-conversation {
+      width: min(820px, 100%) !important;
+      margin-top: 200px !important;
+      margin-right: auto !important;
+      margin-bottom: 0 !important;
+      margin-left: auto !important;
+      padding: 20px 24px 12px !important;
+      flex: 0 0 auto !important;
+      align-self: center !important;
+    }
+    .qa-workspace > .composer {
+      flex: 0 0 auto !important;
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
+      padding-top: 10px !important;
+      padding-bottom: 24px !important;
+      background: transparent !important;
+    }
+
+    /* QA only: match report/compare .cc-stream-inner width + bubble look */
+    #qa-app .qa-main,
+    #qa-app .qa-workspace {
+      width: 100% !important;
+      max-width: none !important;
+      background: #fbfcfe !important;
+    }
+    #qa-app .qa-stream-inner,
+    #qa-app .qa-thread,
+    #qa-app .qa-workspace > .composer,
+    #qa-app .empty-conversation {
+      width: min(1024px, 80%) !important;
+      max-width: min(1024px, 80%) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      box-sizing: border-box !important;
+    }
+    #qa-app .qa-thread {
+      padding: 28px 0 32px !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+    #qa-app .qa-thread::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    #qa-app .qa-workspace > .composer {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    #qa-app .composer-shell {
+      width: 100% !important;
+      max-width: none !important;
+    }
+    #qa-app .qa-message {
+      display: flex !important;
+      margin-bottom: 22px !important;
+    }
+    #qa-app .qa-message-user {
+      justify-content: flex-end !important;
+      padding-left: 60px !important;
+    }
+    #qa-app .qa-message-assistant {
+      justify-content: flex-start !important;
+    }
+    #qa-app .qa-user-bubble {
+      max-width: min(560px, 100%) !important;
+      padding: 12px 14px !important;
+      color: #fff !important;
+      background: #8b7cf6 !important;
+      border: 0 !important;
+      border-radius: 12px 3px 12px 12px !important;
+      box-shadow: 0 7px 18px rgba(139, 124, 246, 0.16) !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      white-space: pre-wrap !important;
+    }
+    #qa-app .qa-assistant-row {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 11px !important;
+      width: 100% !important;
+    }
+    #qa-app .qa-assistant-avatar {
+      display: none !important;
+    }
+    #qa-app .qa-assistant-block {
+      width: auto !important;
+      max-width: min(980px, 100%) !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      display: grid !important;
+      gap: 12px !important;
+    }
+    #qa-app .qa-answer-label {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-bottom: 0 !important;
+      color: #94a3b8 !important;
+      font-size: 12px !important;
+    }
+    #qa-app .qa-answer-label span {
+      width: auto !important;
+      height: auto !important;
+      padding: 0 !important;
+      color: #334155 !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      place-items: unset !important;
+      display: inline !important;
+    }
+    #qa-app .qa-answer-label small {
+      color: #94a3b8 !important;
+      font-size: 12px !important;
+    }
+    #qa-app .qa-summary-section {
+      width: fit-content !important;
+      max-width: 100% !important;
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 10px !important;
+      margin: 0 !important;
+      padding: 14px 16px !important;
+      color: #475569 !important;
+      background: #fff !important;
+      border: 1px solid #eef1f6 !important;
+      border-left: 1px solid #eef1f6 !important;
+      border-radius: 3px 12px 12px 12px !important;
+      box-shadow: 0 5px 18px rgba(42, 52, 69, 0.05) !important;
+      box-sizing: border-box !important;
+    }
+    #qa-app .qa-summary-section .summary-mark {
+      width: 28px !important;
+      height: 28px !important;
+      color: #8b7cf6 !important;
+      background: #f0edff !important;
+      border-radius: 8px !important;
+    }
+    #qa-app .qa-summary-section .eyebrow {
+      color: #94a3b8 !important;
+    }
+    #qa-app .qa-summary-section p,
+    #qa-app .qa-summary-section .qa-markdown {
+      color: #475569 !important;
+    }
+    #qa-app .answer-block,
+    #qa-app .qa-loading-state,
+    #qa-app .qa-error-state {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    #qa-app .answer-block {
+      padding: 14px 16px !important;
+      background: #fff !important;
+      border: 1px solid #eef1f6 !important;
+      border-radius: 3px 12px 12px 12px !important;
+      box-shadow: 0 5px 18px rgba(42, 52, 69, 0.05) !important;
+    }
+    #qa-app .qa-loading-state {
+      width: fit-content !important;
+      padding: 12px 14px !important;
+      color: #64748b !important;
+      background: #fff !important;
+      border: 1px solid #eef1f6 !important;
+      border-radius: 3px 12px 12px 12px !important;
+      box-shadow: 0 5px 18px rgba(42, 52, 69, 0.05) !important;
+    }
+
+    @media (max-width: 767px) {
+      .header.legacy-topbar {
+        left: 0 !important;
+      }
+      .qa-history-toggle {
+        display: grid !important;
+        place-items: center !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        color: #5f6c80 !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+      }
+      .qa-history-toggle svg {
+        width: 19px;
+        height: 19px;
+      }
+      .history-sidebar {
+        width: min(86vw, 320px) !important;
+        min-width: 0 !important;
+        max-width: min(86vw, 320px) !important;
+        transform: translateX(-100%) !important;
+        transition: transform 180ms ease !important;
+        box-shadow: 12px 0 30px rgba(31, 39, 55, 0.14) !important;
+      }
+      .history-sidebar.is-open {
+        transform: translateX(0) !important;
+      }
+      .qa-layout {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="qa-page">
+  <div id="qa-app" v-cloak @click="showAccountMenu = false">
+    <header class="header legacy-topbar">
+      <div class="header-inner">
+        <div class="legacy-nav-heading">
+          <span class="module-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 9h8M8 13h5"/></svg></span>
+          <strong class="legacy-brand">Regulation Q&A Assistant</strong>
+        </div>
+        <div class="header-actions">
+          <button
+            class="qa-history-toggle"
+            type="button"
+            title="Open navigation"
+            aria-label="Open navigation"
+            :aria-expanded="showHistory"
+            @click.stop="showHistory = !showHistory"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="qa-layout">
+      <button
+        class="history-backdrop"
+        type="button"
+        :class="{ 'is-open': showHistory }"
+        aria-label="Close session history"
+        @click="showHistory = false"
+      ></button>
+
+      <aside class="history-sidebar" :class="{ 'is-open': showHistory }" aria-label="Session history">
+        <div class="sidebar-brand-bar">
+          <a class="sidebar-brand" href="./index.html" title="Back to workspace" aria-label="Back to workspace">
+            <div class="sidebar-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="13" height="13" rx="3.5" fill="#6d70ff"/>
+                <rect x="19" y="4" width="13" height="13" rx="3.5" fill="#e6c84a"/>
+                <rect x="4" y="19" width="13" height="13" rx="3.5" fill="#67af86"/>
+                <rect x="19" y="19" width="13" height="13" rx="3.5" fill="#6a8ef5"/>
+                <path d="M7.5 8.5h6M7.5 11.5h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                <rect x="21.8" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.95"/>
+                <rect x="26" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.7"/>
+                <path d="M7.6 25.4l2.4 2.3 4.6-4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M25.5 22.2l1.15 2.55 2.55 1.15-2.55 1.15L25.5 29.6l-1.15-2.55-2.55-1.15 2.55-1.15L25.5 22.2z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="sidebar-brand-text">
+              <div class="sidebar-greeting">AI Regulation Agent</div>
+              <div class="sidebar-version">Back to workspace</div>
+            </div>
+          </a>
+          <button class="topbar-help-btn" type="button" @click="showHelpModal = true" title="View user guide" aria-label="User guide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"></path><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+        </div>
+
+        <nav class="sidebar-actions" aria-label="Workspace navigation">
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn sidebar-new-task-btn" type="button" @click="newConversation" title="New task" aria-label="New task">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            <span>New task</span>
+          </button>
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn" type="button" title="Regulation Knowledge Base" aria-label="Regulation Knowledge Base" @click="goKnowledge">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+            <span>Regulation Knowledge Base</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-body">
+          <div class="sidebar-heading">
+            <div>
+              <strong>History</strong>
+            </div>
+          </div>
+          <div class="history-list">
+            <div v-if="isHistoryLoading" class="history-empty">Loading history…</div>
+            <template v-else>
+              <div
+                v-for="item in sessions"
+                :key="item.id"
+                class="history-entry"
+                :class="{ active: item.id === activeSessionId }"
+              >
+                <button type="button" @click="openConversation(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><circle cx="8.5" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
+                  <span class="history-entry-text">
+                    <span class="history-entry-name">{{ item.title }}</span>
+                    <time>{{ formatTime(item.updated_at) }}</time>
+                  </span>
+                </button>
+                <button class="delete-entry" type="button" title="Delete session" aria-label="Delete session" @click.stop="deleteConversation(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
+              </div>
+              <p v-if="!sessions.length" class="history-empty">No history yet</p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="legacy-account-wrap">
+            <button class="legacy-account" type="button" :aria-expanded="showAccountMenu" aria-label="Account menu" @click.stop="showAccountMenu = !showAccountMenu">
+              <span class="legacy-account-avatar" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <span class="legacy-account-copy">
+                <strong>{{ currentUser.displayName || currentUser.username || 'Jessie' }}</strong>
+                <small>{{ currentUser.role || 'Administrator' }}</small>
+              </span>
+              <svg class="legacy-account-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </button>
+            <div v-if="showAccountMenu" class="legacy-account-menu" @click.stop>
+              <button class="legacy-logout" type="button" @click="logout">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="qa-main">
+        <div class="qa-workspace" :class="{ 'is-empty': !messages.length }">
+          <div v-if="!messages.length" class="empty-conversation">
+            <div class="empty-orb" aria-hidden="true">🤖</div>
+            <span class="empty-kicker">REGULATION QA · 2.0</span>
+            <h1>{{ greeting }}，which regulation question can I help with today?</h1>
+            <p>Describe the vehicle or component, target market, and project stage. I will organize applicable regulations, key clauses, risk notes, and actionable recommendations.</p>
+            <div class="suggestion-grid">
+              <button v-for="ex in examples" :key="ex" type="button" @click="useExample(ex)">
+                <span>{{ ex }}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div v-else class="qa-thread" ref="threadElement">
+            <article
+              v-for="msg in messages"
+              :key="msg.id"
+              class="qa-message"
+              :class="'qa-message-' + msg.role"
+              :data-message-id="msg.id"
+            >
+              <div v-if="msg.role === 'user'" class="qa-user-bubble">{{ msg.content }}</div>
+              <div v-else class="qa-assistant-row">
+                <span class="qa-assistant-avatar" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                </span>
+                <div class="qa-assistant-block">
+                <div v-if="msg.status === 'loading'" class="qa-loading-state">
+                  <span class="loading-orbit"><i></i><i></i><i></i></span>
+                  <span>Analyzing consultation criteria and regulatory basis…</span>
+                </div>
+                <div v-else-if="msg.status === 'error'" class="qa-error-state">
+                  <div>
+                    <strong>Answer failed</strong>
+                    <p>{{ msg.error }}</p>
+                  </div>
+                  <button type="button" @click="retryMessage(msg)">Retry</button>
+                </div>
+                <template v-else>
+                  <div class="qa-answer-label">
+                    <span>Regulation Agent</span>
+                    <small>Ready</small>
+                  </div>
+
+                  <section class="qa-summary-section">
+                    <div class="summary-mark" aria-hidden="true">A</div>
+                    <div>
+                      <span class="eyebrow">Answer</span>
+                      <div class="qa-markdown" v-html="markdownHtml(msg.answer?.answer || msg.content)"></div>
+                      <p v-if="msg.answer?.evidence_notice" class="evidence-notice">{{ msg.answer.evidence_notice }}</p>
+                    </div>
+                  </section>
+
+                  <section v-if="msg.answer?.applicable_regulations?.length" class="answer-block">
+                    <div class="block-heading">
+                      <h3>Applicable regulations</h3>
+                      <span class="block-count">{{ msg.answer.applicable_regulations.length }}</span>
+                    </div>
+                    <div class="regulation-strip">
+                      <article v-for="reg in msg.answer.applicable_regulations" :key="reg.code" class="regulation-card">
+                        <div class="regulation-card-head">
+                          <strong>{{ reg.code }}</strong>
+                          <span>{{ reg.document_status || 'Status unknown' }}</span>
+                        </div>
+                        <p>{{ reg.name }}</p>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section v-if="msg.answer?.key_clauses?.length" class="answer-block compact-block">
+                    <div class="block-heading">
+                      <h3>Key clauses</h3>
+                      <span class="block-count">{{ msg.answer.key_clauses.length }}</span>
+                    </div>
+                    <div class="clause-list">
+                      <article v-for="clause in msg.answer.key_clauses" :key="clause.reference" class="clause-card">
+                        <div class="clause-card-head">
+                          <strong>{{ clause.regulation_code }} · {{ clause.reference }}</strong>
+                          <span class="ant-tag">P.{{ clause.page_no || '-' }}</span>
+                        </div>
+                        <div class="clause-source">
+                          <span>Source text</span>
+                          <p>{{ clause.original_text }}</p>
+                        </div>
+                        <div class="clause-explanation">
+                          <span>Interpretation</span>
+                          <p>{{ clause.explanation }}</p>
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section v-if="msg.answer?.change_items?.length" class="answer-block compact-block">
+                    <div class="block-heading"><h3>Change checklist</h3></div>
+                    <div class="change-list">
+                      <article
+                        v-for="(item, idx) in msg.answer.change_items"
+                        :key="idx"
+                        class="change-card"
+                        :class="'is-' + (item.decision || 'verify')"
+                      >
+                        <header>
+                          <span class="ant-tag">{{ changeLabel(item.decision) }}</span>
+                          <h4>{{ item.title }}</h4>
+                        </header>
+                        <div class="comparison-grid">
+                          <div><span>Current</span><p>{{ item.current }}</p></div>
+                          <div><span>Target</span><p>{{ item.target }}</p></div>
+                        </div>
+                        <div class="action-row">
+                          <span>Recommended action</span>
+                          <p>{{ item.action }}</p>
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section v-if="msg.answer?.risks?.length" class="answer-block compact-block">
+                    <div class="risk-panel">
+                      <div class="risk-title">Risks requiring extra attention</div>
+                      <ul>
+                        <li v-for="(risk, i) in msg.answer.risks" :key="i">{{ risk }}</li>
+                      </ul>
+                    </div>
+                  </section>
+
+                  <section v-if="msg.answer?.next_steps?.length" class="answer-block compact-block">
+                    <div class="block-heading"><h3>Recommended next steps</h3></div>
+                    <ol class="next-list">
+                      <li v-for="(step, i) in msg.answer.next_steps" :key="i">
+                        <b>{{ i + 1 }}</b>
+                        <span>{{ step }}</span>
+                      </li>
+                    </ol>
+                  </section>
+
+                  <section v-if="msg.answer?.sources?.length" class="answer-block compact-block">
+                    <div class="block-heading"><h3>Knowledge used for this answer</h3></div>
+                    <div class="drawer-source" v-for="(src, i) in msg.answer.sources" :key="i" style="border-bottom:1px solid #e9ecf1;padding:12px 0">
+                      <div>
+                        <strong>{{ src.title }}</strong>
+                        <small>{{ src.jurisdiction || '—' }} · {{ (src.locations || []).join('；') }}</small>
+                      </div>
+                    </div>
+                  </section>
+                </template>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <form class="composer" @submit.prevent="submitQuestion">
+            <div class="composer-shell">
+              <div class="composer-context">
+                <span>Regulation consultation</span>
+                <span class="composer-hint">Answers include traceable regulatory citations</span>
+              </div>
+              <textarea
+                v-model="question"
+                rows="1"
+                placeholder="Enter a regulation question; describe vehicle type, market, or project status…"
+                :disabled="isLoading"
+                aria-label="Enter a regulation question"
+                @keydown="handleComposerKeydown"
+                @input="autoResize"
+                ref="composerInput"
+              ></textarea>
+              <div class="composer-footer">
+                <div class="composer-tools"></div>
+                <button class="send-button" type="submit" aria-label="Send" :disabled="!canSend" title="Send question">
+                  <span v-if="isLoading" class="send-loading"></span>
+                  <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    <!-- User guide (same modal as workspace / report pages) -->
+    <div v-if="showHelpModal" class="async-modal-overlay" @click.self="showHelpModal = false">
+      <div class="async-modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-modal-header">
+          <div class="help-modal-title" id="helpTitle">
+            <span class="help-modal-title-icon">📖</span>
+            <span>User guide</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="showHelpModal = false" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="help-modal-body">
+
+          <!-- Section 1: Feature overview (aligned with 10.182.37.12:8091) -->
+          <div class="help-section">
+            <div class="help-section-title">Feature overview</div>
+            <p>AI Regulation Agent is built for automotive regulatory intelligence and offers 3 work modes:</p>
+
+            <div class="help-feature-grid">
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">📌 Regulation report generation</div>
+                <div class="help-feature-card-desc">Automatically crawls the latest regulations/standards from CATARC, MIIT, SAMR, and other sources, then aggregates structured analysis reports (key regulations / meetings / standard notices / drafting updates).</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🌐 Overseas intelligence parsing</div>
+                <div class="help-feature-card-desc">Upload overseas regulation/policy PDFs; AI identifies each discrete regulation/standard/consultation and generates the same 4-section analysis structure as Chinese reports.</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🧠 Skill configuration</div>
+                <div class="help-feature-card-desc">Tune M1 passenger-car pre-filter keywords, add few-shot positive/negative examples, and configure LLM prompt rules; support "dry-run on historical data" for effect checks. All changes are written to an auditable log.</div>
+              </div>
+            </div>
+
+            <ol>
+              <li>The left "Data source status" shows crawled regulation sources. Click an item to crawl it alone, or click "<strong>Crawl all</strong>" to pull everything.</li>
+              <li>Choose a time range (custom / last 15 days / 1 month / 3 months) → click <strong>Generate report</strong> → async generation → auto-jump to preview</li>
+              <li>Overseas intelligence: drag a PDF into the dashed box or click "Select PDF" → click <strong>Generate report</strong> → backend parsing + LLM itemization</li>
+              <li>Each regulation in the report can expand to: <strong>Key points / Policy interpretation / Enterprise actions / Peer references</strong></li>
+              <li>Skill configuration: after changing keywords/rules, click <strong>Save</strong>; use the "Dry run" button in PATCH 04 to validate on historical data</li>
+            </ol>
+          </div>
+
+          <!-- Section 2: Video tutorial -->
+          <div class="help-section">
+            <div class="help-section-title">Video tutorial</div>
+            <div class="help-video-frame">
+              <video controls preload="metadata" :src="helpVideoUrl || ''"></video>
+            </div>
+            <p style="margin-top:10px;color:#94a3b8;font-size:12px">If playback fails, place the video at <code>./static/tutorials/demo.mp4</code> and refresh.</p>
+          </div>
+
+          <!-- Section 3: Skill configuration details -->
+          <div class="help-section">
+            <div class="help-section-title">Skill configuration details</div>
+            <p>Skill configuration tells the AI what counts as an "M1 passenger car"—every newly crawled regulation passes this gate before entering a report. If this gate is wrong, later accuracy does not help.</p>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">The UI has 4 PATCH panels</h4>
+            <ul>
+              <li><strong>PATCH 01 · Filter keywords</strong> — two tag groups: M1 feature terms (hit = keep) and exclusion terms (hit = drop). Type a term and press Enter to add; click ✕ to remove. Click Save at the bottom; changes apply on the next filter run.</li>
+              <li><strong>PATCH 02 · Few-shot samples</strong> — left/right columns for positives (should be M1) and negatives (should not). Samples are appended to the LLM prompt and directly affect is_m1. Prefer 5–10 typical examples per class with clear rationales.</li>
+              <li><strong>PATCH 03 · LLM prompt rules</strong> — extra rules in the textarea (e.g. "prioritize safety + intelligent driving") append to the system prompt; the peer blacklist hides in-house brands (SAIC family: IM / Rising / MG / Roewe, etc.) from Peer references.</li>
+              <li><strong>PATCH 04 · Preview & history</strong> — non-persistent dry-run area. "Dry run" executes the current skill on the last N days of MongoDB data, showing pass/block counts and diffs vs default (X newly kept / Y newly dropped). Below is change history: who, when, and what.</li>
+            </ul>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">Suggested tuning workflow</h4>
+            <ol>
+              <li>In PATCH 04, click "Dry run" to see the default filter baseline</li>
+              <li>In PATCH 01, change keywords (e.g. add "intelligent driving" to M1, or "commercial vehicle" to exclusions), <strong>do not Save yet</strong></li>
+              <li>Run "Dry run" again in PATCH 04 and compare the Diff numbers</li>
+              <li>If the Diff looks right → click Save at the bottom of PATCH 01 → takes effect immediately</li>
+              <li>To undo → click Restore defaults (top-right) to factory settings (note: few-shot samples are kept)</li>
+            </ol>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Operator field</strong> · The Operator box (top-right) is written into every audit log. Set your name (e.g. zhangsan) so history shows who changed what. Default is im, stored in localStorage across reloads.
+            </div>
+          </div>
+
+          <!-- Section 4: Input/output examples -->
+          <div class="help-section">
+            <div class="help-section-title">Input/output examples</div>
+
+            <div class="help-example-grid">
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 1 · Overseas intelligence</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Upload <code>SAIC Group Policy & Standards Weekly (Issue 53, 2026.05.29).pdf</code> (one PDF with 12+ regulations)
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Automatically splits into 12 discrete regulations, each with 4-section analysis (key points / policy interpretation / enterprise actions / peer references), ordered by index
+                </div>
+              </div>
+
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 2 · Regulation aggregation</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Time range = <code>Last 15 days</code><br>
+                  Report title = <code>Regulation information summary report</code>
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Crawl all regulations from 4 sources (CATARC / MIIT / SAMR) for the last 15 days into an ordered "<strong>Key regulation news/policy</strong>" tab
+                </div>
+              </div>
+            </div>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Tip</strong> · Closing the modal while an async job runs does not stop it; scanned/encrypted PDFs that cannot yield text show a friendly message.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./vendor/vue.global.prod.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./js/confirm-dialog.js?v=1"></script>
+  <script src="./js/mock-data.js"></script>
+  <script src="./regulation-qa.js?v=7"></script>
+</body>
+</html>

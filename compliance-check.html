@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compliance Check | AI Regulation Agent</title>
+  <link rel="stylesheet" href="./css/report-8091.css?v=40">
+  <link rel="stylesheet" href="./css/report-extra.css?v=51">
+  <link rel="stylesheet" href="./css/compliance-shell.css?v=41">
+  <link rel="stylesheet" href="./compliance-check.css?v=7">
+  <link rel="stylesheet" href="./css/compliance-conversation.css?v=11">
+  <link rel="stylesheet" href="./css/onboarding-tour.css?v=4">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+</head>
+<body>
+  <div id="app">
+    <header class="header legacy-topbar">
+      <div class="header-inner">
+        <div class="legacy-nav-heading">
+          <span class="module-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <strong class="legacy-brand">Compliance Check</strong>
+        </div>
+        <div class="mode-tabs-row">
+          <div class="mode-tabs" data-ob="mode-tabs" role="tablist" aria-label="Compliance features">
+            <button type="button" class="mode-tab tab-check active" data-mode="check" role="tab" aria-selected="true" title="Checklist review">
+              <span>Checklist Review</span>
+            </button>
+            <button type="button" class="mode-tab tab-report" data-mode="report" role="tab" aria-selected="false" title="Report generation">
+              <span>Report Generation</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-layout">
+      <aside class="sidebar" id="historySidebar" aria-label="History">
+        <div class="sidebar-brand-bar">
+          <a class="sidebar-brand" href="./index.html" title="Back to workspace" aria-label="Back to workspace">
+            <div class="sidebar-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="13" height="13" rx="3.5" fill="#8b7cf6"/>
+                <rect x="19" y="4" width="13" height="13" rx="3.5" fill="#e6c84a"/>
+                <rect x="4" y="19" width="13" height="13" rx="3.5" fill="#67af86"/>
+                <rect x="19" y="19" width="13" height="13" rx="3.5" fill="#6a8ef5"/>
+                <path d="M7.5 8.5h6M7.5 11.5h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                <rect x="21.8" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.95"/>
+                <rect x="26" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.7"/>
+                <path d="M7.6 25.4l2.4 2.3 4.6-4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M25.5 22.2l1.15 2.55 2.55 1.15-2.55 1.15L25.5 29.6l-1.15-2.55-2.55-1.15 2.55-1.15L25.5 22.2z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="sidebar-brand-text">
+              <div class="sidebar-greeting">AI Regulation Agent</div>
+              <div class="sidebar-version">Back to workspace</div>
+            </div>
+          </a>
+          <button class="topbar-help-btn" type="button" id="helpBtn" title="View user guide" aria-label="User guide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"></path><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+        </div>
+
+        <nav class="sidebar-actions" aria-label="Workspace shortcuts">
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn sidebar-new-task-btn" type="button" id="newTaskBtn" data-ob="new-task" title="New task" aria-label="New task">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            <span>New Task</span>
+          </button>
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn" type="button" id="kbBtn" title="Regulation knowledge base" aria-label="Regulation knowledge base">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Regulation Knowledge Base</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-body">
+          <div class="sidebar-heading">
+            <div>
+              <strong>History</strong>
+            </div>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="legacy-account-wrap">
+            <button class="legacy-account" type="button" id="accountBtn" aria-expanded="false" aria-label="Account menu">
+              <span class="legacy-account-avatar" id="userInitials" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <span class="legacy-account-copy">
+                <strong id="userDisplayName">Jessie</strong>
+                <small id="userRole">Administrator</small>
+              </span>
+              <svg class="legacy-account-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </button>
+            <div class="legacy-account-menu hidden" id="accountMenu">
+              <button class="legacy-logout" type="button" id="logoutBtn">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-content">
+        <div class="content-card mode-compliance is-conversation" id="complianceCard">
+          <div class="compliance-page page">
+            <div class="cc-conversation cc-panel-check" id="panelCheck" role="tabpanel">
+              <input id="fileInput" type="file" multiple accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+
+              <section class="cc-message-stream" id="dropzone" aria-live="polite">
+                <div class="cc-stream-inner" id="checkStreamInner">
+                  <div class="cc-assistant-row" id="checkWelcome">
+                    <span class="cc-assistant-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    </span>
+                    <div class="cc-assistant-content">
+                      <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Ready</span></div>
+                      <div class="cc-assistant-bubble" data-ob="check-welcome">
+                        <span>
+                          <strong>Start regulation checklist compliance review</strong>
+                          <p>Markets are identified from file names. Regulations are merged by standard number, with clear annotations of differences across markets. Upload each market Excel checklist below.</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="userUploadMsg" class="cc-user-row hidden">
+                    <div class="cc-user-bubble">
+                      <span class="cc-user-file-icon" aria-hidden="true">📄</span>
+                      <span>
+                        <strong id="userUploadTitle">Checklists uploaded</strong>
+                        <small id="userUploadMeta"></small>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div id="processingView" class="cc-assistant-row hidden" aria-live="polite">
+                    <span class="cc-assistant-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    </span>
+                    <div class="cc-assistant-content">
+                      <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                      <div class="cc-assistant-bubble cc-progress-bubble">
+                        <span class="cc-spin" aria-hidden="true"></span>
+                        <span>
+                          <strong id="processingTitle">Merging checklists and assigning owners</strong>
+                          <p id="processingDetail">Preparing task...</p>
+                        </span>
+                      </div>
+                      <div class="cc-progress-panel">
+                        <div id="progressTrack" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                          <span id="progressBar"></span>
+                        </div>
+                        <div class="progress-meta">
+                          <span id="progressStage">Waiting</span>
+                          <span id="progressRemaining">Estimating time remaining</span>
+                          <b id="progressPercent">0%</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="resultView" class="cc-assistant-row cc-result-row hidden">
+                    <span class="cc-assistant-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    </span>
+                    <div class="cc-assistant-content wide">
+                      <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span id="resultEyebrow">MERGE REVIEW</span></div>
+                      <div class="cc-result-surface">
+                        <div class="cc-result-head">
+                          <div>
+                            <h3 id="resultTitle">Merged result pending confirmation</h3>
+                            <p id="previewMeta">Please confirm the merged result before continuing</p>
+                          </div>
+                          <div class="cc-result-actions">
+                            <button id="continueButton" class="btn btn-primary hidden" type="button">Continue</button>
+                            <a id="downloadButton" class="btn btn-primary hidden" href="#">Download Excel</a>
+                            <button id="annotationAnalysisButton" class="btn btn-outline hidden" type="button" disabled>Go to annotation analysis</button>
+                            <button id="newCheckButton" class="btn btn-outline" type="button">Start over</button>
+                          </div>
+                        </div>
+                        <div id="stats" class="stats"></div>
+                        <div class="cc-result-table-head">
+                          <div>
+                            <h4 id="previewTitle">Merged result preview</h4>
+                          </div>
+                        </div>
+                        <div class="table-wrap">
+                          <table>
+                            <thead id="previewHead"></thead>
+                            <tbody id="previewBody"></tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="streamEnd"></div>
+                </div>
+              </section>
+
+              <div id="uploadView" class="hidden" aria-hidden="true"></div>
+
+              <footer class="cc-composer-area">
+                <div class="cc-composer-inner">
+                  <div id="selectedFile" class="cc-attachment-strip hidden">
+                    <div class="cc-attachment-summary" id="fileSummary">0 Excel file(s) selected</div>
+                    <div id="fileList" class="cc-attachment-list"></div>
+                  </div>
+                  <div class="cc-composer" id="checkComposerBox" data-ob="check-composer">
+                    <div class="cc-composer-copy">
+                      <strong id="composerTitle">Upload Excel checklists to start</strong>
+                      <span id="composerDesc">Multiple .xlsx supported · each file maps to one market; file name is used as the market name</span>
+                    </div>
+                    <div class="cc-composer-actions">
+                      <button type="button" class="cc-icon-action" id="pickFilesBtn" title="Select Excel" aria-label="Select Excel">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                      </button>
+                      <button id="submitButton" class="cc-generate-btn" type="button" disabled>Waiting for upload</button>
+                    </div>
+                  </div>
+                  <p class="cc-composer-hint">You can also drag files into the conversation · merge by standard number and annotate market differences</p>
+                  <p id="errorMessage" class="error hidden" role="alert"></p>
+                </div>
+              </footer>
+            </div>
+
+            <div class="cc-conversation cc-panel-report hidden" id="panelReport" role="tabpanel" hidden>
+              <input id="reportFileInput" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+
+              <div id="reportInspectPhase" class="cc-report-phase">
+                <section class="cc-message-stream" id="reportDropzone" aria-live="polite">
+                  <div class="cc-stream-inner" id="reportStreamInner">
+                    <div class="cc-assistant-row" id="reportWelcome">
+                      <span class="cc-assistant-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      </span>
+                      <div class="cc-assistant-content">
+                        <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Ready</span></div>
+                        <div class="cc-assistant-bubble" data-ob="report-welcome">
+                          <span>
+                            <strong>Start annotation result analysis</strong>
+                            <p>Read the manually annotated regulation checklist, validate assessment results and risk information, then generate an exportable evaluation report.</p>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="reportUserUploadMsg" class="cc-user-row hidden">
+                      <div class="cc-user-bubble">
+                        <span class="cc-user-file-icon" aria-hidden="true">📄</span>
+                        <span>
+                          <strong id="reportUserUploadTitle">Annotated file uploaded</strong>
+                          <small id="reportUserUploadMeta"></small>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div id="reportProcessingView" class="cc-assistant-row hidden" aria-live="polite">
+                      <span class="cc-assistant-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      </span>
+                      <div class="cc-assistant-content">
+                        <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                        <div class="cc-assistant-bubble cc-progress-bubble">
+                          <span class="cc-spin" aria-hidden="true"></span>
+                          <span>
+                            <strong>Validating annotations</strong>
+                            <p>Reading assessment results and risk evaluation fields...</p>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="reportResultView" class="cc-assistant-row cc-result-row hidden">
+                      <span class="cc-assistant-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      </span>
+                      <div class="cc-assistant-content wide">
+                        <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>ANNOTATION READY</span></div>
+                        <div class="cc-result-surface">
+                          <div class="cc-result-head">
+                            <div>
+                              <h3>Annotation validation result</h3>
+                              <p id="reportPreviewMeta"></p>
+                            </div>
+                            <div class="cc-result-actions">
+                              <button id="openReportGenerator" class="btn btn-primary" type="button" disabled>Generate evaluation report</button>
+                              <button id="replaceReportFile" class="btn btn-outline" type="button">Replace file</button>
+                            </div>
+                          </div>
+                          <div id="reportStats" class="stats"></div>
+                          <div class="cc-result-table-head">
+                            <h4>Annotation data preview</h4>
+                          </div>
+                          <div class="table-wrap">
+                            <table>
+                              <thead id="reportPreviewHead"></thead>
+                              <tbody id="reportPreviewBody"></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="reportStreamEnd"></div>
+                  </div>
+                </section>
+
+                <div id="reportUploadView" class="hidden" aria-hidden="true"></div>
+
+                <footer class="cc-composer-area" id="reportComposerArea">
+                  <div class="cc-composer-inner">
+                    <div id="reportSelectedFile" class="cc-attachment-strip hidden">
+                      <div class="cc-attachment-list">
+                        <div class="pdf-list-item">
+                          <span class="pdf-list-item-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>
+                          </span>
+                          <div class="pdf-list-item-meta">
+                            <span class="pdf-list-item-name" id="reportFileName"></span>
+                            <span class="pdf-list-item-size" id="reportFileSize"></span>
+                          </div>
+                          <button class="pdf-list-item-remove" id="removeReportFile" type="button" title="Remove" aria-label="Remove">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cc-composer" id="reportComposerBox" data-ob="report-composer">
+                      <div class="cc-composer-copy">
+                        <strong id="reportComposerTitle">Upload annotation results to analyze</strong>
+                        <span id="reportComposerDesc">Single .xlsx file, max 30 MB</span>
+                      </div>
+                      <div class="cc-composer-actions">
+                        <button type="button" class="cc-icon-action" id="pickReportBtn" title="Select Excel" aria-label="Select Excel">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                        </button>
+                        <button id="inspectReportButton" class="cc-generate-btn" type="button" disabled>Waiting for upload</button>
+                      </div>
+                    </div>
+                    <p class="cc-composer-hint">You can also drag files into the conversation · validate assessment results and risks, then generate the report</p>
+                    <p id="reportErrorMessage" class="error hidden" role="alert"></p>
+                  </div>
+                </footer>
+              </div>
+
+              <div id="reportGenerateView" class="cc-report-phase hidden">
+                <section class="cc-message-stream" aria-label="Report preview">
+                  <div class="cc-stream-inner cc-generate-stream">
+                    <div class="cc-assistant-row">
+                      <span class="cc-assistant-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      </span>
+                      <div class="cc-assistant-content">
+                        <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>REPORT BUILDER</span></div>
+                        <div class="cc-assistant-bubble">
+                          <span>
+                            <strong>Regulation evaluation report is ready</strong>
+                            <p>Edit project fields, preview the report structure, and export to Excel.</p>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="cc-assistant-row">
+                      <span class="cc-assistant-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      </span>
+                      <div class="cc-assistant-content wide">
+                        <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Editable preview</span></div>
+                        <div class="cc-result-surface cc-report-builder-surface">
+                          <div class="cc-result-head">
+                            <div>
+                              <h3>Regulation requirement confirmation result</h3>
+                              <p>Edit fields and export directly</p>
+                            </div>
+                            <div class="cc-result-actions">
+                              <button id="exportReportButton" class="btn btn-primary" type="button">Export Excel</button>
+                            </div>
+                          </div>
+
+                          <form id="reportForm" class="cc-report-form-hidden" autocomplete="off" aria-hidden="true">
+                            <input id="projectName" name="projectName" type="hidden">
+                            <input id="assessmentStage" name="assessmentStage" type="hidden">
+                            <input id="listType" name="listType" type="hidden">
+                            <input id="finalCount" name="finalCount" type="hidden">
+                            <span id="annotationSource" class="hidden" aria-hidden="true"></span>
+                          </form>
+
+                          <section class="cc-report-preview" aria-label="Report preview">
+                            <div class="cc-report-sheet-scroll">
+                              <article class="cc-report-sheet">
+                                <header class="cc-report-document-header">
+                                  <div class="cc-report-header-top">
+                                    <h1 class="cc-report-doc-title">Regulation requirement confirmation result</h1>
+                                  </div>
+                                  <p class="cc-report-field-label">Project name</p>
+                                  <input type="text" id="previewReportTitleInput" class="input-text cc-title-edit-input" aria-label="Project name" placeholder="Enter project name" value="Regulation requirement confirmation result">
+                                </header>
+                                <section class="cc-report-document-section">
+                                  <h3>Assessment results</h3>
+                                  <div class="cc-report-summary-table" role="table" aria-label="Assessment results summary">
+                                    <div class="cc-summary-label"><span>Assessment stage</span>
+                                      <select id="previewAssessmentStage" class="cc-preview-select" aria-label="Assessment stage">
+                                        <option value="">Please select</option>
+                                        <option>Regulation requirement confirmation assessment</option>
+                                        <option>Design-phase assessment</option>
+                                        <option>Certification-phase assessment</option>
+                                      </select>
+                                    </div>
+                                    <div class="cc-summary-label"><span>Checklist scope</span>
+                                      <select id="previewListType" class="cc-preview-select" aria-label="Checklist scope">
+                                        <option value="">Please select</option>
+                                        <option value="Supplement">Supplement</option>
+                                        <option value="Full">Full</option>
+                                      </select>
+                                    </div>
+                                    <div class="cc-summary-label"><span>Issued item count</span><strong id="previewFinalCount">0</strong></div>
+                                    <div class="cc-summary-risk high"><span>High risk</span><strong id="previewHighRisk">0</strong></div>
+                                    <div class="cc-summary-risk medium"><span>Medium risk</span><strong id="previewMediumRisk">0</strong></div>
+                                    <div class="cc-summary-risk low"><span>Low risk</span><strong id="previewLowRisk">0</strong></div>
+                                    <div class="cc-summary-risk pending"><span>Pending feedback</span><strong id="previewPending">0</strong></div>
+                                    <div class="cc-summary-risk na"><span>Not applicable</span><strong id="previewNotApplicable">0</strong></div>
+                                  </div>
+                                </section>
+                                <section class="cc-report-document-section cc-report-risk-section">
+                                  <h3>Project regulation risk items</h3>
+                                  <div class="table-wrap">
+                                    <table>
+                                      <thead><tr><th>Responsible dept.</th><th>Market</th><th>Regulation No.</th><th>Regulation name</th><th>Risk level</th><th>Risk and mitigation</th></tr></thead>
+                                      <tbody id="previewRiskBody"><tr><td colspan="6" class="cc-empty-state">No risk items</td></tr></tbody>
+                                    </table>
+                                  </div>
+                                </section>
+                              </article>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Regulation knowledge base modal (same pattern as decompose/compare pages) -->
+  <div id="kbModal" class="async-modal-overlay kb-modal-overlay" hidden>
+    <div class="async-modal kb-modal" role="dialog" aria-modal="true" aria-labelledby="kbModalTitle">
+      <div class="kb-modal-header">
+        <div class="kb-modal-title" id="kbModalTitle">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+          <span>Regulation Knowledge Base</span>
+        </div>
+        <button class="help-modal-close" type="button" id="kbModalClose" title="Close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="kb-modal-body">
+        <iframe
+          id="kbModalFrame"
+          class="kb-modal-frame"
+          src="./regulation-knowledge.html?embed=1&v=20260830d"
+          title="Regulation Knowledge Base"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/shared.js?v=3"></script>
+  <script src="./js/confirm-dialog.js?v=1"></script>
+  <script src="./js/mock-data.js?v=3"></script>
+  <script src="./js/help-guide-modal.js?v=2"></script>
+  <script src="./js/onboarding-tour.js?v=2"></script>
+  <script src="./compliance-check.js?v=22"></script>
+  <script src="./compliance-report.js?v=16"></script>
+</body>
+</html>

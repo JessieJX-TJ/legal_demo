@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="workbench-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>AI Legal Agent 2.0</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./css/ui-enlarge.css?v=1">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+</head>
+<body>
+  <div id="app" v-cloak @click="showAccountMenu = false">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-brand-area">
+          <a class="brand" href="./index.html">
+            <strong>AI Legal Agent <em>2.0</em></strong>
+          </a>
+          <button class="topbar-help-btn" type="button" @click="showGuide = true" title="View user guide" aria-label="User guide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"></path><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+        </div>
+        <nav class="top-actions header-actions" aria-label="Secondary navigation">
+          <button class="header-kb-btn" type="button" title="Regulation knowledge base" aria-label="Regulation knowledge base" @click="navigateModule('regulation-knowledge.html')">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Regulation knowledge base</span>
+          </button>
+          <div class="account-wrap">
+            <button class="account" type="button" :aria-expanded="showAccountMenu" aria-label="Account menu" @click.stop="showAccountMenu = !showAccountMenu">
+              <b>{{ initials }}</b>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div v-if="showAccountMenu" class="account-menu" @click.stop>
+              <button class="logout-button" type="button" @click="logout">Sign out</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="app-shell">
+      <main class="main-content">
+        <section class="work-area">
+          <div class="welcome">
+            <div class="welcome-copy">
+              <h1>{{ greeting }}, {{ currentUser.displayName }} <span>👋</span></h1>
+              <p>Choose a work mode to start today's regulation tasks.</p>
+              <i class="welcome-accent" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <section class="feature-grid" aria-label="Feature modules">
+            <article class="feature-card report-card" :class="{ 'is-pressing': pressedRoute === 'regulation-report.html' }" role="link" tabindex="0" @click="navigateModule('regulation-report.html')" @keyup.enter="navigateModule('regulation-report.html')">
+              <div class="module-header">
+                <span class="module-icon purple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h7M14 2v6h6M14 2l6 6v5"/><circle cx="17" cy="17" r="3"/><path d="m19.5 19.5 2 2"/></svg></span>
+                <h2>Regulation reports and news analysis <em>1.0</em></h2>
+              </div>
+              <div class="feature-visual"><img src="./assets/regulation-center.svg" alt="Regulation news center illustration"></div>
+              <div class="feature-body">
+                <p>Aggregate the latest regulation news and analyze external regulatory materials.</p>
+                <ul><li>Regulation report generation</li><li>News analysis</li><li>Skill configuration</li></ul>
+                <button class="feature-button" type="button" @click.stop="navigateModule('regulation-report.html')"><span>Open report tool</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+            </article>
+
+            <article class="feature-card compare-card" :class="{ 'is-pressing': pressedRoute === 'regulation-compare.html' }" role="link" tabindex="0" @click="navigateModule('regulation-compare.html')" @keyup.enter="navigateModule('regulation-compare.html')">
+              <div class="module-header">
+                <span class="module-icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M8 8h8M8 12h8M8 16h8"/></svg></span>
+                <h2>Regulation breakdown and version compare <em>1.0</em></h2>
+              </div>
+              <div class="feature-visual"><img src="./assets/regulation-compare.svg" alt="Regulation breakdown and version compare illustration"></div>
+              <div class="feature-body">
+                <p>Break down regulation clauses and analyze differences between old and new versions.</p>
+                <ul><li>Regulation breakdown</li><li>Old vs. new regulation compare</li><li>Excel export</li></ul>
+                <button class="feature-button" type="button" @click.stop="navigateModule('regulation-compare.html')"><span>Open regulation tools</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+            </article>
+
+            <article class="feature-card check-card" :class="{ 'is-pressing': pressedRoute === 'compliance-check.html' }" role="link" tabindex="0" @click="navigateModule('compliance-check.html')" @keyup.enter="navigateModule('compliance-check.html')">
+              <div class="module-header">
+                <span class="module-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                <h2>Compliance screening <em>2.0</em></h2>
+              </div>
+              <div class="feature-visual"><img src="./assets/compliance-check.svg" alt="Compliance screening illustration"></div>
+              <div class="feature-body">
+                <p>Match target-market regulations and generate compliance screening results.</p>
+                <ul><li>Excel data parsing</li><li>Target-market regulation matching</li><li>Risk conclusion export</li></ul>
+                <button class="feature-button" type="button" @click.stop="navigateModule('compliance-check.html')"><span>Start screening</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+            </article>
+
+            <article class="feature-card qa-card" :class="{ 'is-pressing': pressedRoute === 'regulation-qa.html' }" role="link" tabindex="0" @click="navigateModule('regulation-qa.html')" @keyup.enter="navigateModule('regulation-qa.html')">
+              <div class="module-header">
+                <span class="module-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 9h8M8 13h5"/></svg></span>
+                <h2>Regulation Q&A assistant <em>2.0</em></h2>
+              </div>
+              <div class="feature-visual"><img src="./assets/legal-qa.svg" alt="Regulation Q&A assistant illustration"></div>
+              <div class="feature-body">
+                <p>Locate clauses from regulation source text and assess risk.</p>
+                <ul><li>Intelligent regulation Q&A</li><li>Clause locating and citation</li><li>Risk assessment</li></ul>
+                <button class="feature-button" type="button" @click.stop="navigateModule('regulation-qa.html')"><span>Start Q&A</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+            </article>
+          </section>
+
+          <footer>© 2026 AI Legal Agent All rights reserved.</footer>
+        </section>
+      </main>
+    </div>
+
+    <!-- User guide modal (aligned with 10.182.37.12:8091/#/report) -->
+    <div v-if="showGuide" class="async-modal-overlay" @click.self="showGuide = false">
+      <div class="async-modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-modal-header">
+          <div class="help-modal-title" id="helpTitle">
+            <span class="help-modal-title-icon">📖</span>
+            <span>User guide</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="showGuide = false" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="help-modal-body">
+
+          <!-- Section 1: Feature overview (aligned with 10.182.37.12:8091) -->
+          <div class="help-section">
+            <div class="help-section-title">Feature overview</div>
+            <p>AI Legal Agent is designed for automotive regulatory intelligence scenarios and provides 3 work modes:</p>
+
+            <div class="help-feature-grid">
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">📌 Regulation report generation</div>
+                <div class="help-feature-card-desc">Automatically crawl the latest regulations/standards from sources such as CATARC, MIIT, and SAMR, then aggregate them into structured analysis reports (key regulations / meetings / standard notices / drafting updates).</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🌐 Overseas news analysis</div>
+                <div class="help-feature-card-desc">Upload overseas regulation/policy PDFs; AI automatically identifies each independent regulation/standard/consultation and generates a 4-section analysis matching the Chinese report structure.</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🧠 Skill configuration</div>
+                <div class="help-feature-card-desc">Tune M1 passenger-vehicle pre-filter keywords, add few-shot positive/negative examples, and configure LLM prompt rules; support "dry-run on historical data" to preview impact; all changes are written to an audit log for traceability.</div>
+              </div>
+            </div>
+
+            <ol>
+              <li>The left "Data source status" shows crawled regulation sources; click an item to crawl it alone, or click "<strong>Crawl all</strong>" to pull everything at once</li>
+              <li>Select a time range (custom / last 15 days / 1 month / 3 months) → click <strong>Generate report</strong> → async generation → auto-jump to preview</li>
+              <li>Overseas news: drag a PDF into the dashed box or click "Select PDF" → click <strong>Generate report</strong> → backend parsing + per-item LLM recognition</li>
+              <li>In the report, expand each regulation to view: <strong>Key points / Policy interpretation / Enterprise response / Peer reference</strong></li>
+              <li>Skill configuration: after changing keywords / rules, click <strong>Save</strong>; to preview impact, use the "Dry-run" button in PATCH 04 against historical data</li>
+            </ol>
+          </div>
+
+          <!-- Section 2: Video tutorial -->
+          <div class="help-section">
+            <div class="help-section-title">Video tutorial</div>
+            <div class="help-video-frame">
+              <video controls preload="metadata" :src="helpVideoUrl || ''"></video>
+            </div>
+            <p style="margin-top:10px;color:#94a3b8;font-size:12px">If playback fails, place the video file at <code>./static/tutorials/demo.mp4</code> and refresh the page.</p>
+          </div>
+
+          <!-- Section 3: Skill configuration details -->
+          <div class="help-section">
+            <div class="help-section-title">Skill configuration details</div>
+            <p>Skill configuration tells the AI "what counts as an M1 passenger vehicle" — every newly crawled regulation passes this gate before it can enter a report. If this gate is wrong, later accuracy does not help.</p>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">The UI has 4 PATCH panels</h4>
+            <ul>
+              <li><strong>PATCH 01 · Filter keywords</strong> — two tag groups: M1 feature terms (hit = keep) and exclusion terms (hit = drop). Type a term in the input and press Enter to add; click ✕ after a term to remove it. Remember to click "Save" at the bottom; changes apply to the next filter run immediately.</li>
+              <li><strong>PATCH 02 · Few-shot samples</strong> — left/right columns for positive examples (should be M1) and negative examples (should be non-M1). These samples are appended to the LLM prompt and directly affect the is_m1 decision. Aim for 5–10 typical samples per class with clear reasons so the LLM learns faster.</li>
+              <li><strong>PATCH 03 · LLM prompt rules</strong> — extra-rules textarea (e.g. "prioritize safety + intelligent driving") is appended to the end of the LLM system prompt; the peer blacklist hides in-house brands (SAIC group: IM / Rising / MG / Roewe, etc.) from the "Peer reference" module.</li>
+              <li><strong>PATCH 04 · Preview &amp; history</strong> — a non-persisting dry-run area. Click "Dry-run" to run the current skill on the last N days of MongoDB data, showing pass/block counts and differences vs. the "default config" (X newly kept / Y newly dropped). Below is the change history: who changed what and when.</li>
+            </ul>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">Suggested tuning workflow</h4>
+            <ol>
+              <li>First click "Dry-run" in PATCH 04 to see the current default filter effect (baseline)</li>
+              <li>In PATCH 01, change a set of keywords (e.g. add "intelligent driving" to M1, or "commercial vehicle" to exclusions), <strong>do not click Save yet</strong></li>
+              <li>Click "Dry-run" in PATCH 04 again and compare the "difference" numbers before and after</li>
+              <li>If the difference looks right → click "Save" at the bottom of PATCH 01 → takes effect immediately</li>
+              <li>To undo → click "Restore defaults" in the top-right to reset factory settings (note: positive/negative samples are not cleared)</li>
+            </ol>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Operator field</strong> · The "Operator" input at the top-right is written into every audit log. Change it to your name (e.g. zhangsan) before editing so the change history can show who made each change. The default is im; it is stored in browser localStorage and persists across reloads.
+            </div>
+          </div>
+
+          <!-- Section 4: Input / output examples -->
+          <div class="help-section">
+            <div class="help-section-title">Input / output examples</div>
+
+            <div class="help-example-grid">
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 1 · Overseas news</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Upload <code>SAIC Group Policy &amp; Standards Weekly Digest (Issue 53, 2026.05.29).pdf</code> (one PDF containing 12+ regulations)
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Automatically splits into 12 independent regulations; each gets a 4-section analysis (key points / policy interpretation / enterprise response / peer reference), ordered by index
+                </div>
+              </div>
+
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 2 · Regulation aggregation</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Time range = <code>Last 15 days</code><br>
+                  Report title = <code>Regulation information summary report</code>
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Crawl all regulations from 4 data sources (CATARC / MIIT / SAMR) over the last 15 days and aggregate them into an ordered list under the "<strong>Key regulation news/policies</strong>" tab
+                </div>
+              </div>
+            </div>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Tip</strong> · Closing the modal while an async task is running does not stop it; scanned/encrypted PDFs cannot extract text and will show a friendly message.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./vendor/vue.global.prod.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

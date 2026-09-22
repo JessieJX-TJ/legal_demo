@@ -1,0 +1,2249 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulation Report Generation - AI Regulation Agent</title>
+  <link rel="stylesheet" href="./css/report-8091.css?v=49">
+  <link rel="stylesheet" href="./css/report-extra.css?v=52">
+  <link rel="stylesheet" href="./css/compliance-conversation.css?v=11">
+  <link rel="stylesheet" href="./css/compare-conversation.css?v=13">
+  <link rel="stylesheet" href="./css/report-conversation.css?v=20">
+  <link rel="stylesheet" href="./css/onboarding-tour.css?v=4">
+  <link rel="stylesheet" href="./css/skill-patcher.css?v=12">
+  <link rel="stylesheet" href="./css/font-pingfang.css?v=1">
+  <style id="report-critical">
+    /* Sidebar full-height rail + header aligned to its right edge */
+    html, body, #app {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    .header.legacy-topbar {
+      left: 304px !important;
+      right: 0 !important;
+      width: auto !important;
+    }
+    .header.legacy-topbar .header-inner {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      height: 68px !important;
+      padding: 0 32px !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      justify-content: flex-start !important;
+      gap: 20px !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-sizing: border-box !important;
+    }
+    .legacy-nav-heading {
+      position: relative !important;
+      z-index: 2 !important;
+      left: auto !important;
+      transform: none !important;
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex: none !important;
+    }
+    .legacy-topbar .mode-tabs-row {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      z-index: 1 !important;
+      flex: none !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      margin: 0 0 0 auto !important;
+      min-width: 0 !important;
+    }
+    .header-actions {
+      display: none !important;
+    }
+    .sidebar-brand-bar {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      flex: none !important;
+      width: 100% !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      margin: 0 !important;
+      padding: 0 12px !important;
+      box-sizing: border-box !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      background: #fff !important;
+    }
+    .sidebar-brand {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: auto !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      box-sizing: border-box !important;
+      border: 0 !important;
+      border-bottom: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      color: inherit !important;
+      text-decoration: none !important;
+      cursor: pointer !important;
+      transition: background-color 160ms ease !important;
+    }
+    .sidebar-brand:hover {
+      background: transparent !important;
+      color: inherit !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn {
+      width: 36px !important;
+      height: 36px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: none !important;
+      margin-left: auto !important;
+      padding: 0 !important;
+      color: #6b7280 !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      transition: color 200ms ease, background-color 200ms ease !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn:hover {
+      color: #6757c8 !important;
+      background: rgba(109, 112, 255, 0.08) !important;
+    }
+    .sidebar-brand-bar .topbar-help-btn svg {
+      width: 20px !important;
+      height: 20px !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-brand-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      height: 40px !important;
+      flex: none !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+    }
+    .sidebar-brand-icon svg {
+      display: block !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+    .sidebar-greeting {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+    }
+    .sidebar-version {
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      color: #94a3b8 !important;
+      margin-top: 2px !important;
+      white-space: nowrap !important;
+    }
+    .legacy-topbar + .app-layout {
+      display: block !important;
+      margin-top: 68px !important;
+      margin-left: 304px !important;
+      width: calc(100% - 304px) !important;
+      max-width: calc(100% - 304px) !important;
+      min-height: calc(100vh / var(--ui-scale) - 68px) !important;
+      background: #F8FAFC !important;
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+      box-sizing: border-box !important;
+    }
+    .legacy-topbar + .app-layout .sidebar,
+    aside.sidebar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 304px !important;
+      min-width: 304px !important;
+      max-width: 304px !important;
+      height: calc(100vh / var(--ui-scale)) !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      z-index: 120 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      overflow-x: hidden !important;
+      overflow-y: hidden !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+      background: #fff !important;
+    }
+    .legacy-topbar + .app-layout .sidebar::-webkit-scrollbar,
+    aside.sidebar::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .sidebar-brand-bar {
+      flex: none !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      margin: 0 !important;
+      position: relative !important;
+      z-index: 2 !important;
+      background: #fff !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-brand {
+      flex: none !important;
+      width: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      position: relative !important;
+      z-index: 2 !important;
+      background: transparent !important;
+      border-bottom: none !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      padding: 16px 20px 24px !important;
+      box-sizing: border-box !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+      background: #fff !important;
+    }
+    .sidebar-body::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    nav.sidebar-actions {
+      flex: none !important;
+      display: grid !important;
+      gap: 5px !important;
+      padding: 12px 12px 4px !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-kb-btn.header-action-btn.header-kb-btn,
+    .sidebar .sidebar-kb-btn,
+    nav.sidebar-actions .sidebar-kb-btn {
+      width: 100% !important;
+      min-height: 40px !important;
+      height: auto !important;
+      padding: 0 12px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 9px !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      border-radius: 10px !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      text-align: left !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+    }
+    .sidebar-kb-btn.header-action-btn.header-kb-btn:hover,
+    .sidebar .sidebar-kb-btn:hover,
+    .sidebar-kb-btn.is-active,
+    .sidebar-kb-btn[aria-expanded="true"] {
+      color: #6757c8 !important;
+      background: rgba(124, 106, 245, 0.08) !important;
+      border-color: transparent !important;
+    }
+    .sidebar-kb-btn svg {
+      width: 17px !important;
+      height: 17px !important;
+      flex: none !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-kb-btn span {
+      flex: 1 !important;
+    }
+    .sidebar-user {
+      flex: none !important;
+      margin-top: auto !important;
+      padding: 11px 12px 12px !important;
+      border-top: 1px solid rgba(134, 144, 156, 0.18) !important;
+      box-sizing: border-box !important;
+      background: #fff !important;
+    }
+    .sidebar-user .legacy-account-wrap {
+      width: 100% !important;
+      position: relative !important;
+    }
+    .sidebar-user .legacy-account {
+      width: 100% !important;
+      min-height: 58px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 9px !important;
+      padding: 11px 8px 2px !important;
+      box-sizing: border-box !important;
+      grid-template-columns: none !important;
+      color: #1e293b !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      line-height: inherit !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+    }
+    .sidebar-user .legacy-account:hover,
+    .sidebar-user .legacy-account[aria-expanded="true"] {
+      background: rgba(124, 106, 245, 0.06) !important;
+    }
+    .sidebar-user .legacy-account > b,
+    .sidebar-user .legacy-account-avatar {
+      width: 32px !important;
+      height: 32px !important;
+      flex: none !important;
+      display: grid !important;
+      place-items: center !important;
+      color: #6757c8 !important;
+      background: #f0edff !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      box-shadow: none !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    .sidebar-user .legacy-account-avatar svg {
+      width: 17px !important;
+      height: 17px !important;
+      display: block !important;
+    }
+    .sidebar-user .legacy-account-copy {
+      display: grid !important;
+      gap: 2px !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      text-align: left !important;
+    }
+    .sidebar-user .legacy-account-copy strong,
+    .sidebar-user .legacy-account-copy small {
+      display: block !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-user .legacy-account-copy strong {
+      color: #1e293b !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-copy small {
+      color: #94a3b8 !important;
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+    .sidebar-user .legacy-account-chevron,
+    .sidebar-user .legacy-account-settings {
+      width: 16px !important;
+      height: 16px !important;
+      flex: none !important;
+      color: #94a3b8 !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      stroke-width: 1.8 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+    .sidebar-user .legacy-account-menu {
+      position: absolute !important;
+      top: auto !important;
+      bottom: calc(100% + 6px) !important;
+      right: 0 !important;
+      left: 0 !important;
+      z-index: 140 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 7px !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      border: 1px solid #e2e6ed !important;
+      border-radius: 9px !important;
+      box-shadow: 0 16px 36px rgba(29, 43, 77, 0.14) !important;
+      box-sizing: border-box !important;
+    }
+    .sidebar-user .legacy-account-menu button,
+    .sidebar-user .legacy-account-menu .legacy-logout {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      color: #536075 !important;
+      text-align: left !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 6px !important;
+      border-top: 0 !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      cursor: pointer !important;
+    }
+    .sidebar-user .legacy-account-menu button:hover,
+    .sidebar-user .legacy-account-menu .legacy-logout:hover {
+      color: #526fca !important;
+      background: #f2f5fc !important;
+    }
+    .kb-modal-overlay {
+      z-index: 1200 !important;
+    }
+    .kb-modal {
+      width: min(1280px, calc(100vw - 48px)) !important;
+      max-width: none !important;
+      height: min(900px, calc(100vh - 48px)) !important;
+      max-height: none !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      border-radius: 16px !important;
+      background: #fff !important;
+      box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22) !important;
+      text-align: left !important;
+    }
+    .kb-modal-header {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .kb-modal-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .kb-modal-title svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .kb-modal-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    .kb-modal-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+    .skill-modal-overlay {
+      z-index: 1200 !important;
+    }
+    .kb-modal-body.skill-modal-body {
+      overflow-y: auto;
+      padding: 0;
+      background: #f8fafc;
+      text-align: left !important;
+    }
+    .skill-modal-body .skill-page-modal {
+      min-height: 100%;
+      box-sizing: border-box;
+      border-radius: 0;
+      overflow: visible;
+      text-align: left !important;
+    }
+    .async-modal.kb-modal,
+    .async-modal.skill-modal,
+    .skill-modal-body,
+    .skill-modal-body .page,
+    .skill-modal-body .page-desc,
+    .skill-modal-body .sk-patch,
+    .skill-modal-body .sk-patch-body,
+    .skill-modal-body .sk-patch-head,
+    .skill-modal-body .sk-patch-title,
+    .skill-modal-body .sk-patch-meta,
+    .skill-modal-body .sk-kw-card,
+    .skill-modal-body .sk-kw-card-title,
+    .skill-modal-body .sk-kw-card-sub,
+    .skill-modal-body .sk-ex-col,
+    .skill-modal-body .sk-ex-col-title,
+    .skill-modal-body .sk-ex-item,
+    .skill-modal-body .sk-ex-item-title,
+    .skill-modal-body .sk-ex-item-reason,
+    .skill-modal-body .sk-ex-empty,
+    .skill-modal-body .sk-stat,
+    .skill-modal-body .sk-stat-label,
+    .skill-modal-body .sk-stat-num,
+    .skill-modal-body .sk-sample-card,
+    .skill-modal-body .sk-sample-row,
+    .skill-modal-body .sk-sample-title,
+    .skill-modal-body .sk-sample-meta,
+    .skill-modal-body .sk-audit-item,
+    .skill-modal-body .sk-audit-action,
+    .skill-modal-body .sk-audit-note,
+    .skill-modal-body .sk-label,
+    .skill-modal-body .sk-loading {
+      text-align: left !important;
+    }
+    .sidebar-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0 0 12px;
+      flex: none;
+    }
+    .sidebar-heading > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .sidebar-heading strong {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .sidebar-heading small {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .sidebar-history-list {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .sidebar-history-list::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    .history-entry {
+      display: flex;
+      min-width: 0;
+      border-radius: 7px;
+      transition: background-color 160ms ease;
+    }
+    .history-entry:hover {
+      background: #f4f1ff;
+    }
+    .history-entry.active {
+      background: #f8fafc;
+    }
+    .history-entry > button:first-child,
+    .history-entry > .history-entry-main {
+      min-width: 0;
+      min-height: 52px;
+      display: grid;
+      grid-template-columns: 16px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      padding: 8px 7px;
+      color: #5b677a;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      border-radius: 7px 0 0 7px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-family: inherit;
+    }
+    .history-entry > button:first-child {
+      cursor: pointer;
+    }
+    .history-entry > .history-entry-main {
+      cursor: default;
+      pointer-events: none;
+    }
+    .history-entry:hover > button:first-child,
+    .history-entry:hover > .history-entry-main {
+      color: #7564d8;
+    }
+    .history-entry.active > button:first-child,
+    .history-entry.active > .history-entry-main {
+      color: #334155;
+    }
+    .history-entry-text {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .history-entry-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .history-entry > button:first-child svg,
+    .history-entry > .history-entry-main svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+      color: #94a3b8;
+    }
+    .history-entry:hover > button:first-child svg,
+    .history-entry:hover > .history-entry-main svg {
+      color: #7564d8;
+    }
+    .history-entry.active > button:first-child svg,
+    .history-entry.active > .history-entry-main svg {
+      color: #334155;
+    }
+    .history-entry time {
+      color: #a1a9b6;
+      font-size: 12px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .history-entry:hover time {
+      color: #a99be8;
+    }
+    .history-entry.active time {
+      color: #94a3b8;
+    }
+    .history-entry .download-entry,
+    .history-entry .delete-entry {
+      width: 28px;
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      color: #aab1bc;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      flex: none;
+    }
+    .history-entry:hover .download-entry,
+    .history-entry:hover .delete-entry {
+      color: #7564d8;
+    }
+    .history-entry .download-entry:hover {
+      color: #2f9b6a !important;
+    }
+    .history-entry .delete-entry {
+      border-radius: 0 7px 7px 0;
+    }
+    .history-entry .delete-entry:hover {
+      color: #ae626d !important;
+    }
+    .history-entry .download-entry svg,
+    .history-entry .delete-entry svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .sidebar-history-empty {
+      margin: 0;
+      padding: 24px 8px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .sidebar-card {
+      background: #f8fafc !important;
+      border-radius: 12px !important;
+      padding: 16px !important;
+      margin-bottom: 16px !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      flex: none !important;
+    }
+    .sidebar-card.sidebar-actions {
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin-bottom: 16px !important;
+    }
+    .sidebar-actions .btn.btn-primary {
+      width: 100% !important;
+      height: 44px !important;
+      padding: 0 16px !important;
+      color: #7564d8 !important;
+      background: #f4f1ff !important;
+      border: 1px solid #e3dcfa !important;
+      border-radius: 10px !important;
+      box-shadow: none !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      transition: all 220ms ease !important;
+    }
+    .sidebar-actions .btn.btn-primary:hover:not(:disabled) {
+      color: #7564d8 !important;
+      background: #eae4fc !important;
+      border-color: #d6ccf5 !important;
+      transform: none !important;
+      box-shadow: 0 4px 12px rgba(47, 43, 72, 0.06) !important;
+    }
+    .sidebar-card-title {
+      font-size: 12px !important;
+      color: #94a3b8 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      margin-bottom: 14px !important;
+      font-weight: 600 !important;
+    }
+    .sidebar-source-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 8px 0 !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+      font-size: inherit !important;
+    }
+    .sidebar-source-item .src-name {
+      flex: 1 !important;
+      font-size: 13px !important;
+      color: #334155 !important;
+      line-height: 1.4 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+    .sidebar-source-item .src-count {
+      font-size: 12px !important;
+      color: #64748b !important;
+      min-width: 36px !important;
+      text-align: right !important;
+      flex: none !important;
+    }
+    .sidebar-sources-scroll {
+      flex: none !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .sidebar-sources-scroll::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .sidebar-card.sidebar-sources-card {
+      flex: none !important;
+      min-height: 0 !important;
+      display: block !important;
+      overflow: visible !important;
+      margin-bottom: 0 !important;
+    }
+    .sidebar-stat-num {
+      font-size: 22px !important;
+      font-weight: 700 !important;
+      color: #6d70ff !important;
+    }
+    .sidebar-stats-row {
+      display: flex !important;
+      align-items: baseline !important;
+      gap: 16px !important;
+    }
+    .sidebar-stat-item {
+      display: flex !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      margin-bottom: 0 !important;
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+    .sidebar-stat-label {
+      font-size: 12px !important;
+      color: #64748b !important;
+    }
+    .mode-tabs-row {
+      display: flex !important;
+      justify-content: flex-end !important;
+      margin-bottom: 0 !important;
+    }
+    .mode-tabs {
+      display: inline-flex !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      background: #f1f5f9 !important;
+      border: none !important;
+      border-radius: 12px !important;
+      padding: 4px !important;
+      gap: 2px !important;
+      box-shadow: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+    button.mode-tab,
+    .mode-tab {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 9px 16px !important;
+      margin: 0 !important;
+      border: none !important;
+      background: transparent !important;
+      border-radius: 9px !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      line-height: 1.2 !important;
+      color: #64748b !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      flex: 0 0 auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+      box-sizing: border-box !important;
+      font-family: inherit !important;
+    }
+    button.mode-tab.active,
+    .mode-tab.active {
+      background: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+      color: #6d70ff !important;
+    }
+    .mode-tab-icon {
+      font-size: 14px !important;
+      line-height: 1 !important;
+    }
+    .mode-tab-sub {
+      font-size: 10px !important;
+      color: #94a3b8 !important;
+      margin-left: 2px !important;
+      font-weight: 400 !important;
+    }
+    .main-content {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 28px 20px 40px !important;
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+      background: #F8FAFC !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+    /* Conversation modes: match compliance-check full-bleed stream/composer */
+    .main-content:has(.is-conversation) {
+      padding: 0 !important;
+      overflow: hidden !important;
+      min-height: calc(100vh / var(--ui-scale, 1) - 68px) !important;
+      height: calc(100vh / var(--ui-scale, 1) - 68px) !important;
+    }
+    .main-content:has(.is-conversation) .cc-stream-inner,
+    .main-content:has(.is-conversation) .cc-composer-inner {
+      width: min(1024px, 80%) !important;
+    }
+    .main-content > .content-card {
+      width: 100% !important;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      box-sizing: border-box !important;
+      --report-form-offset: 24px;
+    }
+    .content-card > .page {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .content-card > .page .report-form {
+      align-self: center !important;
+      /* Widen 24px on each side relative to current width; keep centered */
+      width: min(1144px, calc(100% - 2 * max(0px, var(--report-form-offset) - 288px) + 48px)) !important;
+      max-width: none !important;
+      margin-left: -24px !important;
+      margin-right: -24px !important;
+      box-sizing: border-box !important;
+    }
+    .content-card > .page > .page-header-row {
+      justify-content: center !important;
+      margin-bottom: 4px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .content-card > .page > .page-header-row h2,
+    .page-header-row.page-header-centered h2 {
+      text-align: center !important;
+    }
+    .content-card > .page > .page-desc {
+      text-align: center !important;
+      margin: 0 0 24px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .content-card {
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      min-height: auto !important;
+    }
+    .page-desc {
+      text-align: center !important;
+      color: #64748b !important;
+      font-size: 14px !important;
+      margin: 0 0 24px !important;
+    }
+    .page-header-row {
+      display: flex !important;
+      align-items: flex-start !important;
+      margin-bottom: 4px !important;
+    }
+    .page-header-row h2,
+    .page h2 {
+      font-size: 20px !important;
+      color: #1e293b !important;
+      font-weight: 600 !important;
+      margin: 0 !important;
+    }
+    .report-form {
+      text-align: left !important;
+      box-sizing: border-box !important;
+    }
+    .content-card > .page .report-form {
+      padding: 40px 48px 80px !important;
+      min-height: calc(100vh / var(--ui-scale) - 218px) !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 18px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+    }
+    .content-card.mode-skill > .page,
+    .content-card.mode-skill > .page.skill-page {
+      align-items: stretch !important;
+      width: 100% !important;
+      max-width: none !important;
+      align-self: stretch !important;
+    }
+    .content-card.mode-skill .skill-page {
+      width: 100% !important;
+      max-width: none !important;
+      align-self: stretch !important;
+      box-sizing: border-box !important;
+    }
+    .content-card.mode-skill .sk-patch,
+    .content-card.mode-skill .sk-patch-body {
+      width: 100% !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+    }
+    .content-card.mode-skill .page h2 {
+      font-size: 22px !important;
+      margin: 0 0 6px !important;
+    }
+    .report-form .btn-group {
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    @media (max-width: 768px) {
+      .header.legacy-topbar {
+        left: 0 !important;
+      }
+      .legacy-topbar + .app-layout {
+        margin-left: 0 !important;
+      }
+      aside.sidebar,
+      .legacy-topbar + .app-layout .sidebar {
+        position: relative !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 1 !important;
+      }
+      .mode-tabs {
+        flex-wrap: wrap !important;
+        max-width: 100% !important;
+      }
+      .main-content { padding: 16px !important; background: #F8FAFC !important; overflow: visible !important; }
+      .main-content:has(.is-conversation) { padding: 0 !important; overflow: hidden !important; }
+      .main-content > .content-card { --report-form-offset: 0 !important; }
+      .content-card { padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak @click="showAccountMenu = false">
+    <header class="header legacy-topbar">
+      <div class="header-inner">
+        <div class="legacy-nav-heading">
+          <span class="module-icon purple" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h7M14 2v6h6M14 2l6 6v5"/><circle cx="17" cy="17" r="3"/><path d="m19.5 19.5 2 2"/></svg></span>
+          <strong class="legacy-brand">Regulation Reports & Intelligence Analysis</strong>
+        </div>
+        <div class="mode-tabs-row">
+          <div class="mode-tabs" data-ob="mode-tabs">
+            <button class="mode-tab tab-report" :class="{active: currentPage === 'report'}" @click="switchToPage('report')" title="Regulation report generation">
+              <span>Regulation Report</span>
+            </button>
+            <button class="mode-tab tab-foreign" :class="{active: currentPage === 'foreign'}" @click="switchToPage('foreign')" title="Foreign intelligence analysis">
+              <span>Foreign Intelligence</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand-bar">
+          <a class="sidebar-brand" href="./index.html" title="Back to workspace" aria-label="Back to workspace">
+            <div class="sidebar-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Workspace four modules: purple / yellow / green / blue -->
+                <rect x="4" y="4" width="13" height="13" rx="3.5" fill="#6d70ff"/>
+                <rect x="19" y="4" width="13" height="13" rx="3.5" fill="#e6c84a"/>
+                <rect x="4" y="19" width="13" height="13" rx="3.5" fill="#67af86"/>
+                <rect x="19" y="19" width="13" height="13" rx="3.5" fill="#6a8ef5"/>
+                <!-- Regulation documents -->
+                <path d="M7.5 8.5h6M7.5 11.5h4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                <!-- Office comparison -->
+                <rect x="21.8" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.95"/>
+                <rect x="26" y="7.5" width="3.2" height="6" rx="0.9" fill="#fff" fill-opacity="0.7"/>
+                <!-- Compliance checklist -->
+                <path d="M7.6 25.4l2.4 2.3 4.6-4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- AI sparkle -->
+                <path d="M25.5 22.2l1.15 2.55 2.55 1.15-2.55 1.15L25.5 29.6l-1.15-2.55-2.55-1.15 2.55-1.15L25.5 22.2z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="sidebar-brand-text">
+              <div class="sidebar-greeting">AI Regulation Agent</div>
+              <div class="sidebar-version">Back to workspace</div>
+            </div>
+          </a>
+          <button class="topbar-help-btn" type="button" @click="showHelpModal = true" title="View user guide" aria-label="User guide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"></path><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+        </div>
+
+        <nav class="sidebar-actions" aria-label="Workspace entries">
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn sidebar-new-task-btn" type="button" data-ob="new-task" @click="startNewTask" title="New task" aria-label="New task">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            <span>New Task</span>
+          </button>
+          <button class="header-action-btn header-kb-btn sidebar-kb-btn" type="button" @click="openKnowledgeBase" title="Regulation knowledge base" aria-label="Regulation knowledge base">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Knowledge Base</span>
+          </button>
+          <button
+            class="header-action-btn header-kb-btn sidebar-kb-btn sidebar-skill-btn"
+            type="button"
+            :class="{ 'is-active': showSkillModal }"
+            title="Skill parameter configuration"
+            aria-label="Skill settings"
+            @click="openSkillConfig"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"></path><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z"></path></svg>
+            <span>Skill Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-body">
+          <div class="sidebar-heading">
+            <div>
+              <strong>History</strong>
+            </div>
+          </div>
+          <div class="sidebar-history-list">
+            <div v-if="!sidebarHistory.length" class="sidebar-history-empty">
+              <div>No download records yet</div>
+            </div>
+            <div v-for="item in sidebarHistory" :key="item.id" class="history-entry">
+              <div class="history-entry-main" :title="item.fileName || item.title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>
+                <span class="history-entry-text">
+                  <span class="history-entry-name">{{ item.fileName || item.title }}</span>
+                  <time>{{ formatHistoryDate(item.date) }}</time>
+                </span>
+              </div>
+              <button class="download-entry" type="button" title="Download file" aria-label="Download file" @click.stop="downloadHistoryItem(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              </button>
+              <button class="delete-entry" type="button" title="Delete record" aria-label="Delete record" @click.stop="deleteHistoryItem(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="legacy-account-wrap">
+            <button class="legacy-account" type="button" :aria-expanded="showAccountMenu" aria-label="Account menu" @click.stop="showAccountMenu = !showAccountMenu">
+              <span class="legacy-account-avatar" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <span class="legacy-account-copy">
+                <strong>{{ currentUser.displayName || currentUser.username || 'Jessie' }}</strong>
+                <small>{{ currentUser.role || 'Administrator' }}</small>
+              </span>
+              <svg class="legacy-account-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </button>
+            <div v-if="showAccountMenu" class="legacy-account-menu" @click.stop>
+              <button class="legacy-logout" type="button" @click="logout">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-content">
+        <div class="content-card" :class="['mode-' + currentPage, { 'is-conversation': currentPage === 'report' || currentPage === 'foreign' }]">
+
+          <!-- Regulation report · conversation flow -->
+          <div v-if="currentPage === 'report'" class="cc-conversation rc-conversation rr-conversation">
+            <section class="cc-message-stream" aria-live="polite">
+              <div class="cc-stream-inner">
+                <div class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Data sources</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble rr-sources-bubble" data-ob="sources">
+                      <span><strong>Please select data sources</strong><p>Check the data sources to include, then click "Crawl Data" below.</p></span>
+                      <div class="rr-sources-panel">
+                        <div class="rr-selected-box" aria-label="Selected data sources">
+                          <div v-if="selectedSourceItems.length" class="rr-selected-tags">
+                            <span
+                              v-for="src in selectedSourceItems"
+                              :key="'sel-' + src.site_key"
+                              class="rr-source-tag"
+                            >
+                              {{ src.display_name }}
+                              <button
+                                type="button"
+                                class="rr-source-tag-x"
+                                title="Remove"
+                                aria-label="Remove"
+                                :disabled="reportBusy"
+                                @click="toggleSource(src.site_key)"
+                              >✕</button>
+                            </span>
+                          </div>
+                          <div v-else class="rr-selected-empty">No data sources selected yet — check items in the list below</div>
+                        </div>
+                        <p class="rr-hint">{{ selectedSourceCount }} source(s) selected · approx. {{ selectedSourceRecords }} record(s)</p>
+                        <div class="rr-sources-toolbar">
+                          <div class="rr-sources-search">
+                            <input
+                              type="text"
+                              class="rr-sources-search-input"
+                              v-model="sourceSearchInput"
+                              placeholder="Search data sources"
+                              :disabled="reportBusy"
+                              @keydown.enter.prevent="applySourceSearch"
+                            >
+                            <button type="button" class="rr-sources-search-icon" title="Search" aria-label="Search" :disabled="reportBusy" @click="applySourceSearch">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                            </button>
+                          </div>
+                          <div class="rr-sources-actions">
+                            <button type="button" class="btn btn-outline" :disabled="reportBusy" @click="selectAllSources">Select all</button>
+                            <button type="button" class="btn btn-outline" :disabled="reportBusy" @click="clearSelectedSources">Clear</button>
+                          </div>
+                        </div>
+                        <div class="rr-sources-list" role="group" aria-label="Data source list">
+                          <button
+                            v-for="src in filteredCrawlStatus"
+                            :key="src.site_key"
+                            type="button"
+                            class="rr-source-item"
+                            :class="{ selected: isSourceSelected(src.site_key), disabled: reportBusy }"
+                            :disabled="reportBusy"
+                            :title="src.display_name"
+                            @click="toggleSource(src.site_key)"
+                          >
+                            <span class="rr-source-check" aria-hidden="true"></span>
+                            <span class="src-name">{{ src.display_name }}</span>
+                            <span class="src-count">{{ src.record_count || 0 }} records</span>
+                          </button>
+                          <div v-if="!filteredCrawlStatus.length" class="rr-sources-empty">No matching data sources found</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="reportSourcesSnapshot" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span>
+                      <strong>{{ reportSourcesSnapshot.count }} data source(s) selected</strong>
+                      <small>{{ reportSourcesSnapshot.names.slice(0, 4).join(', ') }}{{ reportSourcesSnapshot.names.length > 4 ? ' and others' : '' }}</small>
+                    </span>
+                  </div>
+                </div>
+
+                <div v-if="reportCrawling" class="cc-assistant-row" aria-live="polite">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Crawling</span></div>
+                    <div class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span>
+                        <strong>Crawling selected data sources</strong>
+                        <p>Please wait — the assistant is updating data…</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="reportCrawlResult && !reportCrawling" class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Crawl results</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble rr-sources-bubble">
+                      <span><strong>Data crawl completed</strong><p>Selected data sources have been updated. You can continue setting report parameters.</p></span>
+                      <div class="rr-sources-panel">
+                        <div class="rr-sources-stats">
+                          <div class="rr-sources-stat">
+                            <strong>{{ reportCrawlResult.selectedCount }}</strong>
+                            <span>Selected sources</span>
+                          </div>
+                          <div class="rr-sources-stat">
+                            <strong>{{ reportCrawlResult.successCount }}</strong>
+                            <span>Crawled sources</span>
+                          </div>
+                          <div class="rr-sources-stat">
+                            <strong>{{ reportCrawlResult.totalRecords }}</strong>
+                            <span>Total records</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="reportSourcesConfirmed" class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Parameter settings</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span><strong>Please set report parameters</strong><p>Enter a title and choose the data date range.</p></span>
+                      <div class="rr-settings-grid">
+                        <div class="rr-field">
+                          <label>Report title</label>
+                          <input type="text" v-model="reportTitle" placeholder="Regulation & Policy Briefing" :disabled="reportBusy">
+                        </div>
+                        <div class="rr-field">
+                          <label>Data date range</label>
+                          <div class="rr-seg">
+                            <button type="button" class="seg-item" :class="{active: dateMode === 'custom'}" :disabled="reportBusy" @click="enableCustomDate">Custom</button>
+                            <button type="button" class="seg-item" :class="{active: dateMode === 'preset' && days === 15}" :disabled="reportBusy" @click="setDateRange(15)">Last 15 days</button>
+                            <button type="button" class="seg-item" :class="{active: dateMode === 'preset' && days === 30}" :disabled="reportBusy" @click="setDateRange(30)">Last 1 month</button>
+                            <button type="button" class="seg-item" :class="{active: dateMode === 'preset' && days === 90}" :disabled="reportBusy" @click="setDateRange(90)">Last 3 months</button>
+                          </div>
+                        </div>
+                        <div class="rr-field">
+                          <label>Start / end dates</label>
+                          <div class="rr-date-row">
+                            <input type="date" v-model="startDate" @change="onDateInputChange" :disabled="dateMode === 'preset' || reportBusy">
+                            <span class="date-sep">to</span>
+                            <input type="date" v-model="endDate" @change="onDateInputChange" :disabled="dateMode === 'preset' || reportBusy">
+                          </div>
+                          <p class="rr-hint" v-if="dateMode === 'preset'">Selected: last {{ days }} days ({{ startDate }} to {{ endDate }})</p>
+                          <p class="rr-hint" v-else>Custom date range enabled</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="reportParamsConfirmed && reportConfirmedSnapshot" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span>
+                      <strong>Report title: {{ reportConfirmedSnapshot.title }}</strong>
+                      <small>Date range: {{ reportConfirmedSnapshot.dateMode === 'preset' ? ('Last ' + reportConfirmedSnapshot.days + ' days') : 'Custom' }} · {{ reportConfirmedSnapshot.startDate }} to {{ reportConfirmedSnapshot.endDate }}</small>
+                    </span>
+                  </div>
+                </div>
+
+                <div v-if="reportParamsConfirmed" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Parameters confirmed</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span>
+                        <strong>Title and date parameters confirmed</strong>
+                        <p>After setting the title and date range, click "Generate Report" below. When done, preview and export in the chat area.</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="reportGenerating" class="cc-assistant-row" aria-live="polite">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                    <div class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span>
+                        <strong>{{ asyncTaskStatus === 'failed' ? 'Generation failed' : (asyncTaskStatus === 'completed' ? 'Generation complete' : 'Generating report') }}</strong>
+                        <p>{{ asyncTaskError || ('Elapsed ' + asyncElapsed + ' s') }}</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="previewResult && previewResult.success && !previewResult.isForeignReport" class="cc-assistant-row cc-result-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content wide">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Report results</span></div>
+                    <div class="cc-result-surface">
+                      <div class="cc-result-head">
+                        <div>
+                          <h3>{{ previewResult.title }}</h3>
+                          <p>{{ previewDateRange }}</p>
+                        </div>
+                        <div class="cc-result-actions">
+                          <button type="button" class="btn btn-outline" @click="downloadPreviewHtml">Download dynamic HTML</button>
+                          <button type="button" class="btn btn-primary" @click="downloadPreviewExcel">Export Excel</button>
+                        </div>
+                      </div>
+                      <div class="stats">
+                        <div class="stat"><strong>{{ (previewResult.law_policies || []).length }}</strong><span>Key regulation intelligence/policies</span></div>
+                        <div class="stat"><strong>{{ (previewResult.meeting_policies || []).length }}</strong><span>Regulation meetings</span></div>
+                        <div class="stat"><strong>{{ previewProposalCount }}</strong><span>Regulations under development</span></div>
+                        <div class="stat"><strong>{{ (previewResult.law_policies || []).length + (previewResult.meeting_policies || []).length + previewProposalCount }}</strong><span>Total items</span></div>
+                      </div>
+                      <div class="cc-result-table-head">
+                        <div class="rr-seg rr-result-tabs">
+                          <button type="button" class="seg-item" :class="{ active: previewActiveTab === 'law' }" @click="previewActiveTab = 'law'">Key regulation intelligence/policies</button>
+                          <button type="button" class="seg-item" :class="{ active: previewActiveTab === 'meeting' }" @click="previewActiveTab = 'meeting'">Meeting-related</button>
+                          <button type="button" class="seg-item" :class="{ active: previewActiveTab === 'std' }" @click="previewActiveTab = 'std'">Regulation release info</button>
+                          <button type="button" class="seg-item" :class="{ active: previewActiveTab === 'stdproposal' }" @click="previewActiveTab = 'stdproposal'">Regulations under development</button>
+                        </div>
+                      </div>
+                      <div v-if="previewActiveTab === 'law'" class="table-wrap">
+                        <table v-if="previewResult.law_policies && previewResult.law_policies.length">
+                          <thead><tr><th style="width:40px"></th><th style="width:56px">No.</th><th>Regulation/Policy Name</th><th style="width:72px">Actions</th></tr></thead>
+                          <tbody>
+                            <template v-for="(p, i) in previewResult.law_policies" :key="'law-' + i">
+                              <tr class="llm-expandable" :class="{ expanded: p._expanded }" @click="p._expanded = !p._expanded">
+                                <td style="text-align:center"><span class="llm-expand-icon" :class="{ expanded: p._expanded }">▶</span></td>
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                  <a class="llm-link" :href="p.url || '#'" target="_blank" @click.stop>{{ p.title }}</a>
+                                  <div class="llm-src">{{ p.display_name }} · {{ p.list_date_iso || p.detail_date || '' }}</div>
+                                </td>
+                                <td><button type="button" class="llm-row-delete-btn" @click.stop="removePreviewLaw(i)">×</button></td>
+                              </tr>
+                              <tr v-if="p._expanded" class="llm-detail-row">
+                                <td colspan="4">
+                                  <div class="llm-detail-content">
+                                    <div class="llm-detail-section"><h4>Regulation/policy key points</h4><p>{{ stripMarkdown(p.ai_key_points) || 'N/A' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Interpretation & references</h4><p>{{ p.ai_interpretation ? stripMarkdown(p.ai_interpretation) : 'N/A' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Enterprise response suggestions</h4><p>{{ p.ai_suggestion ? stripMarkdown(p.ai_suggestion) : 'No suggestions' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Peer response reference</h4><p>{{ p.ai_peer_reference ? stripMarkdown(p.ai_peer_reference) : 'N/A' }}</p></div>
+                                  </div>
+                                </td>
+                              </tr>
+                            </template>
+                          </tbody>
+                        </table>
+                        <div v-else class="llm-empty">No updates this period</div>
+                      </div>
+                      <div v-else-if="previewActiveTab === 'meeting'" class="table-wrap">
+                        <table v-if="previewResult.meeting_policies && previewResult.meeting_policies.length">
+                          <thead><tr><th style="width:40px"></th><th style="width:56px">No.</th><th>Meeting name</th></tr></thead>
+                          <tbody>
+                            <template v-for="(p, i) in previewResult.meeting_policies" :key="'m-' + i">
+                              <tr class="llm-expandable" :class="{ expanded: p._expanded }" @click="p._expanded = !p._expanded">
+                                <td style="text-align:center"><span class="llm-expand-icon" :class="{ expanded: p._expanded }">▶</span></td>
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                  <a class="llm-link" :href="p.url || '#'" target="_blank" @click.stop>{{ p.title }}</a>
+                                  <div class="llm-src">{{ p.display_name }} · {{ p.list_date_iso || '' }}</div>
+                                </td>
+                              </tr>
+                              <tr v-if="p._expanded" class="llm-detail-row">
+                                <td colspan="3"><div class="llm-detail-content"><div class="llm-detail-section"><h4>Meeting key points</h4><p>{{ stripMarkdown(p.ai_key_points) || 'N/A' }}</p></div></div></td>
+                              </tr>
+                            </template>
+                          </tbody>
+                        </table>
+                        <div v-else class="llm-empty">No updates this period</div>
+                      </div>
+                      <div v-else class="table-wrap"><div class="llm-empty">No updates this period</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="previewResult && !previewResult.success" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Action needed</span></div>
+                    <div class="cc-assistant-bubble"><span><strong>Generation incomplete</strong><p>{{ previewResult.error || 'Please try again later' }}</p></span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <footer class="cc-composer-area">
+              <div class="cc-composer-inner">
+                <div class="cc-composer" data-ob="composer" :class="{ ready: reportComposerReady, busy: reportBusy }">
+                  <div class="cc-composer-copy">
+                    <strong>{{ reportComposerTitle }}</strong>
+                    <span>{{ reportComposerDesc }}</span>
+                  </div>
+                  <div class="cc-composer-actions">
+                    <button class="cc-generate-btn" type="button" :disabled="!reportComposerReady" @click="onReportPrimaryAction">{{ reportPrimaryLabel }}</button>
+                  </div>
+                </div>
+                <p class="cc-composer-hint">{{ reportDone ? 'Report generated · adjust parameters to reconfirm and regenerate' : (reportParamsConfirmed ? 'Parameters confirmed · click "Generate Report" to aggregate' : (reportSourcesConfirmed ? 'Data crawled · set title and date range, then click "Confirm Parameters"' : (reportCrawling ? 'Crawling selected data sources…' : 'Select data sources first, then click "Crawl Data"'))) }}</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- Foreign intelligence · conversation flow -->
+          <div v-else-if="currentPage === 'foreign'" class="cc-conversation rc-conversation rr-conversation">
+            <input ref="pdfInput" type="file" accept="application/pdf,.pdf" multiple hidden @change="onPdfPick">
+            <section
+              class="cc-message-stream"
+              aria-live="polite"
+              :class="{ dragover: isDragOver }"
+              @dragover.prevent="isDragOver = true"
+              @dragenter.prevent="isDragOver = true"
+              @dragleave.prevent="isDragOver = false"
+              @drop.prevent="onPdfDrop"
+            >
+              <div class="cc-stream-inner">
+                <div class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Ready</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble" data-ob="foreign-welcome">
+                      <span>
+                        <strong>Start foreign intelligence analysis</strong>
+                        <p>Upload foreign regulation/policy PDFs below, confirm upload, enter and confirm the title, then generate the report.</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="foreignUploadConfirmed && selectedPdfs.length" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span>
+                      <strong>{{ selectedPdfs.length }} PDF(s) uploaded</strong>
+                      <small>{{ selectedPdfs.map(f => f.name).join(', ') }}</small>
+                    </span>
+                  </div>
+                </div>
+
+                <div v-if="foreignUploadConfirmed" class="cc-assistant-row rc-settings-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Parameter settings</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span><strong>Please set the report title</strong><p>After entering the title, click "Confirm Title" below; generation is enabled only after confirmation.</p></span>
+                      <div class="rr-settings-grid">
+                        <div class="rr-field">
+                          <label>Report title</label>
+                          <input type="text" v-model="foreignReportTitle" placeholder="Foreign Intelligence Analysis Report" :disabled="foreignBusy">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="foreignTitleConfirmed && foreignConfirmedTitle" class="cc-user-row">
+                  <div class="cc-user-bubble">
+                    <span>
+                      <strong>Report title: {{ foreignConfirmedTitle }}</strong>
+                    </span>
+                  </div>
+                </div>
+
+                <div v-if="foreignTitleConfirmed" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Title confirmed</span></div>
+                    <div class="cc-assistant-bubble rc-welcome-bubble">
+                      <span>
+                        <strong>Report title confirmed</strong>
+                        <p>Click "Generate Report" below to start analysis. When done, preview and export in the chat area.</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="foreignGenerating" class="cc-assistant-row" aria-live="polite">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Processing</span></div>
+                    <div class="cc-assistant-bubble cc-progress-bubble">
+                      <span class="cc-spin" aria-hidden="true"></span>
+                      <span>
+                        <strong>{{ asyncTaskStatus === 'failed' ? 'Analysis failed' : (asyncTaskStatus === 'completed' ? 'Analysis complete' : 'Analyzing foreign intelligence') }}</strong>
+                        <p>{{ asyncTaskError || ('Elapsed ' + asyncElapsed + ' s') }}</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="previewResult && previewResult.success && previewResult.isForeignReport" class="cc-assistant-row cc-result-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content wide">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Report results</span></div>
+                    <div class="cc-result-surface">
+                      <div class="cc-result-head">
+                        <div>
+                          <h3>{{ previewResult.title }}</h3>
+                          <p>{{ previewDateRange }}</p>
+                        </div>
+                        <div class="cc-result-actions">
+                          <button type="button" class="btn btn-outline" @click="downloadPreviewHtml">Download dynamic HTML</button>
+                          <button type="button" class="btn btn-primary" @click="downloadPreviewExcel">Export Excel</button>
+                        </div>
+                      </div>
+                      <div class="stats stats-foreign">
+                        <div class="stat"><strong>{{ (previewResult.law_policies || []).length }}</strong><span>Key regulation intelligence/policies</span></div>
+                      </div>
+                      <div class="cc-result-table-head">
+                        <div><h4>Key regulation intelligence/policies</h4></div>
+                      </div>
+                      <div class="table-wrap">
+                        <table v-if="previewResult.law_policies && previewResult.law_policies.length">
+                          <thead><tr><th style="width:40px"></th><th style="width:56px">No.</th><th>Regulation/Policy Name</th><th style="width:72px">Actions</th></tr></thead>
+                          <tbody>
+                            <template v-for="(p, i) in previewResult.law_policies" :key="'flaw-' + i">
+                              <tr class="llm-expandable" :class="{ expanded: p._expanded }" @click="p._expanded = !p._expanded">
+                                <td style="text-align:center"><span class="llm-expand-icon" :class="{ expanded: p._expanded }">▶</span></td>
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                  <a class="llm-link" :href="p.url || '#'" target="_blank" @click.stop>{{ p.title }}</a>
+                                  <div class="llm-src">{{ p.display_name }} · {{ p.list_date_iso || p.detail_date || '' }}</div>
+                                </td>
+                                <td><button type="button" class="llm-row-delete-btn" @click.stop="removePreviewLaw(i)">×</button></td>
+                              </tr>
+                              <tr v-if="p._expanded" class="llm-detail-row">
+                                <td colspan="4">
+                                  <div class="llm-detail-content">
+                                    <div class="llm-detail-section"><h4>Regulation/policy key points</h4><p>{{ stripMarkdown(p.ai_key_points) || 'N/A' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Interpretation & references</h4><p>{{ p.ai_interpretation ? stripMarkdown(p.ai_interpretation) : 'N/A' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Enterprise response suggestions</h4><p>{{ p.ai_suggestion ? stripMarkdown(p.ai_suggestion) : 'No suggestions' }}</p></div>
+                                    <div class="llm-detail-section"><h4>Peer response reference</h4><p>{{ p.ai_peer_reference ? stripMarkdown(p.ai_peer_reference) : 'N/A' }}</p></div>
+                                  </div>
+                                </td>
+                              </tr>
+                            </template>
+                          </tbody>
+                        </table>
+                        <div v-else class="llm-empty">No updates this period</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="previewResult && !previewResult.success" class="cc-assistant-row">
+                  <span class="cc-assistant-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                  </span>
+                  <div class="cc-assistant-content">
+                    <div class="cc-bubble-meta"><strong>Regulation Agent</strong><span>Action needed</span></div>
+                    <div class="cc-assistant-bubble"><span><strong>Generation incomplete</strong><p>{{ previewResult.error || 'Please try again later' }}</p></span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <footer class="cc-composer-area">
+              <div class="cc-composer-inner">
+                <div v-if="selectedPdfs.length" class="cc-attachment-strip">
+                  <div class="cc-attachment-list">
+                    <div v-for="(f, i) in selectedPdfs" :key="i" class="pdf-list-item">
+                      <span class="pdf-list-item-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>
+                      </span>
+                      <span class="pdf-list-item-meta">
+                        <span class="pdf-list-item-name">{{ f.name }}</span>
+                        <span class="pdf-list-item-size">{{ formatFileSize(f.size) }}</span>
+                      </span>
+                      <button class="pdf-list-item-remove" type="button" @click="removePdf(i)" title="Remove" aria-label="Remove" :disabled="foreignBusy">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cc-composer" data-ob="foreign-composer" :class="{ ready: foreignComposerReady, busy: foreignBusy }">
+                  <div class="cc-composer-copy">
+                    <strong>{{ foreignComposerTitle }}</strong>
+                    <span>{{ foreignComposerDesc }}</span>
+                  </div>
+                  <div class="cc-composer-actions">
+                    <button type="button" class="cc-icon-action" title="Select PDF" :disabled="foreignBusy" @click="pickPdf">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                    </button>
+                    <button class="cc-generate-btn" type="button" :disabled="!foreignComposerReady" @click="onForeignPrimaryAction">{{ foreignPrimaryLabel }}</button>
+                  </div>
+                </div>
+                <p class="cc-composer-hint">{{ foreignDone ? 'Analysis complete · replace PDFs to re-upload and regenerate' : (foreignTitleConfirmed ? 'Title confirmed · click "Generate Report" to analyze' : (foreignUploadConfirmed ? 'Enter the report title, then click "Confirm Title"' : (selectedPdfs.length ? 'Files selected — click "Confirm Upload" to set the title' : 'Upload foreign intelligence PDFs first · drag into the chat area · max 20MB per file'))) }}</p>
+              </div>
+            </footer>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Async generation modal -->
+    <div v-if="showAsyncModal" class="async-modal-overlay">
+      <div class="async-modal" role="alertdialog" aria-live="polite">
+        <div v-if="asyncTaskStatus === 'pending' || asyncTaskStatus === 'processing'" class="async-modal-progress-bar">
+          <div class="async-modal-progress-bar-inner"></div>
+        </div>
+        <button
+          v-if="asyncTaskStatus !== 'processing'"
+          class="async-modal-close"
+          type="button"
+          @click="closeAsyncModal"
+          :title="asyncTaskStatus === 'pending' ? 'Continue in background' : 'Close'"
+          aria-label="Close"
+        >×</button>
+        <div v-else class="async-modal-locked" title="Cannot close while processing">🔒</div>
+
+        <div class="async-modal-icon">
+          <span v-if="asyncTaskStatus === 'completed'" class="success-anim">✅</span>
+          <span v-else-if="asyncTaskStatus === 'failed'" class="failed-anim">❌</span>
+          <span v-else-if="asyncTaskStatus === 'processing'">⚙️</span>
+          <span v-else>⏳</span>
+        </div>
+        <div class="async-modal-title">
+          <template v-if="asyncTaskStatus === 'completed'">Generation succeeded</template>
+          <template v-else-if="asyncTaskStatus === 'failed'">Report generation failed</template>
+          <template v-else-if="asyncTaskStatus === 'processing'">Generating report</template>
+          <template v-else>Task submitted, please wait...</template>
+        </div>
+        <div class="async-modal-desc">
+          <template v-if="asyncTaskStatus === 'completed'">Preview results coming up...</template>
+          <template v-else-if="asyncTaskStatus === 'failed'">{{ asyncTaskError || 'Please try again later' }}</template>
+          <template v-else-if="asyncTaskStatus === 'processing'">Please wait — generation may take a few seconds. Do not close the page; the preview will appear automatically.</template>
+          <template v-else>Queuing and preparing your task...</template>
+        </div>
+        <div v-if="asyncTaskStatus === 'pending' || asyncTaskStatus === 'processing'" class="async-modal-elapsed">
+          Waited <strong>{{ asyncElapsed }}</strong> s
+        </div>
+        <div v-if="asyncTaskStatus === 'failed'" class="async-modal-actions">
+          <button class="btn btn-outline" type="button" @click="generateReportAsync">Retry</button>
+          <button class="btn btn-ghost" type="button" @click="closeAsyncModal">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History reports -->
+    <div v-if="showHistoryModal" class="async-modal-overlay" @click.self="showHistoryModal = false">
+      <div class="async-modal history-report-modal">
+        <button class="async-modal-close" type="button" @click="showHistoryModal = false" title="Close" aria-label="Close">×</button>
+        <div class="async-modal-title">{{ historyModeFilter === 'foreign' ? 'Foreign intelligence downloads' : 'Regulation report downloads' }}</div>
+        <div class="async-modal-desc">Export files only (sessions not saved) · {{ filteredReportHistory.length }} file(s)</div>
+        <div class="history-list">
+          <div v-if="!filteredReportHistory.length" class="history-list-empty">
+            <div class="history-list-empty-icon"><img src="./assets/history-empty.svg" alt="" width="120" height="116"></div>
+            <div>No download records yet</div>
+          </div>
+          <div v-for="(r, idx) in filteredReportHistory" :key="idx" class="history-list-item">
+            <div class="history-list-item-left">
+              <div class="history-list-item-date">{{ formatHistoryDate(r.date) }}</div>
+              <div class="history-list-item-title">{{ r.fileName || r.title }}</div>
+              <span class="history-list-item-days">{{ r.kind === 'excel' ? 'Excel/CSV' : 'HTML' }}</span>
+            </div>
+            <button
+              class="history-list-item-delete"
+              type="button"
+              title="Download file"
+              aria-label="Download file"
+              @click.stop="downloadHistoryItem(r)"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            </button>
+            <button
+              class="history-list-item-delete"
+              type="button"
+              title="Delete record"
+              aria-label="Delete record"
+              @click.stop="deleteHistoryItem(r)"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Regulation knowledge base modal -->
+    <div v-if="showKnowledgeModal" class="async-modal-overlay kb-modal-overlay" @click.self="closeKnowledgeModal">
+      <div class="async-modal kb-modal" role="dialog" aria-modal="true" aria-labelledby="kbModalTitle">
+        <div class="kb-modal-header">
+          <div class="kb-modal-title" id="kbModalTitle">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+            <span>Knowledge Base</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="closeKnowledgeModal" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="kb-modal-body">
+          <iframe
+            class="kb-modal-frame"
+            src="./regulation-knowledge.html?embed=1&v=20260830d"
+            title="Regulation knowledge base"
+            @load="onKnowledgeFrameLoad"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill settings modal (aligned with knowledge base modal) -->
+    <div v-if="showSkillModal" class="async-modal-overlay kb-modal-overlay skill-modal-overlay" @click.self="closeSkillModal">
+      <div class="async-modal kb-modal skill-modal" role="dialog" aria-modal="true" aria-labelledby="skillModalTitle">
+        <div class="kb-modal-header">
+          <div class="kb-modal-title" id="skillModalTitle">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"></path><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z"></path></svg>
+            <span>Skill Settings</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="closeSkillModal" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="kb-modal-body skill-modal-body">
+          <div class="page skill-page skill-page-modal">
+  <div style="margin-bottom: 22px;">
+    <h2 style="font-family: var(--sk-sans); font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: 0.02em; line-height: 1.2;">Skill Settings <span style="font-size: 12px; color: var(--sk-ink-3); margin-left: 8px; font-weight: 400;">SKILL PATCHER · v1.0</span></h2>
+    <p class="page-desc" style="margin: 0 0 14px; color: var(--sk-ink-2); font-size: 13px; line-height: 1.5;">Adjust M1 filter rules, few-shot samples, and LLM prompts — changes apply immediately to subsequent report generation.</p>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 6px; padding: 5px 12px; background: #fff; border: 1px solid var(--sk-line); border-radius: 6px;">
+        <span style="font-size: 11px; color: var(--sk-ink-3); white-space: nowrap;">👤 Operator</span>
+        <input v-model="currentOperator" @change="saveOperatorToLocal" placeholder="Your name" style="border: none; outline: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--sk-ink); width: 100px; padding: 2px 0;">
+      </div>
+      <span :class="skillIsCustom ? 'sk-patch-status-custom' : 'sk-patch-status-default'" style="font-size: 11px; display: inline-flex; align-items: center; gap: 6px;">
+        <span class="sk-patch-dot" :style="skillIsCustom ? 'background: #6d70ff; box-shadow: 0 0 0 3px rgba(109, 112, 255, 0.15);' : 'background: #94a3b8; box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15); animation: none;'"></span>
+        {{ skillIsCustom ? 'Custom configuration enabled' : 'Using defaults' }}
+      </span>
+      <span style="flex: 1;"></span>
+      <button class="sk-btn" @click="loadSkillConfig" :disabled="skillLoading">↻ Refresh</button>
+      <button class="sk-btn" @click="confirmResetSkill" :disabled="skillLoading || !skillIsCustom">↺ Reset to defaults</button>
+    </div>
+  </div>
+
+  <!-- PATCH 01 — Keywords -->
+  <div class="sk-patch">
+    <div class="sk-patch-head">
+      <div class="sk-patch-head-left">
+        <span class="sk-patch-id">PATCH 01</span>
+        <span class="sk-patch-title">Filter keywords</span>
+        <span class="sk-patch-dot"></span>
+      </div>
+      <span class="sk-patch-meta" v-if="skillConfig">Last updated {{ skillConfig.config.updated_at || '—' }} · by {{ skillConfig.config.updated_by || '—' }}</span>
+    </div>
+    <div class="sk-patch-body">
+      <div class="sk-kw-grid">
+        <!-- M1 keywords -->
+        <div class="sk-kw-card">
+          <div class="sk-kw-card-head">
+            <span class="sk-kw-card-title">M1 feature keywords</span>
+            <span class="sk-kw-card-sub">Hit = keep</span>
+            <span class="sk-kw-card-count">{{ m1Keywords.length }} word(s)</span>
+          </div>
+          <div class="sk-tag-row">
+            <span v-for="(kw, i) in m1Keywords" :key="'m1-' + i" class="sk-tag positive">
+              {{ kw }}
+              <button class="sk-tag-x" @click="removeM1Keyword(i)" title="Delete">✕</button>
+            </span>
+            <span v-if="!m1Keywords.length" class="sk-ex-empty" style="padding: 14px 10px; width: 100%;">No keywords — all regulations enter the M1 candidate set</span>
+          </div>
+          <div class="sk-add-row">
+            <input class="sk-input" v-model="newM1Kw" @keyup.enter="addM1Keyword" placeholder="Type a keyword and press Enter, e.g. intelligent driving" :disabled="skillLoading">
+            <button class="sk-btn sk-btn-primary" @click="addM1Keyword" :disabled="!newM1Kw.trim()">+ Add</button>
+          </div>
+        </div>
+        <!-- Exclude keywords -->
+        <div class="sk-kw-card">
+          <div class="sk-kw-card-head">
+            <span class="sk-kw-card-title">Exclude keywords</span>
+            <span class="sk-kw-card-sub">Hit = discard</span>
+            <span class="sk-kw-card-count">{{ excludeKeywords.length }} word(s)</span>
+          </div>
+          <div class="sk-tag-row">
+            <span v-for="(kw, i) in excludeKeywords" :key="'ex-' + i" class="sk-tag negative">
+              {{ kw }}
+              <button class="sk-tag-x" @click="removeExcludeKeyword(i)" title="Delete">✕</button>
+            </span>
+            <span v-if="!excludeKeywords.length" class="sk-ex-empty" style="padding: 14px 10px; width: 100%;">No exclude words</span>
+          </div>
+          <div class="sk-add-row">
+            <input class="sk-input" v-model="newExcludeKw" @keyup.enter="addExcludeKeyword" placeholder="Type a keyword and press Enter, e.g. heavy truck" :disabled="skillLoading">
+            <button class="sk-btn sk-btn-primary" @click="addExcludeKeyword" :disabled="!newExcludeKw.trim()">+ Add</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 14px; text-align: right;">
+        <button class="sk-btn sk-btn-primary" @click="saveKeywords" :disabled="skillLoading || !keywordsDirty">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATCH 02 — Few-shot samples -->
+  <div class="sk-patch">
+    <div class="sk-patch-head">
+      <div class="sk-patch-head-left">
+        <span class="sk-patch-id">PATCH 02</span>
+        <span class="sk-patch-title">Few-shot samples (positive / negative)</span>
+        <span class="sk-patch-dot"></span>
+      </div>
+      <span class="sk-patch-meta">Injected into the LLM prompt to improve is_m1 consistency</span>
+    </div>
+    <div class="sk-patch-body">
+      <div class="sk-ex-grid">
+        <!-- Positive column -->
+        <div class="sk-ex-col">
+          <div class="sk-ex-col-head">
+            <div class="sk-ex-col-title pos"><span class="dot"></span><span>Positive <span style="font-weight: 400; color: var(--sk-ink-3); font-size: 11px; margin-left: 4px;">(should be classified as is_m1: true)</span></span></div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="sk-ex-count">{{ positiveExamples.length }} item(s)</span>
+              <button class="sk-btn" @click="openAddExample(true)" :disabled="skillLoading">+ Add</button>
+            </div>
+          </div>
+          <div>
+            <div v-for="(ex, i) in positiveExamples" :key="ex.id" class="sk-ex-item pos">
+              <div class="sk-ex-item-title">{{ ex.title }}</div>
+              <div v-if="ex.reason" class="sk-ex-item-reason">→ {{ ex.reason }}</div>
+              <div class="sk-ex-item-foot">
+                <span class="sk-ex-item-id">#P-{{ String(i + 1).padStart(3, '0') }}</span>
+                <div class="sk-ex-item-actions">
+                  <button class="sk-icon-btn" @click="openEditExample(ex)" title="Edit">✎</button>
+                  <button class="sk-icon-btn" @click="deleteExample(ex)" title="Delete">✕</button>
+                </div>
+              </div>
+            </div>
+            <div v-if="!positiveExamples.length" class="sk-ex-empty">No positive samples yet<br><span style="font-size: 11px; color: var(--sk-ink-3);">Click "+ Add" at top right to enter typical M1 regulation titles</span></div>
+          </div>
+        </div>
+        <div class="sk-ex-divider"></div>
+        <!-- Negative column -->
+        <div class="sk-ex-col">
+          <div class="sk-ex-col-head">
+            <div class="sk-ex-col-title neg"><span class="dot"></span><span>Negative <span style="font-weight: 400; color: var(--sk-ink-3); font-size: 11px; margin-left: 4px;">(should be classified as is_m1: false)</span></span></div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="sk-ex-count">{{ negativeExamples.length }} item(s)</span>
+              <button class="sk-btn" @click="openAddExample(false)" :disabled="skillLoading">+ Add</button>
+            </div>
+          </div>
+          <div>
+            <div v-for="(ex, i) in negativeExamples" :key="ex.id" class="sk-ex-item neg">
+              <div class="sk-ex-item-title">{{ ex.title }}</div>
+              <div v-if="ex.reason" class="sk-ex-item-reason">→ {{ ex.reason }}</div>
+              <div class="sk-ex-item-foot">
+                <span class="sk-ex-item-id">#N-{{ String(i + 1).padStart(3, '0') }}</span>
+                <div class="sk-ex-item-actions">
+                  <button class="sk-icon-btn" @click="openEditExample(ex)" title="Edit">✎</button>
+                  <button class="sk-icon-btn" @click="deleteExample(ex)" title="Delete">✕</button>
+                </div>
+              </div>
+            </div>
+            <div v-if="!negativeExamples.length" class="sk-ex-empty">No negative samples yet<br><span style="font-size: 11px; color: var(--sk-ink-3);">Click "+ Add" at top right to enter typical N/M2/M3 regulations</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATCH 03 — LLM rules -->
+  <div class="sk-patch">
+    <div class="sk-patch-head">
+      <div class="sk-patch-head-left">
+        <span class="sk-patch-id">PATCH 03</span>
+        <span class="sk-patch-title">LLM prompt rules</span>
+        <span class="sk-patch-dot"></span>
+      </div>
+      <span class="sk-patch-meta">Extra fragments injected into parse_policy_with_llm()</span>
+    </div>
+    <div class="sk-patch-body">
+      <div class="sk-rules-grid">
+        <div>
+          <label class="sk-label">Extra rules <span class="sk-label-sub">appended to the end of the system prompt</span></label>
+          <textarea class="sk-textarea" v-model="extraRules" placeholder="e.g. Prioritize safety + intelligent driving regulations; provide dedicated interpretation for SAIC brands (e.g. IM, Rising)" :disabled="skillLoading"></textarea>
+        </div>
+        <div>
+          <label class="sk-label">Peer-case blacklist <span class="sk-label-sub">comma-separated</span></label>
+          <input class="sk-input" v-model="competitorBlacklist" placeholder="Zeekr, smart, Voyah" :disabled="skillLoading">
+          <p style="font-size: 11.5px; color: var(--sk-ink-3); margin: 8px 0 0; line-height: 1.5;">These companies/brands are hidden in the Peer Reference module to avoid showing your own company or affiliates.</p>
+        </div>
+      </div>
+      <div style="margin-top: 14px; text-align: right;">
+        <button class="sk-btn sk-btn-primary" @click="saveExtraRules" :disabled="skillLoading || !rulesDirty">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATCH 04 — Preview + history -->
+  <div class="sk-patch">
+    <div class="sk-patch-head">
+      <div class="sk-patch-head-left">
+        <span class="sk-patch-id">PATCH 04</span>
+        <span class="sk-patch-title">Preview & change history</span>
+        <span class="sk-patch-dot"></span>
+      </div>
+      <span class="sk-patch-meta">No persistence — instantly see the current skill filter effect</span>
+    </div>
+    <div class="sk-patch-body">
+      <div class="sk-preview-head">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Dry-run the current skill on historical data</div>
+          <div style="font-size: 11.5px; color: var(--sk-ink-3); font-family: var(--sk-sans);">SCAN · READ-ONLY · {{ previewDays }} DAYS</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <select class="sk-input" v-model.number="previewDays" style="width: auto; padding: 6px 10px; font-size: 12px;">
+            <option :value="7">Last 7 days</option>
+            <option :value="15">Last 15 days</option>
+            <option :value="30">Last 30 days</option>
+            <option :value="60">Last 60 days</option>
+            <option :value="90">Last 90 days</option>
+          </select>
+          <button class="sk-scan-btn" @click="runPreview" :disabled="previewLoading">
+            <span v-if="previewLoading" class="ring"></span>
+            <span v-else>▶</span>
+            {{ previewLoading ? 'Scanning…' : 'Dry-run' }}
+          </button>
+        </div>
+      </div>
+
+      <div v-if="skillPreviewResult" class="sk-stats-grid">
+        <div class="sk-stat">
+          <div class="sk-stat-label">Total scanned</div>
+          <div class="sk-stat-num">{{ skillPreviewResult.summary.total_scanned }}</div>
+        </div>
+        <div class="sk-stat">
+          <div class="sk-stat-label">Current · pass / block</div>
+          <div class="sk-stat-num">
+            <span class="pos">{{ skillPreviewResult.summary.current_skill.pass }}</span>
+            <span style="color: var(--sk-ink-3); font-size: 14px;"> / </span>
+            <span class="neg">{{ skillPreviewResult.summary.current_skill.block }}</span>
+          </div>
+        </div>
+        <div class="sk-stat">
+          <div class="sk-stat-label">Default · pass / block</div>
+          <div class="sk-stat-num" style="color: var(--sk-ink-2);">
+            <span>{{ skillPreviewResult.summary.default_skill.pass }}</span>
+            <span style="color: var(--sk-ink-3); font-size: 14px;"> / </span>
+            <span>{{ skillPreviewResult.summary.default_skill.block }}</span>
+          </div>
+        </div>
+        <div class="sk-stat">
+          <div class="sk-stat-label">Diff · newly kept / newly dropped</div>
+          <div class="sk-stat-num brand">
+            <span class="pos">+{{ (skillPreviewResult.summary.diff_vs_default && skillPreviewResult.summary.diff_vs_default.kept_by_new_skill) || 0 }}</span>
+            <span style="color: var(--sk-ink-3); font-size: 14px;"> / </span>
+            <span class="neg">-{{ (skillPreviewResult.summary.diff_vs_default && skillPreviewResult.summary.diff_vs_default.blocked_by_new_skill) || 0 }}</span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="previewLoading" class="sk-loading">Scanning MongoDB historical data...</div>
+      <div v-else class="sk-loading">Click the "Dry-run" button at top right to start</div>
+
+      <div v-if="skillPreviewResult" class="sk-samples" style="margin-top: 16px;">
+        <div class="sk-sample-card">
+          <div class="sk-sample-card-head">
+            <span style="color: var(--sk-pos);">✓ Passed samples</span>
+            <span style="font-family: var(--sk-sans); font-size: 10.5px; color: var(--sk-ink-3);">{{ skillPreviewResult.samples.pass.length }} item(s)</span>
+          </div>
+          <div class="sk-sample-list">
+            <div v-for="(s, i) in skillPreviewResult.samples.pass" :key="'pp-' + i" class="sk-sample-row">
+              <div class="sk-sample-title">{{ s.title || '(untitled)' }}</div>
+              <div class="sk-sample-meta">{{ s.site_key || '?' }} · {{ (s.list_date_iso || '').slice(0, 10) }} · {{ s.reason }}</div>
+            </div>
+            <div v-if="!skillPreviewResult.samples.pass.length" class="sk-ex-empty">None</div>
+          </div>
+        </div>
+        <div class="sk-sample-card">
+          <div class="sk-sample-card-head">
+            <span style="color: var(--sk-neg);">✗ Blocked samples</span>
+            <span style="font-family: var(--sk-sans); font-size: 10.5px; color: var(--sk-ink-3);">{{ skillPreviewResult.samples.block.length }} item(s)</span>
+          </div>
+          <div class="sk-sample-list">
+            <div v-for="(s, i) in skillPreviewResult.samples.block" :key="'pb-' + i" class="sk-sample-row">
+              <div class="sk-sample-title">{{ s.title || '(untitled)' }}</div>
+              <div class="sk-sample-meta">{{ s.site_key || '?' }} · {{ (s.list_date_iso || '').slice(0, 10) }} · {{ s.reason }}</div>
+            </div>
+            <div v-if="!skillPreviewResult.samples.block.length" class="sk-ex-empty">None</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 22px; border-top: 1px dashed var(--sk-line); padding-top: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="font-size: 12px; font-weight: 600; color: var(--sk-ink-2);">📜 Change history (Audit Log)</div>
+          <button class="sk-btn sk-btn-ghost" @click="loadAuditLog" :disabled="auditLoading" style="font-size: 11px; padding: 3px 8px;">↻</button>
+        </div>
+        <div class="sk-audit-list">
+          <div v-if="auditLoading" class="sk-loading">Loading...</div>
+          <div v-else-if="!auditLog.length" class="sk-ex-empty">No change records yet</div>
+          <div v-for="item in auditLog" :key="item.id" class="sk-audit-item">
+            <span class="sk-audit-dot" :style="auditDotColor(item.action)"></span>
+            <div class="sk-audit-body">
+              <div class="sk-audit-action">{{ auditActionLabel(item.action) }}</div>
+              <div v-if="item.note" class="sk-audit-note">{{ item.note }}</div>
+            </div>
+            <span class="sk-audit-time">{{ (item.at || '').slice(0, 16).replace('T', ' ') }} · {{ item.operator }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notices -->
+  <div v-if="skillToast" :class="['sk-toast', skillToast.type]">{{ skillToast.text }}</div>
+
+  <!-- Add/edit example modal -->
+  <div v-if="exampleModal.open" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 1300; display: flex; align-items: center; justify-content: center;" @click.self="exampleModal.open = false">
+    <div style="background: #fff; border-radius: 12px; padding: 24px; width: 480px; max-width: calc(90vw / var(--ui-scale)); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);">
+      <div style="font-family: var(--sk-sans); font-weight: 600; font-size: 16px; margin-bottom: 16px;">
+        {{ exampleModal.editingId ? 'Edit sample' : (exampleModal.label ? 'Add positive' : 'Add negative') }}
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label class="sk-label">Regulation title</label>
+        <input class="sk-input" v-model="exampleModal.title" placeholder="e.g. GB 20071 Occupant protection in side impact for passenger cars" style="width: 100%;">
+      </div>
+      <div style="margin-bottom: 16px;">
+        <label class="sk-label">Reason <span class="sk-label-sub">(optional; helps the LLM understand boundaries)</span></label>
+        <textarea class="sk-textarea" v-model="exampleModal.reason" placeholder="e.g. Explicitly targets M1 passenger cars; not applicable to N category" style="min-height: 70px;"></textarea>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="sk-btn" @click="exampleModal.open = false">Cancel</button>
+        <button class="sk-btn sk-btn-primary" @click="submitExample" :disabled="!exampleModal.title.trim() || skillLoading">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User guide (aligned with workspace index.html modal) -->
+    <div v-if="showHelpModal" class="async-modal-overlay" @click.self="showHelpModal = false">
+      <div class="async-modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-modal-header">
+          <div class="help-modal-title" id="helpTitle">
+            <span class="help-modal-title-icon">📖</span>
+            <span>User Guide</span>
+          </div>
+          <button class="help-modal-close" type="button" @click="showHelpModal = false" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="help-modal-body">
+
+          <!-- Section 1: Feature overview (aligned with 10.182.37.12:8091) -->
+          <div class="help-section">
+            <div class="help-section-title">Feature overview</div>
+            <p>AI Regulation Agent is designed for automotive regulation intelligence scenarios and provides 3 working modes:</p>
+            <p style="margin-top:10px">
+              <button type="button" class="btn btn-outline" @click="startOnboardingTour(true)">Restart onboarding tour</button>
+              <span style="margin-left:8px;color:#94a3b8;font-size:12px">Guides the mode you are currently in (Regulation Report / Foreign Intelligence)</span>
+            </p>
+
+            <div class="help-feature-grid">
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">📌 Regulation report generation</div>
+                <div class="help-feature-card-desc">Automatically crawl latest regulations/standards from CATARC, MIIT, SAMR and other sources, then aggregate into a structured analysis report (key regulations / meetings / standard announcements / under-development updates).</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🌐 Foreign intelligence analysis</div>
+                <div class="help-feature-card-desc">Upload foreign regulation/policy PDFs; AI identifies independent regulations/standards/consultations item by item and generates a 4-section analysis with the same structure as the domestic report.</div>
+              </div>
+              <div class="help-feature-card">
+                <div class="help-feature-card-title">🧠 Skill settings</div>
+                <div class="help-feature-card-desc">Tune M1 passenger-car pre-filter keywords, add few-shot positive/negative examples, and configure LLM prompt rules; dry-run on historical data to preview effects; all changes are written to an audit log.</div>
+              </div>
+            </div>
+
+            <ol>
+              <li>In the chat area, select data sources first, click <strong>Crawl Data</strong>, review crawl results, then set parameters</li>
+              <li>Set the date range and title → click <strong>Confirm Parameters</strong> → <strong>Generate Report</strong> → async generation → preview in chat</li>
+              <li>Foreign intelligence: drag PDFs into the dashed box or click "Select PDF" → click <strong>Generate Report</strong> → backend parsing + LLM item-by-item recognition</li>
+              <li>Each regulation in the report can expand to show: <strong>Key points / Policy interpretation / Enterprise response suggestions / Peer reference</strong></li>
+              <li>Skill settings: after changing keywords / rules, click <strong>Save</strong>; to preview effects, use the "Dry-run" button in PATCH 04 on historical data</li>
+            </ol>
+          </div>
+
+          <!-- Section 2: Video tutorial -->
+          <div class="help-section">
+            <div class="help-section-title">Video tutorial</div>
+            <div class="help-video-frame">
+              <video controls preload="metadata" :src="helpVideoUrl || ''"></video>
+            </div>
+            <p style="margin-top:10px;color:#94a3b8;font-size:12px">If playback fails, place the video file at <code>./static/tutorials/demo.mp4</code> and refresh the page.</p>
+          </div>
+
+          <!-- Section 3: Skill settings details -->
+          <div class="help-section">
+            <div class="help-section-title">Skill settings details</div>
+            <p>Skill settings tell the AI what counts as an M1 passenger car — every newly crawled regulation must pass this gate before it can enter the report. If this gate is wrong, later accuracy does not help.</p>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">The UI has 4 PATCH panels</h4>
+            <ul>
+              <li><strong>PATCH 01 · Filter keywords</strong> — Two tag groups: M1 feature words (hit = keep) and exclude words (hit = discard). Type a word and press Enter to add; click ✕ on a tag to delete. Remember to click Save at the bottom; changes take effect on the next filter run.</li>
+              <li><strong>PATCH 02 · Few-shot samples</strong> — Left/right columns for positive examples (should be M1) and negative examples (should be non-M1). These samples are injected into the LLM prompt and directly affect is_m1 decisions. Aim for 5–10 typical samples per class with clear reasons so the LLM learns faster.</li>
+              <li><strong>PATCH 03 · LLM prompt rules</strong> — Extra rules textarea (e.g. "prioritize safety + intelligent driving") is appended to the end of the LLM system prompt; the peer blacklist hides your own brands (SAIC group: IM / Rising / MG / Roewe, etc.) from the Peer Reference module.</li>
+              <li><strong>PATCH 04 · Preview &amp; history</strong> — Non-persistent dry-run area. Click Dry-run to run the current skill on the last N days of MongoDB data, showing pass/block counts and differences vs the default configuration (newly kept X / newly dropped Y). Below is the change history — who changed what and when.</li>
+            </ul>
+
+            <h4 style="margin: 14px 0 6px; font-size: 13px; color: #334155;">Suggested tuning workflow</h4>
+            <ol>
+              <li>First click Dry-run in PATCH 04 to see the current default filter effect (baseline)</li>
+              <li>In PATCH 01, change a set of keywords (e.g. add "intelligent driving" to M1, or "commercial vehicle" to exclude), <strong>do not click Save yet</strong></li>
+              <li>Click Dry-run in PATCH 04 again and compare the Diff numbers before/after</li>
+              <li>If the diff looks right → click Save at the bottom of PATCH 01 → takes effect immediately</li>
+              <li>If you regret it → click Reset to defaults at the top right to restore factory settings (note: positive/negative samples are not cleared)</li>
+            </ol>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Operator field</strong> · The Operator input at the top right is written into every audit log entry. Change it to your name (e.g. zhangsan) before making changes so history can show who edited what. The default is im; it is stored in browser localStorage and persists across reloads.
+            </div>
+          </div>
+
+          <!-- Section 4: Input/output examples -->
+          <div class="help-section">
+            <div class="help-section-title">Input / output examples</div>
+
+            <div class="help-example-grid">
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 1 · Foreign intelligence</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Upload <code>SAIC Policy &amp; Standards Weekly Briefing (Issue 53, 2026.05.29).pdf</code> (a single PDF containing 12+ regulations)
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Automatically splits into 12 independent regulations; each gets a 4-section analysis (key points / policy interpretation / enterprise response suggestions / peer reference), listed by number
+                </div>
+              </div>
+
+              <div class="help-example-card">
+                <div class="help-example-card-header">Example 2 · Regulation aggregation</div>
+                <div class="help-example-card-label">Input</div>
+                <div class="help-example-card-content">
+                  Date range = <code>Last 15 days</code><br>
+                  Report title = <code>Regulation Information Summary Report</code>
+                </div>
+                <div class="help-example-card-label">Output</div>
+                <div class="help-example-card-content">
+                  Crawl all regulations from 4 data sources (CATARC / MIIT / SAMR) over the last 15 days and aggregate them into an ordered list under the "<strong>Key regulation intelligence/policies</strong>" tab
+                </div>
+              </div>
+            </div>
+
+            <div class="help-tip" style="margin-top:14px">
+              <strong>💡 Tip</strong> · Closing the modal while an async task is running lets the task continue in the background; scanned or encrypted PDFs that cannot yield text will show a friendly notice.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  <script src="./vendor/vue.global.prod.js"></script>
+  <script src="./js/shared.js?v=3"></script>
+  <script src="./js/confirm-dialog.js?v=1"></script>
+  <script src="./js/mock-data.js"></script>
+  <script src="./js/onboarding-tour.js?v=2"></script>
+  <script src="./js/skill-patcher.js?v=6"></script>
+  <script src="./regulation-report.js?v=26"></script>
+</body>
+</html>
