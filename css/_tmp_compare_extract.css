@@ -1,0 +1,987 @@
+
+/* --- compare-loading #0 --- */
+pinner + text) */
+    .compare-loading {
+      padding: 56px 20px;
+    }
+    .compare-loading-spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 16px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #6d70ff;
+      border-radius: 50%;
+      animation: compare-spin 0.8s linear infinite;
+    }
+    @keyframes compare-spin {
+      to { transform: rotate(360deg); }
+    }
+    .compare-loading-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    .compare-loading-text .dot-anim {
+      display: inline-block;
+      animation: compare-dot 1
+
+/* --- compare-loading #1 --- */
+6px 20px;
+    }
+    .compare-loading-spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 16px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #6d70ff;
+      border-radius: 50%;
+      animation: compare-spin 0.8s linear infinite;
+    }
+    @keyframes compare-spin {
+      to { transform: rotate(360deg); }
+    }
+    .compare-loading-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    .compare-loading-text .dot-anim {
+      display: inline-block;
+      animation: compare-dot 1.4s steps(4, end) infinite;
+      width: 1.2em;
+      t
+
+/* --- compare-loading #2 --- */
+60deg); }
+    }
+    .compare-loading-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    .compare-loading-text .dot-anim {
+      display: inline-block;
+      animation: compare-dot 1.4s steps(4, end) infinite;
+      width: 1.2em;
+      text-align: left;
+    }
+    @keyframes compare-dot {
+      0%   { content: ''; }
+      25%  { content: '.'; }
+      50%  { content: '..'; }
+      75%  { content: '...'; }
+      100% { content: ''; }
+    }
+    .compare-loading-sub {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* BUG-FIX 2026-06-30 Phase 4: progress bar styles
+
+/* --- compare-loading #3 --- */
+tom: 6px;
+    }
+    .compare-loading-text .dot-anim {
+      display: inline-block;
+      animation: compare-dot 1.4s steps(4, end) infinite;
+      width: 1.2em;
+      text-align: left;
+    }
+    @keyframes compare-dot {
+      0%   { content: ''; }
+      25%  { content: '.'; }
+      50%  { content: '..'; }
+      75%  { content: '...'; }
+      100% { content: ''; }
+    }
+    .compare-loading-sub {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* BUG-FIX 2026-06-30 Phase 4: progress bar styles (more visible + flowing animation) */
+    .compare-progress {
+      width: 380px;
+      max-width: 90%;
+      margin: 16px auto 0;
+    }
+    .compare-p
+
+/* --- compare-loading #4 --- */
+nt: ''; }
+    }
+    .compare-loading-sub {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* BUG-FIX 2026-06-30 Phase 4: progress bar styles (more visible + flowing animation) */
+    .compare-progress {
+      width: 380px;
+      max-width: 90%;
+      margin: 16px auto 0;
+    }
+    .compare-progress-bar-wrap {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    .compare-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+      background-size: 200% 100%;
+      border-r
+
+/* --- compare-error-banner #0 --- */
+/* Error / fallback notice banner */
+    .compare-error-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: #fef3c7;             /* Light yellow */
+      border-bottom: 1px solid #fde68a;
+      font-size: 13px;
+      color: #92400e;
+    }
+    .compare-error-icon { flex-shrink: 0; font-size: 16px; }
+    .compare-error-text { flex: 1; line-height: 1.5; }
+    .compare-error-close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      color: #92400e;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      line-height: 
+
+/* --- breakdown-preview #0 --- */
+compare result styles ===== */
+    .breakdown-preview-header {
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .breakdown-preview-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .breakdown-preview-actions .btn-export-excel {
+      margin-right: 0;
+    }
+    .breakdown-preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      f
+
+/* --- breakdown-preview #1 --- */
+ap: 12px;
+    }
+    .breakdown-preview-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .breakdown-preview-actions .btn-export-excel {
+      margin-right: 0;
+    }
+    .breakdown-preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .breakdown-preview-body {
+      max-hei
+
+/* --- breakdown-preview #2 --- */
+hrink: 0;
+    }
+    .breakdown-preview-actions .btn-export-excel {
+      margin-right: 0;
+    }
+    .breakdown-preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .breakdown-preview-body {
+      max-height: none;
+      overflow: visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-
+
+/* --- breakdown-preview #3 --- */
+right: 0;
+    }
+    .breakdown-preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .breakdown-preview-body {
+      max-height: none;
+      overflow: visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-table.breakdown-preview-table {
+      min-width: 960px;
+    }
+    .compare-table
+
+/* --- breakdown-preview #4 --- */
+ght: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .breakdown-preview-body {
+      max-height: none;
+      overflow: visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-table.breakdown-preview-table {
+      min-width: 960px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-clause {
+      width: 180px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-requirement {
+      width: auto;
+    }
+    .breakdown-prev
+
+/* --- breakdown-preview #5 --- */
+: nowrap;
+    }
+    .breakdown-preview-body {
+      max-height: none;
+      overflow: visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-table.breakdown-preview-table {
+      min-width: 960px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-clause {
+      width: 180px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-requirement {
+      width: auto;
+    }
+    .breakdown-preview-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #e2e8f0;
+      border-radius: 6
+
+/* --- breakdown-preview #6 --- */
+ visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-table.breakdown-preview-table {
+      min-width: 960px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-clause {
+      width: 180px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-requirement {
+      width: auto;
+    }
+    .breakdown-preview-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .breakdown-preview-text {
+      white-space: pr
+
+/* --- breakdown-preview #7 --- */
+}
+    .compare-table.breakdown-preview-table {
+      min-width: 960px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-clause {
+      width: 180px;
+    }
+    .compare-table.breakdown-preview-table .col-breakdown-requirement {
+      width: auto;
+    }
+    .breakdown-preview-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .breakdown-preview-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.8;
+    }
+    body.compare-fullscreen .breakdown-preview-sh
+
+/* --- compare-table #0 --- */
+.compare-fullscreen .compare-table-wrap {
+      overflow: visible;            /* Disable horizontal scrollbar */
+    }
+    body.compare-fullscreen .compare-table {
+      width: 100%;
+      min-width: 0;                 /* Critical: no longer force min-width */
+      table-layout: fixed;          /* Fixed layout so percentage column widths take effect */
+    }
+    /* In fullscreen use percentage column widths (instead of fixed px) so table scales with viewport */
+    body.compare-fullscreen .compare-table .col-topic     { width: 7%;  }
+    body.compare-fullscreen .compare-table .col-clause    { width: 11%; }
+    body.compare-fullscreen .compare-table .col-version-old,
+    body.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-ful
+
+/* --- compare-table #1 --- */
+.compare-fullscreen .compare-table {
+      width: 100%;
+      min-width: 0;                 /* Critical: no longer force min-width */
+      table-layout: fixed;          /* Fixed layout so percentage column widths take effect */
+    }
+    /* In fullscreen use percentage column widths (instead of fixed px) so table scales with viewport */
+    body.compare-fullscreen .compare-table .col-topic     { width: 7%;  }
+    body.compare-fullscreen .compare-table .col-clause    { width: 11%; }
+    body.compare-fullscreen .compare-table .col-version-old,
+    body.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-expl
+
+/* --- compare-table #2 --- */
+.compare-fullscreen .compare-table .col-topic     { width: 7%;  }
+    body.compare-fullscreen .compare-table .col-clause    { width: 11%; }
+    body.compare-fullscreen .compare-table .col-version-old,
+    body.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    bo
+
+/* --- compare-table #3 --- */
+.compare-fullscreen .compare-table .col-clause    { width: 11%; }
+    body.compare-fullscreen .compare-table .col-version-old,
+    body.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    body.compare-fullscreen .diff-num-list li {
+      word-break: break-word;
+  
+
+/* --- compare-table #4 --- */
+.compare-fullscreen .compare-table .col-version-old,
+    body.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    body.compare-fullscreen .diff-num-list li {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* Fullscreen close button (floating top-right) */
+    .btn-full
+
+/* --- compare-table #5 --- */
+.compare-fullscreen .compare-table .col-version-new { width: 17%; }
+    body.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    body.compare-fullscreen .diff-num-list li {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* Fullscreen close button (floating top-right) */
+    .btn-fullscreen-close {
+      position: fixed;
+      top: 16px;
+      
+
+/* --- compare-table #6 --- */
+.compare-fullscreen .compare-table .col-diff      { width: 18%; }
+    body.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    body.compare-fullscreen .diff-num-list li {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* Fullscreen close button (floating top-right) */
+    .btn-fullscreen-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 9999;
+      width: 40px;
+      height: 40px;
+   
+
+/* --- compare-table #7 --- */
+.compare-fullscreen .compare-table .col-explanation { width: 16%; }
+    body.compare-fullscreen .compare-table .col-impact    { width: 8%;  }
+    /* In fullscreen allow long text to wrap without breaking cells */
+    body.compare-fullscreen .change-block,
+    body.compare-fullscreen .diff-single,
+    body.compare-fullscreen .diff-num-list li {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* Fullscreen close button (floating top-right) */
+    .btn-fullscreen-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 9999;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85);
+      col
+
+/* --- btn-export-excel #0 --- */
+hrink: 0;
+    }
+    .btn-export-excel {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: #6d70ff;            /* Use brand blue, consistent with top tabs */
+      color: white;
+      border: 1px solid #6d70ff;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-right: 8px;             /* Leave spacing from the fullscreen button */
+    }
+    .btn-export-excel:hover:not(:disabled) {
+      background: #5a5de6;
+      border-color: #5a5de6;
+      tran
+
+/* --- btn-export-excel #1 --- */
+fullscreen button spacing */
+    }
+    .btn-export-excel:hover:not(:disabled) {
+      background: #5a5de6;
+      border-color: #5a5de6;
+      transform: translateY(-1px);
+    }
+    .btn-export-excel:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-fullscreen-toggle:hover {
+      background: #6d70ff;
+      color: white;
+      border-color: #6d70ff;
+    }
+    .btn-fullscreen-toggle .icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .compare-result-tabs {
+      display: flex;
+      background: transparent;
+      padding: 0 8px;
+      margin-bottom: 12px;
+    }
+    .compare-result-tab {
+      padding
+
+/* --- btn-export-excel #2 --- */
+eY(-1px);
+    }
+    .btn-export-excel:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-fullscreen-toggle:hover {
+      background: #6d70ff;
+      color: white;
+      border-color: #6d70ff;
+    }
+    .btn-fullscreen-toggle .icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .compare-result-tabs {
+      display: flex;
+      background: transparent;
+      padding: 0 8px;
+      margin-bottom: 12px;
+    }
+    .compare-result-tab {
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      cur
+
+/* --- btn-export-excel #3 --- */
+own-preview-actions .btn-export-excel {
+      margin-right: 0;
+    }
+    .breakdown-preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .breakdown-preview-meta {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .breakdown-preview-body {
+      max-height: none;
+      overflow: visible;
+    }
+    .breakdown-preview-body .compare-table-wrap {
+      max-height: 680px;
+      overflow: auto;
+    }
+    .compare-table.breakdown-preview-tab
+
+/* --- checkbox-label #0 --- */
+, 0.08);
+    }
+
+    .checkbox-label {
+      max-width: 600px;
+      margin: -6px auto 0;
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: #475569 !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      cursor: pointer;
+      user-select: none;
+    }
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      accent-color: #6d70ff;
+      flex-shrink: 0;
+    }
+
+    /* ===== Unified white background + colorless borders (three pages visually consistent) ===== */
+    .content-car
+
+/* --- checkbox-label #1 --- */
+ct: none;
+    }
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      accent-color: #6d70ff;
+      flex-shrink: 0;
+    }
+
+    /* ===== Unified white background + colorless borders (three pages visually consistent) ===== */
+    .content-card {
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+    .content-card.mode-report,
+    .content-card.mode-foreign,
+    .content-card.mode-breakdown,
+    .content-card.mode-compare {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    /* Fade-in animation on page switch (opacity only, no position shift) */
+    .p
+
+/* --- dot-anim #0 --- */
+ompare-loading-text .dot-anim {
+      display: inline-block;
+      animation: compare-dot 1.4s steps(4, end) infinite;
+      width: 1.2em;
+      text-align: left;
+    }
+    @keyframes compare-dot {
+      0%   { content: ''; }
+      25%  { content: '.'; }
+      50%  { content: '..'; }
+      75%  { content: '...'; }
+      100% { content: ''; }
+    }
+    .compare-loading-sub {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* BUG-FIX 2026-06-30 Phase 4: progress bar styles (more visible + flowing animation) */
+    .compare-progress {
+      width: 380px;
+      max-width: 90%;
+      margin: 16px auto 0;
+    }
+    .compare-progress-bar-wrap {
+   
+
+/* --- compare-layout #0 --- */
+columns + VS ===== */
+    .compare-layout {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 8px;
+    }
+    .compare-form-item {
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+    .compare-form-item label {
+      display: block;
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .compare-mode-summary { color: #475569; font-size: 12px; white-space: nowrap; }
+    .compare-mode-segment {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid #dbe3ee;
+      border
+
+/* --- compare-result #0 --- */
+    /* Compare results area */
+    .compare-result {
+      margin-top: 24px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+    /* Sub-tab + fullscreen button row (fullscreen button on the right) */
+    .compare-result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+      padding: 8px 12px 8px 16px;
+    }
+    .compare-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+     
+
+/* --- compare-result #1 --- */
+ row layout (fullscreen button on the right) */
+    .compare-result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+      padding: 8px 12px 8px 16px;
+    }
+    .compare-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+    .compare-search-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: min(460px, 100%);
+    }
+    .compare-search-icon {
+      position: absolute;
+      left: 10px;
+      color: #64748b;
+ 
+
+/* --- compare-result #2 --- */
+dth: 760px) {
+      .compare-result-header { align-items: stretch; flex-direction: column; }
+      .compare-search-field { width: 100%; }
+      .compare-header-actions { justify-content: flex-end; }
+    }
+    .btn-fullscreen-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: white;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+   
+
+/* --- compare-result #3 --- */
+eight: 1;
+    }
+    .compare-result-tabs {
+      display: flex;
+      background: transparent;
+      padding: 0 8px;
+      margin-bottom: 12px;
+    }
+    .compare-result-tab {
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .compare-result-tab:hover { color: #334155; }
+    .compare-result-tab.active {
+      color: #10b981;
+      font-weight: 600;
+    }
+    .compare-result-tab.active::after {
+      conten
+
+/* --- compare-result #4 --- */
+om: 12px;
+    }
+    .compare-result-tab {
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .compare-result-tab:hover { color: #334155; }
+    .compare-result-tab.active {
+      color: #10b981;
+      font-weight: 600;
+    }
+    .compare-result-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: linear-
+
+/* --- compare-result #5 --- */
+ inherit;
+    }
+    .compare-result-tab:hover { color: #334155; }
+    .compare-result-tab.active {
+      color: #10b981;
+      font-weight: 600;
+    }
+    .compare-result-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      border-radius: 2px;
+    }
+    .compare-result-body {
+      padding: 16px 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    /* Key changes list styles */
+    .compare-key-changes {
+      padding: 10px 0;
+    }
+    .compare-key-changes
+
+/* --- compare-result #6 --- */
+lor: #334155; }
+    .compare-result-tab.active {
+      color: #10b981;
+      font-weight: 600;
+    }
+    .compare-result-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      border-radius: 2px;
+    }
+    .compare-result-body {
+      padding: 16px 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    /* Key changes list styles */
+    .compare-key-changes {
+      padding: 10px 0;
+    }
+    .compare-key-changes h3 {
+      margin: 0 0 16px 0;
+      font-size: 1
+
+/* --- compare-result #7 --- */
+ght: 600;
+    }
+    .compare-result-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      border-radius: 2px;
+    }
+    .compare-result-body {
+      padding: 16px 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    /* Key changes list styles */
+    .compare-key-changes {
+      padding: 10px 0;
+    }
+    .compare-key-changes h3 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      color: #1e293b;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bott

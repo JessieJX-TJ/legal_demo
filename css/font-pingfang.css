@@ -1,0 +1,47 @@
+/* Global font: PingFang SC for the whole project */
+:root {
+  --app-font: "PingFang SC", sans-serif;
+  --sk-sans: "PingFang SC", sans-serif;
+  font-family: "PingFang SC", sans-serif;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea,
+optgroup,
+option,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+label,
+li,
+td,
+th,
+div,
+section,
+article,
+aside,
+nav,
+header,
+footer,
+main,
+strong,
+em,
+b,
+i,
+small,
+code,
+pre,
+kbd,
+samp {
+  font-family: "PingFang SC", sans-serif !important;
+}

@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "title": "Foreign Intelligence Analysis Report (2026-08-28)",
+  "_source_type": "foreign_pdf",
+  "date_range": "2026-08-28",
+  "summary": {
+    "start_date": "2026-08-28",
+    "end_date": "2026-08-28",
+    "law_count": 4,
+    "meeting_count": 0,
+    "std_announcement_count": 0,
+    "lixiang_count": 0,
+    "zhengqiu_count": 0,
+    "baopi_count": 0
+  },
+  "law_policies": [
+    {
+      "title": "UN Regulation No. 0 - International Whole Vehicle Type Approval (IWVTA)",
+      "url": "/api/foreign-pdf-file/20260828_165940_131810_ECE-TRANS-WP.29-343-Rev.34-Add.2-Rev.1_0.pdf",
+      "display_name": "Foreign PDF Upload",
+      "list_date_iso": "2026-08-28",
+      "detail_date": "2026-08-28",
+      "ai_key_points": "1. Latest series update: The UN R0 08 series amendment was adopted at the 91st AC.1 session and is expected to enter into force on 4 June 2026.\n2. Historical baseline: The 00 series entered into force on 19 July 2018; series 01 through 07 followed, roughly on an annual update cadence.\n3. Document basis: The 08 series corresponds to ECE/TRANS/WP.29/2025/159; the meeting report is WP.29 197th session ECE/TRANS/WP.29/1188, paragraph 110.\n4. Nature of the regulation: IWVTA is the international whole-vehicle type approval framework under the 1958 Agreement, with mutual recognition among Contracting Parties.",
+      "ai_interpretation": "1. Policy background: UN R0 is the core mechanism under the 1958 Agreement for advancing whole-vehicle international type approval mutual recognition; series amendments expand coverage and revise technical requirements.\n2. Core purpose: Provide Contracting Parties with a unified whole-vehicle approval basis, reduce duplicate certification, and lower multi-market access time and cost.\n3. Impact on Chinese OEMs: Export models must apply for approval under the UN R0 series version accepted by the target market; older series may not be mutually recognized or may require supplemental certification.\n4. References: Series history for UN Regulation No. 0 in ECE/TRANS/WP.29/343/Rev.34/Add.2/Rev.1 and ECE/TRANS/WP.29/2025/159.",
+      "ai_suggestion": "1. Immediate actions: Obtain 2025/159 and WP.29 report No. 1188; compare technical differences between the 08 and 07 series; identify certification test and documentation update points.\n2. Near-term plan: Build a mapping of UN R0 series approval status and target-market accepted versions in the certification database, with switchover and expiry alerts.\n3. Long-term capability: Include IWVTA series updates in the annual overseas certification strategy review; assess new-series impact on platforms under development at least 12 months ahead.",
+      "ai_peer_reference": "1. BYD: Tracks IWVTA series updates for 1958 Agreement target markets and adjusts overseas whole-vehicle type approval filing versions in advance.\n2. Geely Auto: Closes the loop from WP.29 documents to certification tasks, mapping UN R0 series switchovers to vehicle program milestones.\n3. Great Wall Motor: Maintains UN R0 series effective dates and scope in its overseas certification system to support parallel multi-market compliance decisions.",
+      "_expanded": false
+    },
+    {
+      "title": "UN Regulation No. 1 - Headlamps (including R and/or HS lamps)",
+      "url": "/api/foreign-pdf-file/20260828_165940_131810_ECE-TRANS-WP.29-343-Rev.34-Add.2-Rev.1_0.pdf",
+      "display_name": "Foreign PDF Upload",
+      "list_date_iso": "2026-08-28",
+      "detail_date": "2026-08-28",
+      "ai_key_points": "1. Latest status: The status table shows UN Regulation No. 1 currently at the 02 series, which entered into force on 8 September 2001.\n2. Amendment history: The 01 series received multiple supplements (Suppl.2 through Suppl.7), mainly proposed by the Netherlands and adopted by AC.1.\n3. Scope: Covers headlamps, including R and/or HS lamp types—an important basis for lighting products entering 1958 Agreement markets.\n4. Certification continuity: The 02 series notes that “no change of approval number is required,” which helps continuity of existing approvals.",
+      "ai_interpretation": "1. Policy background: UN R1 harmonizes photometric, installation, and type-approval requirements for headlamps and R/HS lamps; it is one of the continually updated lighting regulations among UN Regulations.\n2. Core purpose: Ensure lighting safety at night and in low visibility while promoting mutual recognition of headlamp product approvals.\n3. Impact on Chinese OEMs: Export-model headlamps must meet the UN R1 series and supplement versions accepted by the target market; supplier parts must comply in parallel.\n4. References: UN Regulation No. 1 listing in ECE/TRANS/WP.29/343/Rev.34/Add.2/Rev.1 and related documents ECE/TRANS/WP.29/763 and 815.",
+      "ai_suggestion": "1. Immediate actions: Verify which UN R1 series and supplements underpin current export-model headlamp approval certificates and confirm target-market acceptance.\n2. Near-term plan: Require lighting suppliers to provide UN R1 declarations of conformity and test reports; maintain a ledger mapping regulation versions to supplier part numbers.\n3. Long-term capability: Add UN R1 and related lighting regulations to supplier quality and certification onboarding checklists; track subsequent WP.29 supplements.",
+      "ai_peer_reference": "1. BYD: Conducts UN R1 series conformity checks on export-model headlamps to ensure certificates match target-market versions.\n2. NIO: Integrates lighting UN Regulation requirements into supplier part development statements of work and requires concurrent submission of conformity evidence.\n3. Chery Auto: Maps key lighting regulations such as headlamps during overseas certification preparation and builds rapid-response supplier certification document packs.",
+      "_expanded": false
+    },
+    {
+      "title": "UN Regulation No. 2 - Incandescent electric lamps",
+      "url": "/api/foreign-pdf-file/20260828_165940_131810_ECE-TRANS-WP.29-343-Rev.34-Add.2-Rev.1_0.pdf",
+      "display_name": "Foreign PDF Upload",
+      "list_date_iso": "2026-08-28",
+      "detail_date": "2026-08-28",
+      "ai_key_points": "1. Regulation status: UN Regulation No. 2 (incandescent electric lamps) is shown at the 03 series, which entered into force on 9 March 1986.\n2. Document source: The 03 series was proposed by the Netherlands; the original reference is under the E/ECE/324 series as Add.1/Rev.4.\n3. Important change: Notes indicate UN R2 has been incorporated into UN R1 and exists as UN Regulations No. 1 and No. 2.\n4. Certification impact: For incandescent lamp products or related lighting approvals, the consolidated UN R1/R2 requirements should govern.",
+      "ai_interpretation": "1. Policy background: Early on, incandescent electric lamps were managed separately as UN R2; later technical evolution and regulatory consolidation folded them into the headlamp regulation framework.\n2. Core purpose: Unify certification requirements related to incandescent lamps and headlamps and reduce interpretation gaps caused by cross-references.\n3. Impact on Chinese OEMs: Suppliers citing standalone UN R2 certificates alone may no longer align with the current system; confirm the corresponding post-incorporation version requirements.\n4. References: UN Regulation No. 2 notes and UN Regulation No. 1 provisions in ECE/TRANS/WP.29/343/Rev.34/Add.2/Rev.1.",
+      "ai_suggestion": "1. Immediate actions: Check whether in-production export models still cite standalone UN R2 approvals; require suppliers to supplement consolidated UN R1/R2 conformity evidence.\n2. Near-term plan: Map UN R2 clauses to the corresponding UN R1 supplements and series in the lighting-part certification checklist to avoid duplicate testing.\n3. Long-term capability: Establish a tracking mechanism for UN Regulation mergers and withdrawals; periodically clean and revalidate historical product certificates.",
+      "ai_peer_reference": "1. BYD: Cleans overseas-model lighting certification files to confirm incandescent lamp conformity is covered under consolidated UN R1/R2 requirements.\n2. Geely Auto: Maintains a historical UN Regulation certificate ledger and sets revalidation triggers for incorporated or superseded regulations.\n3. Great Wall Motor: Records the special case of UN R2 incorporation into UN R1 in the enterprise regulation knowledge base to guide subsequent lighting selection and certification.",
+      "_expanded": false
+    },
+    {
+      "title": "UN Regulation No. 3 - Retro-reflecting devices",
+      "url": "/api/foreign-pdf-file/20260828_165940_131810_ECE-TRANS-WP.29-343-Rev.34-Add.2-Rev.1_0.pdf",
+      "display_name": "Foreign PDF Upload",
+      "list_date_iso": "2026-08-28",
+      "detail_date": "2026-08-28",
+      "ai_key_points": "1. Latest status: The status table shows UN Regulation No. 3 currently at 02 series Suppl.12, which entered into force on 23 June 2011.\n2. Amendment history: The 02 series received Supplements 3 through 12; some were proposed by the Netherlands and later adopted at the 46th AC.1 session.\n3. Scope: Retro-reflecting devices are critical safety parts for vehicle exterior conspicuity and nighttime recognition.\n4. Document basis: Suppl.12 corresponds to ECE/TRANS/WP.29/2010/92 and WP.29 report No. 1087, paragraph 100, adopted at the 46th AC.1 session.",
+      "ai_interpretation": "1. Policy background: UN R3 harmonizes optical performance, color, and installation requirements for vehicle retro-reflecting devices—a foundational regulation for passive safety conspicuity.\n2. Core purpose: Ensure vehicles can be effectively recognized by other road users at night or in low visibility, reducing collision risk.\n3. Impact on Chinese OEMs: Retro-reflectors on export vehicles must meet the UN R3 version accepted by the target market, with particular attention to 02-series supplement differences.\n4. References: UN Regulation No. 3 listing in ECE/TRANS/WP.29/343/Rev.34/Add.2/Rev.1 and ECE/TRANS/WP.29/2010/92.",
+      "ai_suggestion": "1. Immediate actions: Check current export-model retro-reflecting device approval certificate versions and confirm coverage of the latest UN R3 02-series supplement requirements.\n2. Near-term plan: Include UN R3 certification requirements for retro-reflecting devices in part-level PPAP or first-article supplier submission checklists.\n3. Long-term capability: Track subsequent UN R3 amendments; maintain an exterior conspicuity parts regulation status table and update it in sync with model refreshes.",
+      "ai_peer_reference": "1. BYD: Conducts UN R3 02-series supplement conformity checks on export-model retro-reflecting devices.\n2. NIO: Includes UN R3 requirements for retro-reflectors in supplier part certification packs to keep approval data aligned with the vehicle type.\n3. GAC Group: Maintains an exterior conspicuity parts checklist in the overseas certification process to manage UN R3 and related regulation versions uniformly.",
+      "_expanded": false
+    }
+  ],
+  "meeting_policies": [],
+  "std_announcements": [],
+  "std_proposals_lixiang": [],
+  "std_proposals_zhengqiu": [],
+  "std_proposals_baopi": [],
+  "isForeignReport": true
+}

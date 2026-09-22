@@ -1,0 +1,125 @@
+/* Newbie onboarding tour — Youdao-style spotlight */
+.ob-tour-root {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  pointer-events: none;
+}
+
+.ob-tour-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.52);
+  pointer-events: auto;
+}
+
+.ob-tour-hole {
+  position: fixed;
+  z-index: 12001;
+  box-sizing: border-box;
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.52);
+  background: transparent;
+  pointer-events: none;
+  transition: top 0.22s ease, left 0.22s ease, width 0.22s ease, height 0.22s ease;
+}
+
+.ob-tour-tip {
+  position: fixed;
+  z-index: 12002;
+  width: min(300px, calc(100vw - 32px));
+  padding: 16px 16px 14px;
+  border-radius: 12px;
+  background: #6d70ff;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(109, 112, 255, 0.35);
+  pointer-events: auto;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-sizing: border-box;
+}
+
+.ob-tour-tip::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #6d70ff;
+  transform: rotate(45deg);
+}
+
+.ob-tour-tip[data-placement="right"]::before {
+  left: -6px;
+  top: var(--ob-arrow-top, 22px);
+}
+
+.ob-tour-tip[data-placement="left"]::before {
+  right: -6px;
+  top: var(--ob-arrow-top, 22px);
+}
+
+.ob-tour-tip[data-placement="bottom"]::before {
+  top: -6px;
+  left: var(--ob-arrow-left, 24px);
+}
+
+.ob-tour-tip[data-placement="top"]::before {
+  bottom: -6px;
+  left: var(--ob-arrow-left, 24px);
+}
+
+.ob-tour-title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.ob-tour-desc {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ob-tour-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.ob-tour-btn {
+  min-height: 30px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.ob-tour-btn.skip {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.ob-tour-btn.skip:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ob-tour-btn.next {
+  color: #6d70ff;
+  background: #fff;
+}
+
+.ob-tour-btn.next:hover {
+  background: #f0edff;
+}
+
+body.ob-tour-lock {
+  overflow: hidden;
+}

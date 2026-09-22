@@ -1,0 +1,37 @@
+/* Moderate global enlarge (~10%): text, cards, buttons scale together */
+:root {
+  --ui-enlarge: 1.1;
+}
+
+html {
+  zoom: var(--ui-enlarge);
+}
+
+/* Pages that already manage --ui-scale (report/compare) should not load this file. */
+
+/* Compact top-right account control (match report/compare legacy-account) */
+.account {
+  display: grid !important;
+  grid-template-columns: 40px 14px !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 8px !important;
+  border-radius: 10px !important;
+}
+.account:hover,
+.account[aria-expanded="true"] {
+  background: rgba(109, 112, 255, 0.08) !important;
+}
+.account b {
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+.account-copy {
+  display: none !important;
+}
+.account .chevron {
+  width: 14px !important;
+  height: 14px !important;
+}

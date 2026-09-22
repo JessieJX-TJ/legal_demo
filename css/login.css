@@ -1,0 +1,96 @@
+:root { font-family:"PingFang SC",sans-serif; color:#374151; background:#f8f9fc; }
+* { box-sizing:border-box; }
+html,body { min-height:100%; }
+body { margin:0; min-width:320px; overflow-x:hidden; }
+button,input { font:inherit; }
+.login-layout {
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(560px,1.08fr) minmax(480px,.92fr);
+  grid-template-rows:1fr auto 1fr;
+  background:#f8f9fc;
+}
+.brand-panel {
+  position:relative;
+  grid-row:1 / -1;
+  display:grid;
+  grid-template-rows:subgrid;
+  min-height:100vh;
+  overflow:hidden;
+  color:#374151;
+  background:#eef1fb;
+  border-right:1px solid #e5e7eb;
+  padding:0 68px;
+  box-sizing:border-box;
+}
+.brand-panel::before { content:""; position:absolute; inset:0; opacity:.55; background-image:radial-gradient(circle at 20% 20%,rgba(104,66,232,.15) 0 1px,transparent 1px),radial-gradient(circle at 80% 70%,rgba(82,126,221,.14) 0 1px,transparent 1px); background-size:52px 52px,68px 68px; }
+.brand-panel::after { content:""; position:absolute; width:560px; height:560px; right:-260px; top:-260px; border:1px solid rgba(104,66,232,.14); border-radius:50%; box-shadow:0 0 0 90px rgba(104,66,232,.045),0 0 0 180px rgba(104,66,232,.028); }
+.brand-content {
+  position:relative;
+  z-index:1;
+  grid-row:2;
+  align-self:start;
+  width:min(720px,100%);
+  display:flex;
+  flex-direction:column;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+.brand-copy { margin:0 0 42px; }
+.brand-copy>span { color:#7564d8; font-size:10px; font-weight:700; letter-spacing:1.4px; }
+.brand-copy h1 { margin:16px 0 16px; color:#374151; font-size:42px; line-height:1.24; letter-spacing:0; }
+.brand-copy p { max-width:500px; margin:0; color:#6b7280; font-size:14px; line-height:1.8; }
+.capability-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.capability-grid article { min-width:0; padding:18px 13px; border:1px solid #d8cff3; border-radius:10px; box-shadow:0 7px 18px rgba(55,65,81,.055); }
+.capability-grid article:nth-child(1) { background:linear-gradient(180deg,#f5f1ff 0%,#fdfcff 72%); border-color:#d8cff3; }
+.capability-grid article:nth-child(2) { background:linear-gradient(180deg,#fffbeb 0%,#fffef9 72%); border-color:#eee5bd; }
+.capability-grid article:nth-child(3) { background:linear-gradient(180deg,#edf9f1 0%,#fbfefc 72%); border-color:#cbe6d5; }
+.capability-grid article:nth-child(4) { background:linear-gradient(180deg,#f0f5ff 0%,#fbfdff 72%); border-color:#cdd9ef; }
+.capability-grid img { width:100%; height:92px; display:block; object-fit:contain; filter:drop-shadow(0 8px 10px rgba(55,65,81,.08)); }
+.capability-label { display:block; min-width:0; text-align:center; }
+.capability-grid strong { display:block; overflow:hidden; color:#374151; font-size:10px; line-height:1.35; }
+.form-panel {
+  grid-row:1 / -1;
+  display:grid;
+  grid-template-rows:subgrid;
+  justify-items:center;
+  min-width:0;
+  min-height:100vh;
+  padding:0 48px;
+  background:#f8f9fc;
+  box-sizing:border-box;
+}
+.login-card {
+  grid-row:2;
+  align-self:start;
+  width:min(400px,100%);
+  min-width:0;
+  padding:34px 36px 30px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  box-shadow:0 16px 36px rgba(55,65,81,.08);
+}
+.mobile-brand { display:none; }
+.form-heading { margin-bottom:31px; }.form-heading>span{color:#6757c8;font-size:12px;font-weight:700}.form-heading h2{margin:8px 0 9px;color:#374151;font-size:27px}.form-heading p{margin:0;color:#6b7280;font-size:12px}
+.login-card>label { display:block; margin:18px 0 8px; color:#424555; font-size: 12px; font-weight:650; }
+.input-wrap { position:relative; }
+.input-wrap>svg { position:absolute; top:14px; left:14px; width:18px; height:18px; fill:none; stroke:#8b8e9d; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.input-wrap input { width:100%; height:47px; padding:0 44px; color:#292c3c; background:#f9fafb; border:1px solid #dfe3eb; border-radius:8px; outline:0; font-size:12px; transition:.18s; }
+.input-wrap input:focus { background:#fff; border-color:#6d70ff; box-shadow:0 0 0 3px rgba(109,112,255,.15); }
+.input-wrap>button { position:absolute; top:7px; right:8px; width:34px; height:34px; display:grid; place-items:center; color:#9295a3; background:transparent; border:0; cursor:pointer; }
+.input-wrap>button svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.form-options { display:flex; align-items:center; justify-content:space-between; margin-top:14px; }.remember{display:flex;align-items:center;gap:7px;color:#6b7280;font-size:10px;cursor:pointer}.remember input{accent-color:#6757c8}.form-options>button{padding:0;color:#6757c8;background:none;border:0;font-size:10px;cursor:pointer}
+.login-error { min-height:17px; margin:9px 0 0; color:#d34b4b; font-size:10px; }
+.login-button { width:100%; height:48px; display:flex; align-items:center; justify-content:center; gap:0; margin-top:5px; color:#fff; background:#6757c8; border:0; border-radius:8px; box-shadow:0 9px 22px rgba(103,87,200,.2); font-size:12px; font-weight:700; cursor:pointer; transition:.18s; }.login-button:hover{transform:translateY(-1px);background:#5a4bb5;box-shadow:0 12px 25px rgba(103,87,200,.25)}.login-button.loading{pointer-events:none;opacity:.8}
+.security-note { display:flex; align-items:center; justify-content:center; gap:6px; margin:18px 0 0; color:#a0a2ae; font-size:9px; }.security-note svg{width:14px;height:14px;fill:none;stroke:#8c8f9e;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1100px){.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.capability-grid img{height:70px}}
+@media(max-width:950px){
+  .login-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:auto}
+  .brand-panel{display:none}
+  .form-panel{grid-row:auto;display:grid;place-items:center;min-height:100vh;padding:28px}
+  .login-card{grid-row:auto;width:min(400px,calc(100vw - 56px));max-width:none;padding:30px 32px 28px}
+  .mobile-brand{display:block;margin-bottom:56px;color:#6757c8;font-size:17px;font-weight:700}
+}
+@media(max-width:480px){.form-panel{padding:22px 16px}.login-card{width:100%;max-width:none;padding:28px 24px 26px}.mobile-brand{margin-bottom:42px}.form-heading h2{font-size:24px}}
